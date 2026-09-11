@@ -1,3 +1,3 @@
-from .gpt import ConfigGPT, GPT, gerar
+from .gpt import CamadaMoE, ConfigGPT, GPT, RedeDensa, Roteador, gerar
 
-__all__ = ["ConfigGPT", "GPT", "gerar"]
+__all__ = ["CamadaMoE", "ConfigGPT", "GPT", "RedeDensa", "Roteador", "gerar"]

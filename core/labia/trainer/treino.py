@@ -206,6 +206,8 @@ def executar_treino(
                     "tokens_por_s": tokens_avaliados / max(1e-6, agora - ultimo_reporte),
                     "tempo_s": round(tempo_decorrido, 2),
                     "dispositivo": str(dispositivo),
+                    "aux_router": modelo.ultimo_aux,
+                    "uso_especialistas": modelo.mapa_uso_especialistas(),
                 },
             )
             perdas_trem = []

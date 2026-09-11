@@ -17,6 +17,9 @@ class ConfigGPT:
     cabecas: int = 8
     janela_ctx: int = 256
     abandono: float = 0.1
+    n_especialistas: int = 0  # 0 = FFN denso; >1 = camada MoE (spec G4)
+    top_k: int = 1  # especialistas ativos por token
+    coef_auxiliar: float = 0.01  # peso da perda de balanceamento de carga
 
     def para_dict(self) -> dict:
         return asdict(self)
@@ -58,8 +61,51 @@ class RedeDensa(nn.Module):
         self.fc2 = nn.Linear(4 * cfg.dim, cfg.dim)
         self.abandono = nn.Dropout(cfg.abandono)
 
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        return self.abandono(self.fc2(F.gelu(self.fc1(x))))
+    def forward(self, x: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
+        y = self.abandono(self.fc2(F.gelu(self.fc1(x))))
+        return y, torch.zeros((), device=y.device)
+
+
+class Roteador(nn.Module):
+    """Porta top-k estilo Switch: softmax → top-k renormalizado; perda aux de carga."""
+
+    def __init__(self, cfg: ConfigGPT):
+        super().__init__()
+        self.n = max(1, cfg.n_especialistas)
+        self.k = min(max(1, cfg.top_k), self.n)
+        self.peso = nn.Linear(cfg.dim, self.n, bias=False)
+        self.ultima_fracao: torch.Tensor | None = None
+
+    def forward(self, x: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
+        probs = torch.softmax(self.peso(x), dim=-1)
+        val, idx = probs.topk(self.k, dim=-1)
+        val = val / val.sum(-1, keepdim=True)
+        destino = torch.zeros_like(probs).scatter_(1, idx, val)
+        with torch.no_grad():
+            fracao = destino.gt(0).float().mean(0)
+            aux = self.n * (fracao * probs.mean(0)).sum()
+            self.ultima_fracao = fracao.detach()
+        return destino, aux
+
+
+class CamadaMoE(nn.Module):
+    """FFN esparsamente ativado: n especialistas, top-k por token (spec G4)."""
+
+    def __init__(self, cfg: ConfigGPT):
+        super().__init__()
+        self.roteador = Roteador(cfg)
+        self.especialistas = nn.ModuleList(RedeDensa(cfg) for _ in range(self.roteador.n))
+
+    def forward(self, x: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
+        b, t, d = x.shape
+        xf = x.reshape(-1, d)
+        g, aux = self.roteador(xf)
+        y = torch.zeros_like(xf)
+        for i, esp in enumerate(self.especialistas):
+            m = g[:, i] > 0
+            if m.any():
+                y[m] = y[m] + g[m, i : i + 1] * esp(xf[m])[0]
+        return y.view(b, t, d), aux
 
 
 class BlocoTransformer(nn.Module):
@@ -68,11 +114,12 @@ class BlocoTransformer(nn.Module):
         self.ln1 = nn.LayerNorm(cfg.dim)
         self.atencao = AtencaoMultiCabeca(cfg)
         self.ln2 = nn.LayerNorm(cfg.dim)
-        self.mlp = RedeDensa(cfg)
+        self.mlp = CamadaMoE(cfg) if cfg.n_especialistas > 1 else RedeDensa(cfg)
 
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
+    def forward(self, x: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
         x = x + self.atencao(self.ln1(x))
-        return x + self.mlp(self.ln2(x))
+        saida, aux = self.mlp(self.ln2(x))
+        return x + saida, aux
 
 
 class GPT(nn.Module):
@@ -101,7 +148,10 @@ class GPT(nn.Module):
             escala = 1.0 / math.sqrt(2 * self.cfg.camadas)
             for bloco in self.blocos:
                 bloco.atencao.proj.weight.mul_(escala)
-                bloco.mlp.fc2.weight.mul_(escala)
+                mlp = bloco.mlp
+                redes = mlp.especialistas if isinstance(mlp, CamadaMoE) else [mlp]
+                for red in redes:
+                    red.fc2.weight.mul_(escala)
             for ln in [self.ln_f, *(b.ln1 for b in self.blocos), *(b.ln2 for b in self.blocos)]:
                 ln.weight.fill_(1.0)
                 ln.bias.zero_()
@@ -113,6 +163,29 @@ class GPT(nn.Module):
     def contar_parametros(self) -> int:
         return sum(p.numel() for p in self.parameters())
 
+    def contar_parametros_ativos(self) -> int:
+        """Custo real por token: com MoE top-k, só k de n especialistas por camada."""
+        total = self.contar_parametros()
+        moe = [b for b in self.blocos if isinstance(b.mlp, CamadaMoE)]
+        if not moe:
+            return total
+        por_especialista = sum(p.numel() for p in moe[0].mlp.especialistas[0].parameters())
+        k = moe[0].mlp.roteador.k
+        n = moe[0].mlp.roteador.n
+        return total - (n - k) * por_especialista * len(moe)
+
+    def mapa_uso_especialistas(self) -> list[float] | None:
+        """Fração média de tokens por especialista (por camada MoE), do último forward."""
+        moe = [b.mlp for b in self.blocos if isinstance(b.mlp, CamadaMoE)]
+        if not moe or any(m.roteador.ultima_fracao is None for m in moe):
+            return None
+        frac = torch.stack([m.roteador.ultima_fracao for m in moe]).mean(0)
+        return [round(float(v), 4) for v in frac]
+
+    @property
+    def ultimo_aux(self) -> float | None:
+        return getattr(self, "_ultimo_aux", None)
+
     def emb(self, idx: torch.Tensor) -> torch.Tensor:
         t = idx.shape[1]
         if t > self.cfg.janela_ctx:
@@ -122,12 +195,18 @@ class GPT(nn.Module):
 
     def forward(self, idx: torch.Tensor, alvos: torch.Tensor | None = None):
         x = self.emb(idx)
+        aux_total = x.new_zeros(())
         for bloco in self.blocos:
-            x = bloco(x)
+            x, aux = bloco(x)
+            aux_total = aux_total + aux
         logits = self.cabeca(self.ln_f(x))
+        n_moe = sum(1 for b in self.blocos if isinstance(b.mlp, CamadaMoE))
+        self._ultimo_aux = float(aux_total / max(1, n_moe)) if n_moe else None
         if alvos is None:
             return logits, None
         perda = F.cross_entropy(logits.view(-1, self.cfg.vocab), alvos.view(-1))
+        if n_moe and self.cfg.coef_auxiliar:
+            perda = perda + self.cfg.coef_auxiliar * aux_total / n_moe
         return logits, perda
 
     @torch.no_grad()
