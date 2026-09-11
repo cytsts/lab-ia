@@ -51,6 +51,15 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--semente", type=int, default=1234)
     p.add_argument("--raiz", default=".")
 
+    p = sub.add_parser("agentes", help="lista agentes e skills expostas (spec G9)")
+    p.add_argument("--raiz", default=".")
+
+    p = sub.add_parser("agente", help="executa uma skill de um agente")
+    p.add_argument("nome", help="treinador | avaliador | arquiteto")
+    p.add_argument("skill", help="nome da skill")
+    p.add_argument("--json", default="{}", help="argumentos em JSON")
+    p.add_argument("--raiz", default=".")
+
     p = sub.add_parser("servir", help="expõe a API interna para a camada visual")
     p.add_argument("--host", default="127.0.0.1")
     p.add_argument("--porta", type=int, default=8765)
@@ -141,6 +150,31 @@ def main(argv: list[str] | None = None) -> int:
                 f"[lab-ia] {args.estrategia}: acurácia {rel['acuracia_global']:.3f} "
                 f"valida {rel['taxa_resposta_valida']:.3f} por família {rel['acuracia_por_familia']}"
             )
+        return 0
+
+    if args.comando == "agentes":
+        import json as _json
+
+        from .agents import criar_agentes
+
+        saida = {
+            nome: {"papel": ag.papel, "escopo": ag.escopo, "skills": ag.expor_skills()}
+            for nome, ag in criar_agentes(args.raiz).items()
+        }
+        print(_json.dumps(saida, ensure_ascii=False, indent=1))
+        return 0
+
+    if args.comando == "agente":
+        import json as _json
+
+        from .agents import REGISTRO
+
+        if args.nome not in REGISTRO:
+            parser.error(f"agente {args.nome!r} desconhecido (use {sorted(REGISTRO)})")
+        ag = REGISTRO[args.nome](raiz=args.raiz)
+        argumentos = _json.loads(args.json)
+        resultado = ag.executar(args.skill, **argumentos)
+        print(_json.dumps(resultado, ensure_ascii=False, indent=1, default=str))
         return 0
 
     if args.comando == "servir":

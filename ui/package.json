@@ -39,6 +39,7 @@
     "appId": "dev.labia.app",
     "productName": "Lab-IA",
     "files": ["dist/**", "electron/**"],
-    "directories": { "output": "release" }
+    "directories": { "output": "release" },
+    "win": { "target": ["portable"], "icon": null }
   }
 }

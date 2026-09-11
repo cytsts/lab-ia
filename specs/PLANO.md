@@ -27,7 +27,7 @@ Regra: item só muda de status com evidência re-executável (comando + saída) 
 | G6 | UI completa (Electron + DS) | FEITO (Aprovada) | vitest 7/7; tsc+vite build limpo; janela Electron REAL com dados do núcleo ao vivo (screenshot: 7 runs, badges corretos, progresso, tema escuro do sistema); DS catálogo vivo renderizando (screenshot); API RF5 /execucao+/configs+/tamanhos+/comparativo testada (53/53 pytest). Screenshot da janela em `.qwen/captura-app/ui-*.png` (fora do repo, reprodutível) |
 | G7 | Empacotamento desktop | AGUARDANDO | — |
 | G8 | Retomada pós-queda (kill -9) | FEITO (Aprovada) | 2/2 testes com KILL REAL de subprocesso (TerminateProcess, sem cleanup) em 2 janelas de passos diferentes: todo passo-*.pt visível carrega inteiro, estado.json íntegro com concluido=false, retomada produz métricas idênticas (<1e-6) ao contínuo e conclui ✅ |
-| G9 | Agentes (3+ com skills) | AGUARDANDO | — |
+| G9 | Agentes (3+ com skills) | FEITO (Aprovada) | 6/6 testes CPU; deviação de processo registrada: spec escrita DEPOIS de testes+código (contrato formalizado a posteriori em specs/G9.md). Evidência viva: `lab-ia agentes` → 3 agentes / 8 skills com assinaturas; log `agente_acao` ok=true/false auditado |
 | G10 | Suite de testes ≥80% cobertura | AGUARDANDO | — |
 
 ## Fora de escopo declarado
