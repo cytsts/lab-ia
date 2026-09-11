@@ -221,4 +221,8 @@ __marimo__/
 .venv/
 runs/
 .lab-ia/
+.qwen/
+node_modules/
+ui/dist/
+ui/release/
 *.tmp

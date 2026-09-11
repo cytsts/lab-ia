@@ -1,0 +1,44 @@
+{
+  "name": "lab-ia-ui",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Camada visual do Lab-IA (Electron + React + Design System pt-BR)",
+  "main": "electron/main.mjs",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "test": "vitest run",
+    "coverage": "vitest run --coverage",
+    "electron": "electron .",
+    "electron:dev": "cross-env VITE_DEV=1 electron .",
+    "package": "electron-builder"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.1.0",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "cross-env": "^10.1.0",
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8",
+    "jsdom": "^25.0.1",
+    "typescript": "~5.6.3",
+    "vite": "^5.4.11",
+    "vitest": "^2.1.8",
+    "@vitest/coverage-v8": "^2.1.8"
+  },
+  "build": {
+    "appId": "dev.labia.app",
+    "productName": "Lab-IA",
+    "files": ["dist/**", "electron/**"],
+    "directories": { "output": "release" }
+  }
+}

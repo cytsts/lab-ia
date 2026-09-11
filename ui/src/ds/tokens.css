@@ -1,0 +1,47 @@
+/* Design System Lab-IA — tokens de design (identidade amistosa, WCAG AA) */
+:root {
+  /* paleta clara */
+  --fundo: #fff9ef;
+  --fundo-cartao: #ffffff;
+  --fundo-suave: #f6ecdd;
+  --tinta: #27322c;
+  --tinta-suave: #5c6b62;
+  --primaria: #b45309;        /* âmbar escuro — AA sobre creme */
+  --primaria-forte: #92400e;
+  --secundaria: #0f766e;      /* verde-azulado */
+  --perigo: #b91c1c;
+  --ok: #15803d;
+  --aviso: #a16207;
+  --info: #1d4ed8;
+  --borda: #e8d9c3;
+  --sombra: 0 2px 10px rgb(39 50 44 / 0.08);
+  /* MoE / séries */
+  --serie-a: var(--primaria);
+  --serie-b: var(--secundaria);
+  --serie-c: #7c3aed;
+  --serie-d: #be185d;
+  /* tipografia */
+  --fonte: "Segoe UI Variable Text", "Nunito", "Open Sans", system-ui, -apple-system, sans-serif;
+  --fonte-mono: "Cascadia Code", ui-monospace, Consolas, monospace;
+  --h1: 1.6rem; --h2: 1.2rem; --corpo: 0.95rem; --miudo: 0.8rem;
+  /* forma */
+  --raio: 14px; --raio-suave: 10px;
+  --esp-1: 4px; --esp-2: 8px; --esp-3: 16px; --esp-4: 24px; --esp-5: 40px;
+}
+
+[data-tema="escuro"] {
+  --fundo: #191c1a;
+  --fundo-cartao: #232724;
+  --fundo-suave: #2c312e;
+  --tinta: #ece7dd;
+  --tinta-suave: #a8b0aa;
+  --primaria: #f59e0b;
+  --primaria-forte: #fbbf24;
+  --secundaria: #2dd4bf;
+  --perigo: #f87171;
+  --ok: #4ade80;
+  --aviso: #facc15;
+  --info: #93c5fd;
+  --borda: #3a403c;
+  --sombra: 0 2px 10px rgb(0 0 0 / 0.4);
+}
