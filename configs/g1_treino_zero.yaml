@@ -1,0 +1,22 @@
+nome: g1-treino-zero
+corpus: data/corpus_ptbr.txt
+vocab_bpe: 4096
+modelo:
+  dim: 256
+  camadas: 6
+  cabecas: 8
+  janela_ctx: 256
+  abandono: 0.1
+passos: 2500
+lote: 32
+stride: 128          # janelas deslizantes: dobra o aproveitamento do corpus pequeno
+avaliar_a_cada: 250
+salvar_a_cada: 250
+iters_avaliacao: 60
+lr: 0.0003
+minimo_lr: 0.00003
+warmup: 100
+peso_decay: 0.1
+grad_clip: 1.0
+semente: 42
+dispositivo: auto
