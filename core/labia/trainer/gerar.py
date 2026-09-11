@@ -65,6 +65,14 @@ def _preparar_modelo(run_dir: Path, disp: torch.device):
     return modelo, tokenizer
 
 
+def carregar_para_geracao(run_dir: Path | str, dispositivo: str = "auto"):
+    """API pública: (modelo em eval, tokenizer, dispositivo) para qualquer tipo de run."""
+    run_dir = Path(run_dir)
+    disp = _dispositivo(dispositivo)
+    modelo, tokenizer = _preparar_modelo(run_dir, disp)
+    return modelo.to(disp).eval(), tokenizer, disp
+
+
 def gerar_de_checkpoint(
     run_dir: Path | str,
     prompt: str,

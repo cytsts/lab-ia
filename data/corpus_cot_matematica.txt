@@ -1,0 +1,3011 @@
+Quanto e 4 + 2?
+Vamos pensar passo a passo.
+Passo 1: Some 2 ao valor inicial 4.
+Passo 2: O total e 6.
+Resposta: 6
+
+Quanto e 17 + 8?
+Vamos pensar passo a passo.
+Passo 1: Some 8 ao valor inicial 17.
+Passo 2: O total e 25.
+Resposta: 25
+
+Quanto e 5 + 2?
+Vamos pensar passo a passo.
+Passo 1: Some 2 ao valor inicial 5.
+Passo 2: O total e 7.
+Resposta: 7
+
+Quanto e 19 + 10?
+Vamos pensar passo a passo.
+Passo 1: Some 10 ao valor inicial 19.
+Passo 2: O total e 29.
+Resposta: 29
+
+Quanto e 13 + 3?
+Vamos pensar passo a passo.
+Passo 1: Some 3 ao valor inicial 13.
+Passo 2: O total e 16.
+Resposta: 16
+
+Quanto e 10 + 11?
+Vamos pensar passo a passo.
+Passo 1: Some 11 ao valor inicial 10.
+Passo 2: O total e 21.
+Resposta: 21
+
+Quanto e 14 + 11?
+Vamos pensar passo a passo.
+Passo 1: Some 11 ao valor inicial 14.
+Passo 2: O total e 25.
+Resposta: 25
+
+Quanto e 7 + 12?
+Vamos pensar passo a passo.
+Passo 1: Some 12 ao valor inicial 7.
+Passo 2: O total e 19.
+Resposta: 19
+
+Quanto e 11 + 12?
+Vamos pensar passo a passo.
+Passo 1: Some 12 ao valor inicial 11.
+Passo 2: O total e 23.
+Resposta: 23
+
+Quanto e 16 + 4?
+Vamos pensar passo a passo.
+Passo 1: Some 4 ao valor inicial 16.
+Passo 2: O total e 20.
+Resposta: 20
+
+Quanto e 12 + 18?
+Vamos pensar passo a passo.
+Passo 1: Some 18 ao valor inicial 12.
+Passo 2: O total e 30.
+Resposta: 30
+
+Quanto e 9 + 8?
+Vamos pensar passo a passo.
+Passo 1: Some 8 ao valor inicial 9.
+Passo 2: O total e 17.
+Resposta: 17
+
+Quanto e 5 + 16?
+Vamos pensar passo a passo.
+Passo 1: Some 16 ao valor inicial 5.
+Passo 2: O total e 21.
+Resposta: 21
+
+Quanto e 11 + 19?
+Vamos pensar passo a passo.
+Passo 1: Some 19 ao valor inicial 11.
+Passo 2: O total e 30.
+Resposta: 30
+
+Quanto e 4 + 5?
+Vamos pensar passo a passo.
+Passo 1: Some 5 ao valor inicial 4.
+Passo 2: O total e 9.
+Resposta: 9
+
+Quanto e 5 + 18?
+Vamos pensar passo a passo.
+Passo 1: Some 18 ao valor inicial 5.
+Passo 2: O total e 23.
+Resposta: 23
+
+Quanto e 6 + 11?
+Vamos pensar passo a passo.
+Passo 1: Some 11 ao valor inicial 6.
+Passo 2: O total e 17.
+Resposta: 17
+
+Quanto e 17 + 13?
+Vamos pensar passo a passo.
+Passo 1: Some 13 ao valor inicial 17.
+Passo 2: O total e 30.
+Resposta: 30
+
+Quanto e 18 + 18?
+Vamos pensar passo a passo.
+Passo 1: Some 18 ao valor inicial 18.
+Passo 2: O total e 36.
+Resposta: 36
+
+Quanto e 10 + 20?
+Vamos pensar passo a passo.
+Passo 1: Some 20 ao valor inicial 10.
+Passo 2: O total e 30.
+Resposta: 30
+
+Quanto e 20 + 4?
+Vamos pensar passo a passo.
+Passo 1: Some 4 ao valor inicial 20.
+Passo 2: O total e 24.
+Resposta: 24
+
+Quanto e 8 + 15?
+Vamos pensar passo a passo.
+Passo 1: Some 15 ao valor inicial 8.
+Passo 2: O total e 23.
+Resposta: 23
+
+Quanto e 5 + 5?
+Vamos pensar passo a passo.
+Passo 1: Some 5 ao valor inicial 5.
+Passo 2: O total e 10.
+Resposta: 10
+
+Quanto e 8 + 17?
+Vamos pensar passo a passo.
+Passo 1: Some 17 ao valor inicial 8.
+Passo 2: O total e 25.
+Resposta: 25
+
+Quanto e 12 + 16?
+Vamos pensar passo a passo.
+Passo 1: Some 16 ao valor inicial 12.
+Passo 2: O total e 28.
+Resposta: 28
+
+Quanto e 19 + 13?
+Vamos pensar passo a passo.
+Passo 1: Some 13 ao valor inicial 19.
+Passo 2: O total e 32.
+Resposta: 32
+
+Quanto e 5 + 15?
+Vamos pensar passo a passo.
+Passo 1: Some 15 ao valor inicial 5.
+Passo 2: O total e 20.
+Resposta: 20
+
+Quanto e 6 + 10?
+Vamos pensar passo a passo.
+Passo 1: Some 10 ao valor inicial 6.
+Passo 2: O total e 16.
+Resposta: 16
+
+Quanto e 14 + 13?
+Vamos pensar passo a passo.
+Passo 1: Some 13 ao valor inicial 14.
+Passo 2: O total e 27.
+Resposta: 27
+
+Quanto e 18 + 3?
+Vamos pensar passo a passo.
+Passo 1: Some 3 ao valor inicial 18.
+Passo 2: O total e 21.
+Resposta: 21
+
+Quanto e 2 + 18?
+Vamos pensar passo a passo.
+Passo 1: Some 18 ao valor inicial 2.
+Passo 2: O total e 20.
+Resposta: 20
+
+Quanto e 14 + 14?
+Vamos pensar passo a passo.
+Passo 1: Some 14 ao valor inicial 14.
+Passo 2: O total e 28.
+Resposta: 28
+
+Quanto e 12 + 20?
+Vamos pensar passo a passo.
+Passo 1: Some 20 ao valor inicial 12.
+Passo 2: O total e 32.
+Resposta: 32
+
+Quanto e 16 + 16?
+Vamos pensar passo a passo.
+Passo 1: Some 16 ao valor inicial 16.
+Passo 2: O total e 32.
+Resposta: 32
+
+Quanto e 18 + 2?
+Vamos pensar passo a passo.
+Passo 1: Some 2 ao valor inicial 18.
+Passo 2: O total e 20.
+Resposta: 20
+
+Quanto e 8 + 13?
+Vamos pensar passo a passo.
+Passo 1: Some 13 ao valor inicial 8.
+Passo 2: O total e 21.
+Resposta: 21
+
+Quanto e 13 + 10?
+Vamos pensar passo a passo.
+Passo 1: Some 10 ao valor inicial 13.
+Passo 2: O total e 23.
+Resposta: 23
+
+Quanto e 4 + 20?
+Vamos pensar passo a passo.
+Passo 1: Some 20 ao valor inicial 4.
+Passo 2: O total e 24.
+Resposta: 24
+
+Quanto e 1 + 15?
+Vamos pensar passo a passo.
+Passo 1: Some 15 ao valor inicial 1.
+Passo 2: O total e 16.
+Resposta: 16
+
+Quanto e 19 + 20?
+Vamos pensar passo a passo.
+Passo 1: Some 20 ao valor inicial 19.
+Passo 2: O total e 39.
+Resposta: 39
+
+Quanto e 15 + 8?
+Vamos pensar passo a passo.
+Passo 1: Some 8 ao valor inicial 15.
+Passo 2: O total e 23.
+Resposta: 23
+
+Quanto e 7 + 15?
+Vamos pensar passo a passo.
+Passo 1: Some 15 ao valor inicial 7.
+Passo 2: O total e 22.
+Resposta: 22
+
+Quanto e 5 + 8?
+Vamos pensar passo a passo.
+Passo 1: Some 8 ao valor inicial 5.
+Passo 2: O total e 13.
+Resposta: 13
+
+Quanto e 4 + 12?
+Vamos pensar passo a passo.
+Passo 1: Some 12 ao valor inicial 4.
+Passo 2: O total e 16.
+Resposta: 16
+
+Quanto e 19 + 6?
+Vamos pensar passo a passo.
+Passo 1: Some 6 ao valor inicial 19.
+Passo 2: O total e 25.
+Resposta: 25
+
+Quanto e 8 + 5?
+Vamos pensar passo a passo.
+Passo 1: Some 5 ao valor inicial 8.
+Passo 2: O total e 13.
+Resposta: 13
+
+Quanto e 9 + 13?
+Vamos pensar passo a passo.
+Passo 1: Some 13 ao valor inicial 9.
+Passo 2: O total e 22.
+Resposta: 22
+
+Quanto e 17 + 14?
+Vamos pensar passo a passo.
+Passo 1: Some 14 ao valor inicial 17.
+Passo 2: O total e 31.
+Resposta: 31
+
+Quanto e 2 + 4?
+Vamos pensar passo a passo.
+Passo 1: Some 4 ao valor inicial 2.
+Passo 2: O total e 6.
+Resposta: 6
+
+Quanto e 5 + 6?
+Vamos pensar passo a passo.
+Passo 1: Some 6 ao valor inicial 5.
+Passo 2: O total e 11.
+Resposta: 11
+
+Quanto e 16 + 10?
+Vamos pensar passo a passo.
+Passo 1: Some 10 ao valor inicial 16.
+Passo 2: O total e 26.
+Resposta: 26
+
+Quanto e 7 + 5?
+Vamos pensar passo a passo.
+Passo 1: Some 5 ao valor inicial 7.
+Passo 2: O total e 12.
+Resposta: 12
+
+Quanto e 8 + 16?
+Vamos pensar passo a passo.
+Passo 1: Some 16 ao valor inicial 8.
+Passo 2: O total e 24.
+Resposta: 24
+
+Quanto e 6 + 1?
+Vamos pensar passo a passo.
+Passo 1: Some 1 ao valor inicial 6.
+Passo 2: O total e 7.
+Resposta: 7
+
+Quanto e 15 + 2?
+Vamos pensar passo a passo.
+Passo 1: Some 2 ao valor inicial 15.
+Passo 2: O total e 17.
+Resposta: 17
+
+Quanto e 20 + 3?
+Vamos pensar passo a passo.
+Passo 1: Some 3 ao valor inicial 20.
+Passo 2: O total e 23.
+Resposta: 23
+
+Quanto e 20 + 18?
+Vamos pensar passo a passo.
+Passo 1: Some 18 ao valor inicial 20.
+Passo 2: O total e 38.
+Resposta: 38
+
+Quanto e 5 + 3?
+Vamos pensar passo a passo.
+Passo 1: Some 3 ao valor inicial 5.
+Passo 2: O total e 8.
+Resposta: 8
+
+Quanto e 3 + 19?
+Vamos pensar passo a passo.
+Passo 1: Some 19 ao valor inicial 3.
+Passo 2: O total e 22.
+Resposta: 22
+
+Quanto e 6 + 13?
+Vamos pensar passo a passo.
+Passo 1: Some 13 ao valor inicial 6.
+Passo 2: O total e 19.
+Resposta: 19
+
+Quanto e 20 + 19?
+Vamos pensar passo a passo.
+Passo 1: Some 19 ao valor inicial 20.
+Passo 2: O total e 39.
+Resposta: 39
+
+Quanto e 17 + 17?
+Vamos pensar passo a passo.
+Passo 1: Some 17 ao valor inicial 17.
+Passo 2: O total e 34.
+Resposta: 34
+
+Quanto e 2 + 10?
+Vamos pensar passo a passo.
+Passo 1: Some 10 ao valor inicial 2.
+Passo 2: O total e 12.
+Resposta: 12
+
+Quanto e 11 + 3?
+Vamos pensar passo a passo.
+Passo 1: Some 3 ao valor inicial 11.
+Passo 2: O total e 14.
+Resposta: 14
+
+Quanto e 17 + 16?
+Vamos pensar passo a passo.
+Passo 1: Some 16 ao valor inicial 17.
+Passo 2: O total e 33.
+Resposta: 33
+
+Quanto e 9 + 2?
+Vamos pensar passo a passo.
+Passo 1: Some 2 ao valor inicial 9.
+Passo 2: O total e 11.
+Resposta: 11
+
+Quanto e 6 + 5?
+Vamos pensar passo a passo.
+Passo 1: Some 5 ao valor inicial 6.
+Passo 2: O total e 11.
+Resposta: 11
+
+Quanto e 4 + 11?
+Vamos pensar passo a passo.
+Passo 1: Some 11 ao valor inicial 4.
+Passo 2: O total e 15.
+Resposta: 15
+
+Quanto e 20 + 11?
+Vamos pensar passo a passo.
+Passo 1: Some 11 ao valor inicial 20.
+Passo 2: O total e 31.
+Resposta: 31
+
+Quanto e 6 + 14?
+Vamos pensar passo a passo.
+Passo 1: Some 14 ao valor inicial 6.
+Passo 2: O total e 20.
+Resposta: 20
+
+Quanto e 19 + 5?
+Vamos pensar passo a passo.
+Passo 1: Some 5 ao valor inicial 19.
+Passo 2: O total e 24.
+Resposta: 24
+
+Quanto e 10 + 8?
+Vamos pensar passo a passo.
+Passo 1: Some 8 ao valor inicial 10.
+Passo 2: O total e 18.
+Resposta: 18
+
+Quanto e 18 + 19?
+Vamos pensar passo a passo.
+Passo 1: Some 19 ao valor inicial 18.
+Passo 2: O total e 37.
+Resposta: 37
+
+Quanto e 16 + 12?
+Vamos pensar passo a passo.
+Passo 1: Some 12 ao valor inicial 16.
+Passo 2: O total e 28.
+Resposta: 28
+
+Quanto e 4 + 14?
+Vamos pensar passo a passo.
+Passo 1: Some 14 ao valor inicial 4.
+Passo 2: O total e 18.
+Resposta: 18
+
+Quanto e 8 + 6?
+Vamos pensar passo a passo.
+Passo 1: Some 6 ao valor inicial 8.
+Passo 2: O total e 14.
+Resposta: 14
+
+Quanto e 10 + 6?
+Vamos pensar passo a passo.
+Passo 1: Some 6 ao valor inicial 10.
+Passo 2: O total e 16.
+Resposta: 16
+
+Quanto e 6 + 19?
+Vamos pensar passo a passo.
+Passo 1: Some 19 ao valor inicial 6.
+Passo 2: O total e 25.
+Resposta: 25
+
+Quanto e 4 + 8?
+Vamos pensar passo a passo.
+Passo 1: Some 8 ao valor inicial 4.
+Passo 2: O total e 12.
+Resposta: 12
+
+Quanto e 9 + 5?
+Vamos pensar passo a passo.
+Passo 1: Some 5 ao valor inicial 9.
+Passo 2: O total e 14.
+Resposta: 14
+
+Quanto e 10 + 19?
+Vamos pensar passo a passo.
+Passo 1: Some 19 ao valor inicial 10.
+Passo 2: O total e 29.
+Resposta: 29
+
+Quanto e 11 + 15?
+Vamos pensar passo a passo.
+Passo 1: Some 15 ao valor inicial 11.
+Passo 2: O total e 26.
+Resposta: 26
+
+Quanto e 11 + 14?
+Vamos pensar passo a passo.
+Passo 1: Some 14 ao valor inicial 11.
+Passo 2: O total e 25.
+Resposta: 25
+
+Quanto e 5 + 19?
+Vamos pensar passo a passo.
+Passo 1: Some 19 ao valor inicial 5.
+Passo 2: O total e 24.
+Resposta: 24
+
+Quanto e 2 + 1?
+Vamos pensar passo a passo.
+Passo 1: Some 1 ao valor inicial 2.
+Passo 2: O total e 3.
+Resposta: 3
+
+Quanto e 18 + 6?
+Vamos pensar passo a passo.
+Passo 1: Some 6 ao valor inicial 18.
+Passo 2: O total e 24.
+Resposta: 24
+
+Quanto e 14 + 10?
+Vamos pensar passo a passo.
+Passo 1: Some 10 ao valor inicial 14.
+Passo 2: O total e 24.
+Resposta: 24
+
+Quanto e 6 + 9?
+Vamos pensar passo a passo.
+Passo 1: Some 9 ao valor inicial 6.
+Passo 2: O total e 15.
+Resposta: 15
+
+Quanto e 4 + 10?
+Vamos pensar passo a passo.
+Passo 1: Some 10 ao valor inicial 4.
+Passo 2: O total e 14.
+Resposta: 14
+
+Quanto e 11 + 2?
+Vamos pensar passo a passo.
+Passo 1: Some 2 ao valor inicial 11.
+Passo 2: O total e 13.
+Resposta: 13
+
+Quanto e 14 + 1?
+Vamos pensar passo a passo.
+Passo 1: Some 1 ao valor inicial 14.
+Passo 2: O total e 15.
+Resposta: 15
+
+Quanto e 19 + 19?
+Vamos pensar passo a passo.
+Passo 1: Some 19 ao valor inicial 19.
+Passo 2: O total e 38.
+Resposta: 38
+
+Quanto e 2 + 16?
+Vamos pensar passo a passo.
+Passo 1: Some 16 ao valor inicial 2.
+Passo 2: O total e 18.
+Resposta: 18
+
+Quanto e 18 + 17?
+Vamos pensar passo a passo.
+Passo 1: Some 17 ao valor inicial 18.
+Passo 2: O total e 35.
+Resposta: 35
+
+Quanto e 3 + 16?
+Vamos pensar passo a passo.
+Passo 1: Some 16 ao valor inicial 3.
+Passo 2: O total e 19.
+Resposta: 19
+
+Quanto e 7 + 16?
+Vamos pensar passo a passo.
+Passo 1: Some 16 ao valor inicial 7.
+Passo 2: O total e 23.
+Resposta: 23
+
+Quanto e 12 + 8?
+Vamos pensar passo a passo.
+Passo 1: Some 8 ao valor inicial 12.
+Passo 2: O total e 20.
+Resposta: 20
+
+Quanto e 19 + 14?
+Vamos pensar passo a passo.
+Passo 1: Some 14 ao valor inicial 19.
+Passo 2: O total e 33.
+Resposta: 33
+
+Quanto e 7 + 4?
+Vamos pensar passo a passo.
+Passo 1: Some 4 ao valor inicial 7.
+Passo 2: O total e 11.
+Resposta: 11
+
+Quanto e 3 + 9?
+Vamos pensar passo a passo.
+Passo 1: Some 9 ao valor inicial 3.
+Passo 2: O total e 12.
+Resposta: 12
+
+Quanto e 19 + 11?
+Vamos pensar passo a passo.
+Passo 1: Some 11 ao valor inicial 19.
+Passo 2: O total e 30.
+Resposta: 30
+
+Quanto e 17 + 6?
+Vamos pensar passo a passo.
+Passo 1: Some 6 ao valor inicial 17.
+Passo 2: O total e 23.
+Resposta: 23
+
+Quanto e 13 + 19?
+Vamos pensar passo a passo.
+Passo 1: Some 19 ao valor inicial 13.
+Passo 2: O total e 32.
+Resposta: 32
+
+Quanto e 13 + 13?
+Vamos pensar passo a passo.
+Passo 1: Some 13 ao valor inicial 13.
+Passo 2: O total e 26.
+Resposta: 26
+
+Quanto e 3 + 5?
+Vamos pensar passo a passo.
+Passo 1: Some 5 ao valor inicial 3.
+Passo 2: O total e 8.
+Resposta: 8
+
+Quanto e 10 + 18?
+Vamos pensar passo a passo.
+Passo 1: Some 18 ao valor inicial 10.
+Passo 2: O total e 28.
+Resposta: 28
+
+Quanto e 16 + 2?
+Vamos pensar passo a passo.
+Passo 1: Some 2 ao valor inicial 16.
+Passo 2: O total e 18.
+Resposta: 18
+
+Quanto e 1 + 9?
+Vamos pensar passo a passo.
+Passo 1: Some 9 ao valor inicial 1.
+Passo 2: O total e 10.
+Resposta: 10
+
+Quanto e 15 + 10?
+Vamos pensar passo a passo.
+Passo 1: Some 10 ao valor inicial 15.
+Passo 2: O total e 25.
+Resposta: 25
+
+Quanto e 8 + 1?
+Vamos pensar passo a passo.
+Passo 1: Some 1 ao valor inicial 8.
+Passo 2: O total e 9.
+Resposta: 9
+
+Quanto e 15 + 3?
+Vamos pensar passo a passo.
+Passo 1: Some 3 ao valor inicial 15.
+Passo 2: O total e 18.
+Resposta: 18
+
+Quanto e 17 + 19?
+Vamos pensar passo a passo.
+Passo 1: Some 19 ao valor inicial 17.
+Passo 2: O total e 36.
+Resposta: 36
+
+Quanto e 12 + 7?
+Vamos pensar passo a passo.
+Passo 1: Some 7 ao valor inicial 12.
+Passo 2: O total e 19.
+Resposta: 19
+
+Quanto e 16 + 14?
+Vamos pensar passo a passo.
+Passo 1: Some 14 ao valor inicial 16.
+Passo 2: O total e 30.
+Resposta: 30
+
+Quanto e 5 + 7?
+Vamos pensar passo a passo.
+Passo 1: Some 7 ao valor inicial 5.
+Passo 2: O total e 12.
+Resposta: 12
+
+Quanto e 8 + 20?
+Vamos pensar passo a passo.
+Passo 1: Some 20 ao valor inicial 8.
+Passo 2: O total e 28.
+Resposta: 28
+
+Quanto e 6 + 12?
+Vamos pensar passo a passo.
+Passo 1: Some 12 ao valor inicial 6.
+Passo 2: O total e 18.
+Resposta: 18
+
+Quanto e 16 + 20?
+Vamos pensar passo a passo.
+Passo 1: Some 20 ao valor inicial 16.
+Passo 2: O total e 36.
+Resposta: 36
+
+Quanto e 11 + 8?
+Vamos pensar passo a passo.
+Passo 1: Some 8 ao valor inicial 11.
+Passo 2: O total e 19.
+Resposta: 19
+
+Quanto e 8 + 12?
+Vamos pensar passo a passo.
+Passo 1: Some 12 ao valor inicial 8.
+Passo 2: O total e 20.
+Resposta: 20
+
+Quanto e 13 + 4?
+Vamos pensar passo a passo.
+Passo 1: Some 4 ao valor inicial 13.
+Passo 2: O total e 17.
+Resposta: 17
+
+Quanto e 3 + 4?
+Vamos pensar passo a passo.
+Passo 1: Some 4 ao valor inicial 3.
+Passo 2: O total e 7.
+Resposta: 7
+
+Quanto e 13 + 14?
+Vamos pensar passo a passo.
+Passo 1: Some 14 ao valor inicial 13.
+Passo 2: O total e 27.
+Resposta: 27
+
+Quanto e 8 + 7?
+Vamos pensar passo a passo.
+Passo 1: Some 7 ao valor inicial 8.
+Passo 2: O total e 15.
+Resposta: 15
+
+Quanto e 6 + 20?
+Vamos pensar passo a passo.
+Passo 1: Some 20 ao valor inicial 6.
+Passo 2: O total e 26.
+Resposta: 26
+
+Quanto e 7 + 8?
+Vamos pensar passo a passo.
+Passo 1: Some 8 ao valor inicial 7.
+Passo 2: O total e 15.
+Resposta: 15
+
+Quanto e 2 + 12?
+Vamos pensar passo a passo.
+Passo 1: Some 12 ao valor inicial 2.
+Passo 2: O total e 14.
+Resposta: 14
+
+Quanto e 10 + 12?
+Vamos pensar passo a passo.
+Passo 1: Some 12 ao valor inicial 10.
+Passo 2: O total e 22.
+Resposta: 22
+
+Quanto e 6 + 16?
+Vamos pensar passo a passo.
+Passo 1: Some 16 ao valor inicial 6.
+Passo 2: O total e 22.
+Resposta: 22
+
+Quanto e 4 + 18?
+Vamos pensar passo a passo.
+Passo 1: Some 18 ao valor inicial 4.
+Passo 2: O total e 22.
+Resposta: 22
+
+Quanto e 18 + 20?
+Vamos pensar passo a passo.
+Passo 1: Some 20 ao valor inicial 18.
+Passo 2: O total e 38.
+Resposta: 38
+
+Quanto e 5 + 4?
+Vamos pensar passo a passo.
+Passo 1: Some 4 ao valor inicial 5.
+Passo 2: O total e 9.
+Resposta: 9
+
+Quanto e 12 + 10?
+Vamos pensar passo a passo.
+Passo 1: Some 10 ao valor inicial 12.
+Passo 2: O total e 22.
+Resposta: 22
+
+Quanto e 7 + 11?
+Vamos pensar passo a passo.
+Passo 1: Some 11 ao valor inicial 7.
+Passo 2: O total e 18.
+Resposta: 18
+
+Quanto e 10 + 16?
+Vamos pensar passo a passo.
+Passo 1: Some 16 ao valor inicial 10.
+Passo 2: O total e 26.
+Resposta: 26
+
+Quanto e 1 + 7?
+Vamos pensar passo a passo.
+Passo 1: Some 7 ao valor inicial 1.
+Passo 2: O total e 8.
+Resposta: 8
+
+Quanto e 5 + 11?
+Vamos pensar passo a passo.
+Passo 1: Some 11 ao valor inicial 5.
+Passo 2: O total e 16.
+Resposta: 16
+
+Quanto e 9 + 6?
+Vamos pensar passo a passo.
+Passo 1: Some 6 ao valor inicial 9.
+Passo 2: O total e 15.
+Resposta: 15
+
+Quanto e 5 + 9?
+Vamos pensar passo a passo.
+Passo 1: Some 9 ao valor inicial 5.
+Passo 2: O total e 14.
+Resposta: 14
+
+Quanto e 1 + 14?
+Vamos pensar passo a passo.
+Passo 1: Some 14 ao valor inicial 1.
+Passo 2: O total e 15.
+Resposta: 15
+
+Quanto e 1 + 19?
+Vamos pensar passo a passo.
+Passo 1: Some 19 ao valor inicial 1.
+Passo 2: O total e 20.
+Resposta: 20
+
+Quanto e 14 + 5?
+Vamos pensar passo a passo.
+Passo 1: Some 5 ao valor inicial 14.
+Passo 2: O total e 19.
+Resposta: 19
+
+Quanto e 2 + 8?
+Vamos pensar passo a passo.
+Passo 1: Some 8 ao valor inicial 2.
+Passo 2: O total e 10.
+Resposta: 10
+
+Quanto e 1 + 4?
+Vamos pensar passo a passo.
+Passo 1: Some 4 ao valor inicial 1.
+Passo 2: O total e 5.
+Resposta: 5
+
+Quanto e 5 + 17?
+Vamos pensar passo a passo.
+Passo 1: Some 17 ao valor inicial 5.
+Passo 2: O total e 22.
+Resposta: 22
+
+Quanto e 14 + 19?
+Vamos pensar passo a passo.
+Passo 1: Some 19 ao valor inicial 14.
+Passo 2: O total e 33.
+Resposta: 33
+
+Quanto e 11 + 10?
+Vamos pensar passo a passo.
+Passo 1: Some 10 ao valor inicial 11.
+Passo 2: O total e 21.
+Resposta: 21
+
+Quanto e 17 + 10?
+Vamos pensar passo a passo.
+Passo 1: Some 10 ao valor inicial 17.
+Passo 2: O total e 27.
+Resposta: 27
+
+Quanto e 2 + 19?
+Vamos pensar passo a passo.
+Passo 1: Some 19 ao valor inicial 2.
+Passo 2: O total e 21.
+Resposta: 21
+
+Quanto e 11 + 7?
+Vamos pensar passo a passo.
+Passo 1: Some 7 ao valor inicial 11.
+Passo 2: O total e 18.
+Resposta: 18
+
+Quanto e 19 + 2?
+Vamos pensar passo a passo.
+Passo 1: Some 2 ao valor inicial 19.
+Passo 2: O total e 21.
+Resposta: 21
+
+Quanto e 6 + 6?
+Vamos pensar passo a passo.
+Passo 1: Some 6 ao valor inicial 6.
+Passo 2: O total e 12.
+Resposta: 12
+
+Quanto e 12 + 4?
+Vamos pensar passo a passo.
+Passo 1: Some 4 ao valor inicial 12.
+Passo 2: O total e 16.
+Resposta: 16
+
+Quanto e 4 + 19?
+Vamos pensar passo a passo.
+Passo 1: Some 19 ao valor inicial 4.
+Passo 2: O total e 23.
+Resposta: 23
+
+Quanto e 12 + 9?
+Vamos pensar passo a passo.
+Passo 1: Some 9 ao valor inicial 12.
+Passo 2: O total e 21.
+Resposta: 21
+
+Quanto e 18 + 5?
+Vamos pensar passo a passo.
+Passo 1: Some 5 ao valor inicial 18.
+Passo 2: O total e 23.
+Resposta: 23
+
+Quanto e 11 + 1?
+Vamos pensar passo a passo.
+Passo 1: Some 1 ao valor inicial 11.
+Passo 2: O total e 12.
+Resposta: 12
+
+Quanto e 12 + 13?
+Vamos pensar passo a passo.
+Passo 1: Some 13 ao valor inicial 12.
+Passo 2: O total e 25.
+Resposta: 25
+
+Quanto e 3 + 1?
+Vamos pensar passo a passo.
+Passo 1: Some 1 ao valor inicial 3.
+Passo 2: O total e 4.
+Resposta: 4
+
+Quanto e 13 + 8?
+Vamos pensar passo a passo.
+Passo 1: Some 8 ao valor inicial 13.
+Passo 2: O total e 21.
+Resposta: 21
+
+Quanto e 6 + 7?
+Vamos pensar passo a passo.
+Passo 1: Some 7 ao valor inicial 6.
+Passo 2: O total e 13.
+Resposta: 13
+
+Quanto e 2 + 2?
+Vamos pensar passo a passo.
+Passo 1: Some 2 ao valor inicial 2.
+Passo 2: O total e 4.
+Resposta: 4
+
+Quanto e 14 + 17?
+Vamos pensar passo a passo.
+Passo 1: Some 17 ao valor inicial 14.
+Passo 2: O total e 31.
+Resposta: 31
+
+Quanto e 7 + 10?
+Vamos pensar passo a passo.
+Passo 1: Some 10 ao valor inicial 7.
+Passo 2: O total e 17.
+Resposta: 17
+
+Quanto e 9 + 18?
+Vamos pensar passo a passo.
+Passo 1: Some 18 ao valor inicial 9.
+Passo 2: O total e 27.
+Resposta: 27
+
+Quanto e 14 + 18?
+Vamos pensar passo a passo.
+Passo 1: Some 18 ao valor inicial 14.
+Passo 2: O total e 32.
+Resposta: 32
+
+Quanto e 8 + 14?
+Vamos pensar passo a passo.
+Passo 1: Some 14 ao valor inicial 8.
+Passo 2: O total e 22.
+Resposta: 22
+
+Quanto e 2 + 14?
+Vamos pensar passo a passo.
+Passo 1: Some 14 ao valor inicial 2.
+Passo 2: O total e 16.
+Resposta: 16
+
+Quanto e 15 + 19?
+Vamos pensar passo a passo.
+Passo 1: Some 19 ao valor inicial 15.
+Passo 2: O total e 34.
+Resposta: 34
+
+Quanto e 7 + 2?
+Vamos pensar passo a passo.
+Passo 1: Some 2 ao valor inicial 7.
+Passo 2: O total e 9.
+Resposta: 9
+
+Quanto e 3 + 18?
+Vamos pensar passo a passo.
+Passo 1: Some 18 ao valor inicial 3.
+Passo 2: O total e 21.
+Resposta: 21
+
+Quanto e 15 + 12?
+Vamos pensar passo a passo.
+Passo 1: Some 12 ao valor inicial 15.
+Passo 2: O total e 27.
+Resposta: 27
+
+Quanto e 2 + 15?
+Vamos pensar passo a passo.
+Passo 1: Some 15 ao valor inicial 2.
+Passo 2: O total e 17.
+Resposta: 17
+
+Quanto e 15 + 11?
+Vamos pensar passo a passo.
+Passo 1: Some 11 ao valor inicial 15.
+Passo 2: O total e 26.
+Resposta: 26
+
+Quanto e 9 + 17?
+Vamos pensar passo a passo.
+Passo 1: Some 17 ao valor inicial 9.
+Passo 2: O total e 26.
+Resposta: 26
+
+Quanto e 7 + 6?
+Vamos pensar passo a passo.
+Passo 1: Some 6 ao valor inicial 7.
+Passo 2: O total e 13.
+Resposta: 13
+
+Quanto e 12 + 1?
+Vamos pensar passo a passo.
+Passo 1: Some 1 ao valor inicial 12.
+Passo 2: O total e 13.
+Resposta: 13
+
+Quanto e 10 + 17?
+Vamos pensar passo a passo.
+Passo 1: Some 17 ao valor inicial 10.
+Passo 2: O total e 27.
+Resposta: 27
+
+Quanto e 18 + 15?
+Vamos pensar passo a passo.
+Passo 1: Some 15 ao valor inicial 18.
+Passo 2: O total e 33.
+Resposta: 33
+
+Quanto e 18 + 16?
+Vamos pensar passo a passo.
+Passo 1: Some 16 ao valor inicial 18.
+Passo 2: O total e 34.
+Resposta: 34
+
+Quanto e 9 + 11?
+Vamos pensar passo a passo.
+Passo 1: Some 11 ao valor inicial 9.
+Passo 2: O total e 20.
+Resposta: 20
+
+Quanto e 5 + 1?
+Vamos pensar passo a passo.
+Passo 1: Some 1 ao valor inicial 5.
+Passo 2: O total e 6.
+Resposta: 6
+
+Quanto e 20 + 1?
+Vamos pensar passo a passo.
+Passo 1: Some 1 ao valor inicial 20.
+Passo 2: O total e 21.
+Resposta: 21
+
+Quanto e 19 + 1?
+Vamos pensar passo a passo.
+Passo 1: Some 1 ao valor inicial 19.
+Passo 2: O total e 20.
+Resposta: 20
+
+Quanto e 5 + 12?
+Vamos pensar passo a passo.
+Passo 1: Some 12 ao valor inicial 5.
+Passo 2: O total e 17.
+Resposta: 17
+
+Quanto e 16 + 5?
+Vamos pensar passo a passo.
+Passo 1: Some 5 ao valor inicial 16.
+Passo 2: O total e 21.
+Resposta: 21
+
+Quanto e 10 + 14?
+Vamos pensar passo a passo.
+Passo 1: Some 14 ao valor inicial 10.
+Passo 2: O total e 24.
+Resposta: 24
+
+Quanto e 9 + 12?
+Vamos pensar passo a passo.
+Passo 1: Some 12 ao valor inicial 9.
+Passo 2: O total e 21.
+Resposta: 21
+
+Quanto e 4 + 9?
+Vamos pensar passo a passo.
+Passo 1: Some 9 ao valor inicial 4.
+Passo 2: O total e 13.
+Resposta: 13
+
+Quanto e 13 + 5?
+Vamos pensar passo a passo.
+Passo 1: Some 5 ao valor inicial 13.
+Passo 2: O total e 18.
+Resposta: 18
+
+Quanto e 7 + 20?
+Vamos pensar passo a passo.
+Passo 1: Some 20 ao valor inicial 7.
+Passo 2: O total e 27.
+Resposta: 27
+
+Quanto e 19 + 4?
+Vamos pensar passo a passo.
+Passo 1: Some 4 ao valor inicial 19.
+Passo 2: O total e 23.
+Resposta: 23
+
+Quanto e 1 + 12?
+Vamos pensar passo a passo.
+Passo 1: Some 12 ao valor inicial 1.
+Passo 2: O total e 13.
+Resposta: 13
+
+Quanto e 18 + 10?
+Vamos pensar passo a passo.
+Passo 1: Some 10 ao valor inicial 18.
+Passo 2: O total e 28.
+Resposta: 28
+
+Quanto e 2 + 11?
+Vamos pensar passo a passo.
+Passo 1: Some 11 ao valor inicial 2.
+Passo 2: O total e 13.
+Resposta: 13
+
+Quanto e 7 + 7?
+Vamos pensar passo a passo.
+Passo 1: Some 7 ao valor inicial 7.
+Passo 2: O total e 14.
+Resposta: 14
+
+Quanto e 6 + 2?
+Vamos pensar passo a passo.
+Passo 1: Some 2 ao valor inicial 6.
+Passo 2: O total e 8.
+Resposta: 8
+
+Quanto e 3 + 3?
+Vamos pensar passo a passo.
+Passo 1: Some 3 ao valor inicial 3.
+Passo 2: O total e 6.
+Resposta: 6
+
+Quanto e 14 + 15?
+Vamos pensar passo a passo.
+Passo 1: Some 15 ao valor inicial 14.
+Passo 2: O total e 29.
+Resposta: 29
+
+Quanto e 1 + 1?
+Vamos pensar passo a passo.
+Passo 1: Some 1 ao valor inicial 1.
+Passo 2: O total e 2.
+Resposta: 2
+
+Quanto e 3 + 8?
+Vamos pensar passo a passo.
+Passo 1: Some 8 ao valor inicial 3.
+Passo 2: O total e 11.
+Resposta: 11
+
+Quanto e 1 + 8?
+Vamos pensar passo a passo.
+Passo 1: Some 8 ao valor inicial 1.
+Passo 2: O total e 9.
+Resposta: 9
+
+Quanto e 20 + 7?
+Vamos pensar passo a passo.
+Passo 1: Some 7 ao valor inicial 20.
+Passo 2: O total e 27.
+Resposta: 27
+
+Quanto e 4 + 15?
+Vamos pensar passo a passo.
+Passo 1: Some 15 ao valor inicial 4.
+Passo 2: O total e 19.
+Resposta: 19
+
+Quanto e 11 + 11?
+Vamos pensar passo a passo.
+Passo 1: Some 11 ao valor inicial 11.
+Passo 2: O total e 22.
+Resposta: 22
+
+Quanto e 5 + 20?
+Vamos pensar passo a passo.
+Passo 1: Some 20 ao valor inicial 5.
+Passo 2: O total e 25.
+Resposta: 25
+
+Quanto e 3 + 10?
+Vamos pensar passo a passo.
+Passo 1: Some 10 ao valor inicial 3.
+Passo 2: O total e 13.
+Resposta: 13
+
+Quanto e 10 + 10?
+Vamos pensar passo a passo.
+Passo 1: Some 10 ao valor inicial 10.
+Passo 2: O total e 20.
+Resposta: 20
+
+Quanto e 17 + 20?
+Vamos pensar passo a passo.
+Passo 1: Some 20 ao valor inicial 17.
+Passo 2: O total e 37.
+Resposta: 37
+
+Quanto e 7 + 17?
+Vamos pensar passo a passo.
+Passo 1: Some 17 ao valor inicial 7.
+Passo 2: O total e 24.
+Resposta: 24
+
+Quanto e 2 + 13?
+Vamos pensar passo a passo.
+Passo 1: Some 13 ao valor inicial 2.
+Passo 2: O total e 15.
+Resposta: 15
+
+Quanto e 16 + 3?
+Vamos pensar passo a passo.
+Passo 1: Some 3 ao valor inicial 16.
+Passo 2: O total e 19.
+Resposta: 19
+
+Quanto e 17 + 18?
+Vamos pensar passo a passo.
+Passo 1: Some 18 ao valor inicial 17.
+Passo 2: O total e 35.
+Resposta: 35
+
+Quanto e 5 + 14?
+Vamos pensar passo a passo.
+Passo 1: Some 14 ao valor inicial 5.
+Passo 2: O total e 19.
+Resposta: 19
+
+Quanto e 12 + 12?
+Vamos pensar passo a passo.
+Passo 1: Some 12 ao valor inicial 12.
+Passo 2: O total e 24.
+Resposta: 24
+
+Quanto e 20 + 16?
+Vamos pensar passo a passo.
+Passo 1: Some 16 ao valor inicial 20.
+Passo 2: O total e 36.
+Resposta: 36
+
+Quanto e 14 + 4?
+Vamos pensar passo a passo.
+Passo 1: Some 4 ao valor inicial 14.
+Passo 2: O total e 18.
+Resposta: 18
+
+Quanto e 12 + 5?
+Vamos pensar passo a passo.
+Passo 1: Some 5 ao valor inicial 12.
+Passo 2: O total e 17.
+Resposta: 17
+
+Quanto e 19 + 16?
+Vamos pensar passo a passo.
+Passo 1: Some 16 ao valor inicial 19.
+Passo 2: O total e 35.
+Resposta: 35
+
+Quanto e 20 + 9?
+Vamos pensar passo a passo.
+Passo 1: Some 9 ao valor inicial 20.
+Passo 2: O total e 29.
+Resposta: 29
+
+Quanto e 9 + 3?
+Vamos pensar passo a passo.
+Passo 1: Some 3 ao valor inicial 9.
+Passo 2: O total e 12.
+Resposta: 12
+
+Quanto e 8 + 9?
+Vamos pensar passo a passo.
+Passo 1: Some 9 ao valor inicial 8.
+Passo 2: O total e 17.
+Resposta: 17
+
+Quanto e 1 + 18?
+Vamos pensar passo a passo.
+Passo 1: Some 18 ao valor inicial 1.
+Passo 2: O total e 19.
+Resposta: 19
+
+Quanto e 12 + 3?
+Vamos pensar passo a passo.
+Passo 1: Some 3 ao valor inicial 12.
+Passo 2: O total e 15.
+Resposta: 15
+
+Quanto e 13 + 15?
+Vamos pensar passo a passo.
+Passo 1: Some 15 ao valor inicial 13.
+Passo 2: O total e 28.
+Resposta: 28
+
+Quanto e 14 + 2?
+Vamos pensar passo a passo.
+Passo 1: Some 2 ao valor inicial 14.
+Passo 2: O total e 16.
+Resposta: 16
+
+Quanto e 12 + 19?
+Vamos pensar passo a passo.
+Passo 1: Some 19 ao valor inicial 12.
+Passo 2: O total e 31.
+Resposta: 31
+
+Quanto e 13 + 9?
+Vamos pensar passo a passo.
+Passo 1: Some 9 ao valor inicial 13.
+Passo 2: O total e 22.
+Resposta: 22
+
+Quanto e 7 + 14?
+Vamos pensar passo a passo.
+Passo 1: Some 14 ao valor inicial 7.
+Passo 2: O total e 21.
+Resposta: 21
+
+Quanto e 6 + 3?
+Vamos pensar passo a passo.
+Passo 1: Some 3 ao valor inicial 6.
+Passo 2: O total e 9.
+Resposta: 9
+
+Quanto e 10 + 5?
+Vamos pensar passo a passo.
+Passo 1: Some 5 ao valor inicial 10.
+Passo 2: O total e 15.
+Resposta: 15
+
+Quanto e 13 + 11?
+Vamos pensar passo a passo.
+Passo 1: Some 11 ao valor inicial 13.
+Passo 2: O total e 24.
+Resposta: 24
+
+Quanto e 17 + 1?
+Vamos pensar passo a passo.
+Passo 1: Some 1 ao valor inicial 17.
+Passo 2: O total e 18.
+Resposta: 18
+
+Quanto e 18 + 14?
+Vamos pensar passo a passo.
+Passo 1: Some 14 ao valor inicial 18.
+Passo 2: O total e 32.
+Resposta: 32
+
+Quanto e 4 + 17?
+Vamos pensar passo a passo.
+Passo 1: Some 17 ao valor inicial 4.
+Passo 2: O total e 21.
+Resposta: 21
+
+Quanto e 1 + 17?
+Vamos pensar passo a passo.
+Passo 1: Some 17 ao valor inicial 1.
+Passo 2: O total e 18.
+Resposta: 18
+
+Quanto e 1 + 5?
+Vamos pensar passo a passo.
+Passo 1: Some 5 ao valor inicial 1.
+Passo 2: O total e 6.
+Resposta: 6
+
+Quanto e 7 + 18?
+Vamos pensar passo a passo.
+Passo 1: Some 18 ao valor inicial 7.
+Passo 2: O total e 25.
+Resposta: 25
+
+Quanto e 8 + 11?
+Vamos pensar passo a passo.
+Passo 1: Some 11 ao valor inicial 8.
+Passo 2: O total e 19.
+Resposta: 19
+
+Quanto e 6 + 4?
+Vamos pensar passo a passo.
+Passo 1: Some 4 ao valor inicial 6.
+Passo 2: O total e 10.
+Resposta: 10
+
+Quanto e 12 + 2?
+Vamos pensar passo a passo.
+Passo 1: Some 2 ao valor inicial 12.
+Passo 2: O total e 14.
+Resposta: 14
+
+Quanto e 16 + 7?
+Vamos pensar passo a passo.
+Passo 1: Some 7 ao valor inicial 16.
+Passo 2: O total e 23.
+Resposta: 23
+
+Quanto e 17 + 9?
+Vamos pensar passo a passo.
+Passo 1: Some 9 ao valor inicial 17.
+Passo 2: O total e 26.
+Resposta: 26
+
+Quanto e 13 + 17?
+Vamos pensar passo a passo.
+Passo 1: Some 17 ao valor inicial 13.
+Passo 2: O total e 30.
+Resposta: 30
+
+Quanto e 20 + 8?
+Vamos pensar passo a passo.
+Passo 1: Some 8 ao valor inicial 20.
+Passo 2: O total e 28.
+Resposta: 28
+
+Quanto e 8 + 18?
+Vamos pensar passo a passo.
+Passo 1: Some 18 ao valor inicial 8.
+Passo 2: O total e 26.
+Resposta: 26
+
+Quanto e 11 + 6?
+Vamos pensar passo a passo.
+Passo 1: Some 6 ao valor inicial 11.
+Passo 2: O total e 17.
+Resposta: 17
+
+Quanto e 15 + 7?
+Vamos pensar passo a passo.
+Passo 1: Some 7 ao valor inicial 15.
+Passo 2: O total e 22.
+Resposta: 22
+
+Quanto e 19 + 7?
+Vamos pensar passo a passo.
+Passo 1: Some 7 ao valor inicial 19.
+Passo 2: O total e 26.
+Resposta: 26
+
+Quanto e 14 + 20?
+Vamos pensar passo a passo.
+Passo 1: Some 20 ao valor inicial 14.
+Passo 2: O total e 34.
+Resposta: 34
+
+Quanto e 16 + 17?
+Vamos pensar passo a passo.
+Passo 1: Some 17 ao valor inicial 16.
+Passo 2: O total e 33.
+Resposta: 33
+
+Quanto e 12 + 14?
+Vamos pensar passo a passo.
+Passo 1: Some 14 ao valor inicial 12.
+Passo 2: O total e 26.
+Resposta: 26
+
+Quanto e 4 + 3?
+Vamos pensar passo a passo.
+Passo 1: Some 3 ao valor inicial 4.
+Passo 2: O total e 7.
+Resposta: 7
+
+Quanto e 6 + 18?
+Vamos pensar passo a passo.
+Passo 1: Some 18 ao valor inicial 6.
+Passo 2: O total e 24.
+Resposta: 24
+
+Quanto e 13 + 7?
+Vamos pensar passo a passo.
+Passo 1: Some 7 ao valor inicial 13.
+Passo 2: O total e 20.
+Resposta: 20
+
+Quanto e 18 + 13?
+Vamos pensar passo a passo.
+Passo 1: Some 13 ao valor inicial 18.
+Passo 2: O total e 31.
+Resposta: 31
+
+Quanto e 13 + 1?
+Vamos pensar passo a passo.
+Passo 1: Some 1 ao valor inicial 13.
+Passo 2: O total e 14.
+Resposta: 14
+
+Quanto e 11 + 20?
+Vamos pensar passo a passo.
+Passo 1: Some 20 ao valor inicial 11.
+Passo 2: O total e 31.
+Resposta: 31
+
+Quanto e 20 + 12?
+Vamos pensar passo a passo.
+Passo 1: Some 12 ao valor inicial 20.
+Passo 2: O total e 32.
+Resposta: 32
+
+Quanto e 20 + 15?
+Vamos pensar passo a passo.
+Passo 1: Some 15 ao valor inicial 20.
+Passo 2: O total e 35.
+Resposta: 35
+
+Quanto e 14 + 8?
+Vamos pensar passo a passo.
+Passo 1: Some 8 ao valor inicial 14.
+Passo 2: O total e 22.
+Resposta: 22
+
+Quanto e 2 + 6?
+Vamos pensar passo a passo.
+Passo 1: Some 6 ao valor inicial 2.
+Passo 2: O total e 8.
+Resposta: 8
+
+Quanto e 4 + 7?
+Vamos pensar passo a passo.
+Passo 1: Some 7 ao valor inicial 4.
+Passo 2: O total e 11.
+Resposta: 11
+
+Quanto e 20 + 14?
+Vamos pensar passo a passo.
+Passo 1: Some 14 ao valor inicial 20.
+Passo 2: O total e 34.
+Resposta: 34
+
+Quanto e 15 + 15?
+Vamos pensar passo a passo.
+Passo 1: Some 15 ao valor inicial 15.
+Passo 2: O total e 30.
+Resposta: 30
+
+Quanto e 18 + 9?
+Vamos pensar passo a passo.
+Passo 1: Some 9 ao valor inicial 18.
+Passo 2: O total e 27.
+Resposta: 27
+
+Quanto e 14 + 6?
+Vamos pensar passo a passo.
+Passo 1: Some 6 ao valor inicial 14.
+Passo 2: O total e 20.
+Resposta: 20
+
+Quanto e 19 + 3?
+Vamos pensar passo a passo.
+Passo 1: Some 3 ao valor inicial 19.
+Passo 2: O total e 22.
+Resposta: 22
+
+Quanto e 13 + 6?
+Vamos pensar passo a passo.
+Passo 1: Some 6 ao valor inicial 13.
+Passo 2: O total e 19.
+Resposta: 19
+
+Quanto e 15 + 9?
+Vamos pensar passo a passo.
+Passo 1: Some 9 ao valor inicial 15.
+Passo 2: O total e 24.
+Resposta: 24
+
+Quanto e 20 + 10?
+Vamos pensar passo a passo.
+Passo 1: Some 10 ao valor inicial 20.
+Passo 2: O total e 30.
+Resposta: 30
+
+Quanto e 7 + 13?
+Vamos pensar passo a passo.
+Passo 1: Some 13 ao valor inicial 7.
+Passo 2: O total e 20.
+Resposta: 20
+
+Quanto e 14 + 9?
+Vamos pensar passo a passo.
+Passo 1: Some 9 ao valor inicial 14.
+Passo 2: O total e 23.
+Resposta: 23
+
+Quanto e 19 + 8?
+Vamos pensar passo a passo.
+Passo 1: Some 8 ao valor inicial 19.
+Passo 2: O total e 27.
+Resposta: 27
+
+Quanto e 19 + 12?
+Vamos pensar passo a passo.
+Passo 1: Some 12 ao valor inicial 19.
+Passo 2: O total e 31.
+Resposta: 31
+
+Quanto e 20 + 13?
+Vamos pensar passo a passo.
+Passo 1: Some 13 ao valor inicial 20.
+Passo 2: O total e 33.
+Resposta: 33
+
+Quanto e 13 + 20?
+Vamos pensar passo a passo.
+Passo 1: Some 20 ao valor inicial 13.
+Passo 2: O total e 33.
+Resposta: 33
+
+Quanto e 11 + 18?
+Vamos pensar passo a passo.
+Passo 1: Some 18 ao valor inicial 11.
+Passo 2: O total e 29.
+Resposta: 29
+
+Quanto e 3 + 20?
+Vamos pensar passo a passo.
+Passo 1: Some 20 ao valor inicial 3.
+Passo 2: O total e 23.
+Resposta: 23
+
+Quanto e 13 + 16?
+Vamos pensar passo a passo.
+Passo 1: Some 16 ao valor inicial 13.
+Passo 2: O total e 29.
+Resposta: 29
+
+Quanto e 15 + 4?
+Vamos pensar passo a passo.
+Passo 1: Some 4 ao valor inicial 15.
+Passo 2: O total e 19.
+Resposta: 19
+
+Quanto e 15 + 20?
+Vamos pensar passo a passo.
+Passo 1: Some 20 ao valor inicial 15.
+Passo 2: O total e 35.
+Resposta: 35
+
+Quanto e 11 + 5?
+Vamos pensar passo a passo.
+Passo 1: Some 5 ao valor inicial 11.
+Passo 2: O total e 16.
+Resposta: 16
+
+Quanto e 3 + 7?
+Vamos pensar passo a passo.
+Passo 1: Some 7 ao valor inicial 3.
+Passo 2: O total e 10.
+Resposta: 10
+
+Quanto e 11 + 17?
+Vamos pensar passo a passo.
+Passo 1: Some 17 ao valor inicial 11.
+Passo 2: O total e 28.
+Resposta: 28
+
+Quanto e 12 + 17?
+Vamos pensar passo a passo.
+Passo 1: Some 17 ao valor inicial 12.
+Passo 2: O total e 29.
+Resposta: 29
+
+Quanto e 10 + 7?
+Vamos pensar passo a passo.
+Passo 1: Some 7 ao valor inicial 10.
+Passo 2: O total e 17.
+Resposta: 17
+
+Quanto e 10 + 9?
+Vamos pensar passo a passo.
+Passo 1: Some 9 ao valor inicial 10.
+Passo 2: O total e 19.
+Resposta: 19
+
+Quanto e 1 + 13?
+Vamos pensar passo a passo.
+Passo 1: Some 13 ao valor inicial 1.
+Passo 2: O total e 14.
+Resposta: 14
+
+Quanto e 8 + 19?
+Vamos pensar passo a passo.
+Passo 1: Some 19 ao valor inicial 8.
+Passo 2: O total e 27.
+Resposta: 27
+
+Quanto e 15 + 16?
+Vamos pensar passo a passo.
+Passo 1: Some 16 ao valor inicial 15.
+Passo 2: O total e 31.
+Resposta: 31
+
+Quanto e 17 + 11?
+Vamos pensar passo a passo.
+Passo 1: Some 11 ao valor inicial 17.
+Passo 2: O total e 28.
+Resposta: 28
+
+Quanto e 4 + 13?
+Vamos pensar passo a passo.
+Passo 1: Some 13 ao valor inicial 4.
+Passo 2: O total e 17.
+Resposta: 17
+
+Quanto e 12 + 15?
+Vamos pensar passo a passo.
+Passo 1: Some 15 ao valor inicial 12.
+Passo 2: O total e 27.
+Resposta: 27
+
+Quanto e 19 + 17?
+Vamos pensar passo a passo.
+Passo 1: Some 17 ao valor inicial 19.
+Passo 2: O total e 36.
+Resposta: 36
+
+Quanto e 8 + 10?
+Vamos pensar passo a passo.
+Passo 1: Some 10 ao valor inicial 8.
+Passo 2: O total e 18.
+Resposta: 18
+
+Quanto e 14 + 16?
+Vamos pensar passo a passo.
+Passo 1: Some 16 ao valor inicial 14.
+Passo 2: O total e 30.
+Resposta: 30
+
+Quanto e 15 + 6?
+Vamos pensar passo a passo.
+Passo 1: Some 6 ao valor inicial 15.
+Passo 2: O total e 21.
+Resposta: 21
+
+Quanto e 3 + 6?
+Vamos pensar passo a passo.
+Passo 1: Some 6 ao valor inicial 3.
+Passo 2: O total e 9.
+Resposta: 9
+
+Quanto e 9 + 15?
+Vamos pensar passo a passo.
+Passo 1: Some 15 ao valor inicial 9.
+Passo 2: O total e 24.
+Resposta: 24
+
+Quanto e 2 + 20?
+Vamos pensar passo a passo.
+Passo 1: Some 20 ao valor inicial 2.
+Passo 2: O total e 22.
+Resposta: 22
+
+Quanto e 17 + 7?
+Vamos pensar passo a passo.
+Passo 1: Some 7 ao valor inicial 17.
+Passo 2: O total e 24.
+Resposta: 24
+
+Quanto e 20 + 17?
+Vamos pensar passo a passo.
+Passo 1: Some 17 ao valor inicial 20.
+Passo 2: O total e 37.
+Resposta: 37
+
+Quanto e 10 + 13?
+Vamos pensar passo a passo.
+Passo 1: Some 13 ao valor inicial 10.
+Passo 2: O total e 23.
+Resposta: 23
+
+Quanto e 10 + 3?
+Vamos pensar passo a passo.
+Passo 1: Some 3 ao valor inicial 10.
+Passo 2: O total e 13.
+Resposta: 13
+
+Quanto e 9 + 19?
+Vamos pensar passo a passo.
+Passo 1: Some 19 ao valor inicial 9.
+Passo 2: O total e 28.
+Resposta: 28
+
+Quanto e 7 + 9?
+Vamos pensar passo a passo.
+Passo 1: Some 9 ao valor inicial 7.
+Passo 2: O total e 16.
+Resposta: 16
+
+Quanto e 11 + 4?
+Vamos pensar passo a passo.
+Passo 1: Some 4 ao valor inicial 11.
+Passo 2: O total e 15.
+Resposta: 15
+
+Quanto e 6 + 8?
+Vamos pensar passo a passo.
+Passo 1: Some 8 ao valor inicial 6.
+Passo 2: O total e 14.
+Resposta: 14
+
+Quanto e 9 + 1?
+Vamos pensar passo a passo.
+Passo 1: Some 1 ao valor inicial 9.
+Passo 2: O total e 10.
+Resposta: 10
+
+Quanto e 18 + 8?
+Vamos pensar passo a passo.
+Passo 1: Some 8 ao valor inicial 18.
+Passo 2: O total e 26.
+Resposta: 26
+
+Quanto e 20 + 6?
+Vamos pensar passo a passo.
+Passo 1: Some 6 ao valor inicial 20.
+Passo 2: O total e 26.
+Resposta: 26
+
+Quanto e 18 + 11?
+Vamos pensar passo a passo.
+Passo 1: Some 11 ao valor inicial 18.
+Passo 2: O total e 29.
+Resposta: 29
+
+Quanto e 1 + 6?
+Vamos pensar passo a passo.
+Passo 1: Some 6 ao valor inicial 1.
+Passo 2: O total e 7.
+Resposta: 7
+
+Quanto e 12 + 11?
+Vamos pensar passo a passo.
+Passo 1: Some 11 ao valor inicial 12.
+Passo 2: O total e 23.
+Resposta: 23
+
+Quanto e 3 + 11?
+Vamos pensar passo a passo.
+Passo 1: Some 11 ao valor inicial 3.
+Passo 2: O total e 14.
+Resposta: 14
+
+Quanto e 8 + 8?
+Vamos pensar passo a passo.
+Passo 1: Some 8 ao valor inicial 8.
+Passo 2: O total e 16.
+Resposta: 16
+
+Quanto e 3 + 17?
+Vamos pensar passo a passo.
+Passo 1: Some 17 ao valor inicial 3.
+Passo 2: O total e 20.
+Resposta: 20
+
+Quanto e 3 + 2?
+Vamos pensar passo a passo.
+Passo 1: Some 2 ao valor inicial 3.
+Passo 2: O total e 5.
+Resposta: 5
+
+Quanto e 16 + 15?
+Vamos pensar passo a passo.
+Passo 1: Some 15 ao valor inicial 16.
+Passo 2: O total e 31.
+Resposta: 31
+
+Quanto e 1 + 2?
+Vamos pensar passo a passo.
+Passo 1: Some 2 ao valor inicial 1.
+Passo 2: O total e 3.
+Resposta: 3
+
+Quanto e 7 + 3?
+Vamos pensar passo a passo.
+Passo 1: Some 3 ao valor inicial 7.
+Passo 2: O total e 10.
+Resposta: 10
+
+Quanto e 12 + 6?
+Vamos pensar passo a passo.
+Passo 1: Some 6 ao valor inicial 12.
+Passo 2: O total e 18.
+Resposta: 18
+
+Quanto e 16 + 1?
+Vamos pensar passo a passo.
+Passo 1: Some 1 ao valor inicial 16.
+Passo 2: O total e 17.
+Resposta: 17
+
+Quanto e 20 + 5?
+Vamos pensar passo a passo.
+Passo 1: Some 5 ao valor inicial 20.
+Passo 2: O total e 25.
+Resposta: 25
+
+Quanto e 13 + 12?
+Vamos pensar passo a passo.
+Passo 1: Some 12 ao valor inicial 13.
+Passo 2: O total e 25.
+Resposta: 25
+
+Quanto e 19 + 15?
+Vamos pensar passo a passo.
+Passo 1: Some 15 ao valor inicial 19.
+Passo 2: O total e 34.
+Resposta: 34
+
+Quanto e 15 + 1?
+Vamos pensar passo a passo.
+Passo 1: Some 1 ao valor inicial 15.
+Passo 2: O total e 16.
+Resposta: 16
+
+Quanto e 15 + 14?
+Vamos pensar passo a passo.
+Passo 1: Some 14 ao valor inicial 15.
+Passo 2: O total e 29.
+Resposta: 29
+
+Quanto e 11 + 16?
+Vamos pensar passo a passo.
+Passo 1: Some 16 ao valor inicial 11.
+Passo 2: O total e 27.
+Resposta: 27
+
+Quanto e 15 + 5?
+Vamos pensar passo a passo.
+Passo 1: Some 5 ao valor inicial 15.
+Passo 2: O total e 20.
+Resposta: 20
+
+Quanto e 16 + 19?
+Vamos pensar passo a passo.
+Passo 1: Some 19 ao valor inicial 16.
+Passo 2: O total e 35.
+Resposta: 35
+
+Quanto e 16 + 8?
+Vamos pensar passo a passo.
+Passo 1: Some 8 ao valor inicial 16.
+Passo 2: O total e 24.
+Resposta: 24
+
+Quanto e 6 + 15?
+Vamos pensar passo a passo.
+Passo 1: Some 15 ao valor inicial 6.
+Passo 2: O total e 21.
+Resposta: 21
+
+Quanto e 3 + 13?
+Vamos pensar passo a passo.
+Passo 1: Some 13 ao valor inicial 3.
+Passo 2: O total e 16.
+Resposta: 16
+
+Quanto e 17 + 12?
+Vamos pensar passo a passo.
+Passo 1: Some 12 ao valor inicial 17.
+Passo 2: O total e 29.
+Resposta: 29
+
+Quanto e 14 + 3?
+Vamos pensar passo a passo.
+Passo 1: Some 3 ao valor inicial 14.
+Passo 2: O total e 17.
+Resposta: 17
+
+Quanto e 13 + 18?
+Vamos pensar passo a passo.
+Passo 1: Some 18 ao valor inicial 13.
+Passo 2: O total e 31.
+Resposta: 31
+
+Quanto e 9 + 4?
+Vamos pensar passo a passo.
+Passo 1: Some 4 ao valor inicial 9.
+Passo 2: O total e 13.
+Resposta: 13
+
+Quanto e 4 + 1?
+Vamos pensar passo a passo.
+Passo 1: Some 1 ao valor inicial 4.
+Passo 2: O total e 5.
+Resposta: 5
+
+Quanto e 18 - 11?
+Vamos pensar passo a passo.
+Passo 1: Parta de 18 e remova 11.
+Passo 2: Resta 7.
+Resposta: 7
+
+Quanto e 5 - 3?
+Vamos pensar passo a passo.
+Passo 1: Parta de 5 e remova 3.
+Passo 2: Resta 2.
+Resposta: 2
+
+Quanto e 15 - 9?
+Vamos pensar passo a passo.
+Passo 1: Parta de 15 e remova 9.
+Passo 2: Resta 6.
+Resposta: 6
+
+Quanto e 10 - 1?
+Vamos pensar passo a passo.
+Passo 1: Parta de 10 e remova 1.
+Passo 2: Resta 9.
+Resposta: 9
+
+Quanto e 20 - 14?
+Vamos pensar passo a passo.
+Passo 1: Parta de 20 e remova 14.
+Passo 2: Resta 6.
+Resposta: 6
+
+Quanto e 19 - 11?
+Vamos pensar passo a passo.
+Passo 1: Parta de 19 e remova 11.
+Passo 2: Resta 8.
+Resposta: 8
+
+Quanto e 14 - 1?
+Vamos pensar passo a passo.
+Passo 1: Parta de 14 e remova 1.
+Passo 2: Resta 13.
+Resposta: 13
+
+Quanto e 16 - 11?
+Vamos pensar passo a passo.
+Passo 1: Parta de 16 e remova 11.
+Passo 2: Resta 5.
+Resposta: 5
+
+Quanto e 14 - 6?
+Vamos pensar passo a passo.
+Passo 1: Parta de 14 e remova 6.
+Passo 2: Resta 8.
+Resposta: 8
+
+Quanto e 14 - 8?
+Vamos pensar passo a passo.
+Passo 1: Parta de 14 e remova 8.
+Passo 2: Resta 6.
+Resposta: 6
+
+Quanto e 15 - 4?
+Vamos pensar passo a passo.
+Passo 1: Parta de 15 e remova 4.
+Passo 2: Resta 11.
+Resposta: 11
+
+Quanto e 17 - 4?
+Vamos pensar passo a passo.
+Passo 1: Parta de 17 e remova 4.
+Passo 2: Resta 13.
+Resposta: 13
+
+Quanto e 10 - 7?
+Vamos pensar passo a passo.
+Passo 1: Parta de 10 e remova 7.
+Passo 2: Resta 3.
+Resposta: 3
+
+Quanto e 11 - 5?
+Vamos pensar passo a passo.
+Passo 1: Parta de 11 e remova 5.
+Passo 2: Resta 6.
+Resposta: 6
+
+Quanto e 7 - 4?
+Vamos pensar passo a passo.
+Passo 1: Parta de 7 e remova 4.
+Passo 2: Resta 3.
+Resposta: 3
+
+Quanto e 20 - 7?
+Vamos pensar passo a passo.
+Passo 1: Parta de 20 e remova 7.
+Passo 2: Resta 13.
+Resposta: 13
+
+Quanto e 6 - 4?
+Vamos pensar passo a passo.
+Passo 1: Parta de 6 e remova 4.
+Passo 2: Resta 2.
+Resposta: 2
+
+Quanto e 19 - 12?
+Vamos pensar passo a passo.
+Passo 1: Parta de 19 e remova 12.
+Passo 2: Resta 7.
+Resposta: 7
+
+Quanto e 18 - 4?
+Vamos pensar passo a passo.
+Passo 1: Parta de 18 e remova 4.
+Passo 2: Resta 14.
+Resposta: 14
+
+Quanto e 16 - 1?
+Vamos pensar passo a passo.
+Passo 1: Parta de 16 e remova 1.
+Passo 2: Resta 15.
+Resposta: 15
+
+Quanto e 14 - 11?
+Vamos pensar passo a passo.
+Passo 1: Parta de 14 e remova 11.
+Passo 2: Resta 3.
+Resposta: 3
+
+Quanto e 11 - 4?
+Vamos pensar passo a passo.
+Passo 1: Parta de 11 e remova 4.
+Passo 2: Resta 7.
+Resposta: 7
+
+Quanto e 11 - 6?
+Vamos pensar passo a passo.
+Passo 1: Parta de 11 e remova 6.
+Passo 2: Resta 5.
+Resposta: 5
+
+Quanto e 19 - 9?
+Vamos pensar passo a passo.
+Passo 1: Parta de 19 e remova 9.
+Passo 2: Resta 10.
+Resposta: 10
+
+Quanto e 13 - 8?
+Vamos pensar passo a passo.
+Passo 1: Parta de 13 e remova 8.
+Passo 2: Resta 5.
+Resposta: 5
+
+Quanto e 16 - 12?
+Vamos pensar passo a passo.
+Passo 1: Parta de 16 e remova 12.
+Passo 2: Resta 4.
+Resposta: 4
+
+Quanto e 16 - 13?
+Vamos pensar passo a passo.
+Passo 1: Parta de 16 e remova 13.
+Passo 2: Resta 3.
+Resposta: 3
+
+Quanto e 8 - 7?
+Vamos pensar passo a passo.
+Passo 1: Parta de 8 e remova 7.
+Passo 2: Resta 1.
+Resposta: 1
+
+Quanto e 13 - 3?
+Vamos pensar passo a passo.
+Passo 1: Parta de 13 e remova 3.
+Passo 2: Resta 10.
+Resposta: 10
+
+Quanto e 18 - 14?
+Vamos pensar passo a passo.
+Passo 1: Parta de 18 e remova 14.
+Passo 2: Resta 4.
+Resposta: 4
+
+Quanto e 6 - 3?
+Vamos pensar passo a passo.
+Passo 1: Parta de 6 e remova 3.
+Passo 2: Resta 3.
+Resposta: 3
+
+Quanto e 17 - 8?
+Vamos pensar passo a passo.
+Passo 1: Parta de 17 e remova 8.
+Passo 2: Resta 9.
+Resposta: 9
+
+Quanto e 7 - 3?
+Vamos pensar passo a passo.
+Passo 1: Parta de 7 e remova 3.
+Passo 2: Resta 4.
+Resposta: 4
+
+Quanto e 9 - 6?
+Vamos pensar passo a passo.
+Passo 1: Parta de 9 e remova 6.
+Passo 2: Resta 3.
+Resposta: 3
+
+Quanto e 15 - 3?
+Vamos pensar passo a passo.
+Passo 1: Parta de 15 e remova 3.
+Passo 2: Resta 12.
+Resposta: 12
+
+Quanto e 13 - 4?
+Vamos pensar passo a passo.
+Passo 1: Parta de 13 e remova 4.
+Passo 2: Resta 9.
+Resposta: 9
+
+Quanto e 11 - 3?
+Vamos pensar passo a passo.
+Passo 1: Parta de 11 e remova 3.
+Passo 2: Resta 8.
+Resposta: 8
+
+Quanto e 17 - 16?
+Vamos pensar passo a passo.
+Passo 1: Parta de 17 e remova 16.
+Passo 2: Resta 1.
+Resposta: 1
+
+Quanto e 6 - 1?
+Vamos pensar passo a passo.
+Passo 1: Parta de 6 e remova 1.
+Passo 2: Resta 5.
+Resposta: 5
+
+Quanto e 20 - 17?
+Vamos pensar passo a passo.
+Passo 1: Parta de 20 e remova 17.
+Passo 2: Resta 3.
+Resposta: 3
+
+Quanto e 17 - 6?
+Vamos pensar passo a passo.
+Passo 1: Parta de 17 e remova 6.
+Passo 2: Resta 11.
+Resposta: 11
+
+Quanto e 19 - 8?
+Vamos pensar passo a passo.
+Passo 1: Parta de 19 e remova 8.
+Passo 2: Resta 11.
+Resposta: 11
+
+Quanto e 20 - 16?
+Vamos pensar passo a passo.
+Passo 1: Parta de 20 e remova 16.
+Passo 2: Resta 4.
+Resposta: 4
+
+Quanto e 16 - 8?
+Vamos pensar passo a passo.
+Passo 1: Parta de 16 e remova 8.
+Passo 2: Resta 8.
+Resposta: 8
+
+Quanto e 14 - 12?
+Vamos pensar passo a passo.
+Passo 1: Parta de 14 e remova 12.
+Passo 2: Resta 2.
+Resposta: 2
+
+Quanto e 13 - 1?
+Vamos pensar passo a passo.
+Passo 1: Parta de 13 e remova 1.
+Passo 2: Resta 12.
+Resposta: 12
+
+Quanto e 19 - 4?
+Vamos pensar passo a passo.
+Passo 1: Parta de 19 e remova 4.
+Passo 2: Resta 15.
+Resposta: 15
+
+Quanto e 15 - 14?
+Vamos pensar passo a passo.
+Passo 1: Parta de 15 e remova 14.
+Passo 2: Resta 1.
+Resposta: 1
+
+Quanto e 18 - 15?
+Vamos pensar passo a passo.
+Passo 1: Parta de 18 e remova 15.
+Passo 2: Resta 3.
+Resposta: 3
+
+Quanto e 2 - 1?
+Vamos pensar passo a passo.
+Passo 1: Parta de 2 e remova 1.
+Passo 2: Resta 1.
+Resposta: 1
+
+Quanto e 18 - 5?
+Vamos pensar passo a passo.
+Passo 1: Parta de 18 e remova 5.
+Passo 2: Resta 13.
+Resposta: 13
+
+Quanto e 7 - 5?
+Vamos pensar passo a passo.
+Passo 1: Parta de 7 e remova 5.
+Passo 2: Resta 2.
+Resposta: 2
+
+Quanto e 11 - 8?
+Vamos pensar passo a passo.
+Passo 1: Parta de 11 e remova 8.
+Passo 2: Resta 3.
+Resposta: 3
+
+Quanto e 19 - 2?
+Vamos pensar passo a passo.
+Passo 1: Parta de 19 e remova 2.
+Passo 2: Resta 17.
+Resposta: 17
+
+Quanto e 7 - 6?
+Vamos pensar passo a passo.
+Passo 1: Parta de 7 e remova 6.
+Passo 2: Resta 1.
+Resposta: 1
+
+Quanto e 8 - 4?
+Vamos pensar passo a passo.
+Passo 1: Parta de 8 e remova 4.
+Passo 2: Resta 4.
+Resposta: 4
+
+Quanto e 10 - 4?
+Vamos pensar passo a passo.
+Passo 1: Parta de 10 e remova 4.
+Passo 2: Resta 6.
+Resposta: 6
+
+Quanto e 13 - 9?
+Vamos pensar passo a passo.
+Passo 1: Parta de 13 e remova 9.
+Passo 2: Resta 4.
+Resposta: 4
+
+Quanto e 14 - 9?
+Vamos pensar passo a passo.
+Passo 1: Parta de 14 e remova 9.
+Passo 2: Resta 5.
+Resposta: 5
+
+Quanto e 15 - 10?
+Vamos pensar passo a passo.
+Passo 1: Parta de 15 e remova 10.
+Passo 2: Resta 5.
+Resposta: 5
+
+Quanto e 16 - 10?
+Vamos pensar passo a passo.
+Passo 1: Parta de 16 e remova 10.
+Passo 2: Resta 6.
+Resposta: 6
+
+Quanto e 12 - 6?
+Vamos pensar passo a passo.
+Passo 1: Parta de 12 e remova 6.
+Passo 2: Resta 6.
+Resposta: 6
+
+Quanto e 15 - 13?
+Vamos pensar passo a passo.
+Passo 1: Parta de 15 e remova 13.
+Passo 2: Resta 2.
+Resposta: 2
+
+Quanto e 18 - 12?
+Vamos pensar passo a passo.
+Passo 1: Parta de 18 e remova 12.
+Passo 2: Resta 6.
+Resposta: 6
+
+Quanto e 17 - 7?
+Vamos pensar passo a passo.
+Passo 1: Parta de 17 e remova 7.
+Passo 2: Resta 10.
+Resposta: 10
+
+Quanto e 18 - 8?
+Vamos pensar passo a passo.
+Passo 1: Parta de 18 e remova 8.
+Passo 2: Resta 10.
+Resposta: 10
+
+Quanto e 19 - 10?
+Vamos pensar passo a passo.
+Passo 1: Parta de 19 e remova 10.
+Passo 2: Resta 9.
+Resposta: 9
+
+Quanto e 20 - 9?
+Vamos pensar passo a passo.
+Passo 1: Parta de 20 e remova 9.
+Passo 2: Resta 11.
+Resposta: 11
+
+Quanto e 15 - 5?
+Vamos pensar passo a passo.
+Passo 1: Parta de 15 e remova 5.
+Passo 2: Resta 10.
+Resposta: 10
+
+Quanto e 11 - 7?
+Vamos pensar passo a passo.
+Passo 1: Parta de 11 e remova 7.
+Passo 2: Resta 4.
+Resposta: 4
+
+Quanto e 18 - 10?
+Vamos pensar passo a passo.
+Passo 1: Parta de 18 e remova 10.
+Passo 2: Resta 8.
+Resposta: 8
+
+Quanto e 19 - 7?
+Vamos pensar passo a passo.
+Passo 1: Parta de 19 e remova 7.
+Passo 2: Resta 12.
+Resposta: 12
+
+Quanto e 12 - 5?
+Vamos pensar passo a passo.
+Passo 1: Parta de 12 e remova 5.
+Passo 2: Resta 7.
+Resposta: 7
+
+Quanto e 15 - 2?
+Vamos pensar passo a passo.
+Passo 1: Parta de 15 e remova 2.
+Passo 2: Resta 13.
+Resposta: 13
+
+Quanto e 15 - 12?
+Vamos pensar passo a passo.
+Passo 1: Parta de 15 e remova 12.
+Passo 2: Resta 3.
+Resposta: 3
+
+Quanto e 10 - 3?
+Vamos pensar passo a passo.
+Passo 1: Parta de 10 e remova 3.
+Passo 2: Resta 7.
+Resposta: 7
+
+Quanto e 17 - 11?
+Vamos pensar passo a passo.
+Passo 1: Parta de 17 e remova 11.
+Passo 2: Resta 6.
+Resposta: 6
+
+Quanto e 20 - 2?
+Vamos pensar passo a passo.
+Passo 1: Parta de 20 e remova 2.
+Passo 2: Resta 18.
+Resposta: 18
+
+Quanto e 19 - 14?
+Vamos pensar passo a passo.
+Passo 1: Parta de 19 e remova 14.
+Passo 2: Resta 5.
+Resposta: 5
+
+Quanto e 17 - 1?
+Vamos pensar passo a passo.
+Passo 1: Parta de 17 e remova 1.
+Passo 2: Resta 16.
+Resposta: 16
+
+Quanto e 12 - 8?
+Vamos pensar passo a passo.
+Passo 1: Parta de 12 e remova 8.
+Passo 2: Resta 4.
+Resposta: 4
+
+Quanto e 3 - 2?
+Vamos pensar passo a passo.
+Passo 1: Parta de 3 e remova 2.
+Passo 2: Resta 1.
+Resposta: 1
+
+Quanto e 6 - 5?
+Vamos pensar passo a passo.
+Passo 1: Parta de 6 e remova 5.
+Passo 2: Resta 1.
+Resposta: 1
+
+Quanto e 14 - 4?
+Vamos pensar passo a passo.
+Passo 1: Parta de 14 e remova 4.
+Passo 2: Resta 10.
+Resposta: 10
+
+Quanto e 20 - 19?
+Vamos pensar passo a passo.
+Passo 1: Parta de 20 e remova 19.
+Passo 2: Resta 1.
+Resposta: 1
+
+Quanto e 14 - 10?
+Vamos pensar passo a passo.
+Passo 1: Parta de 14 e remova 10.
+Passo 2: Resta 4.
+Resposta: 4
+
+Quanto e 19 - 3?
+Vamos pensar passo a passo.
+Passo 1: Parta de 19 e remova 3.
+Passo 2: Resta 16.
+Resposta: 16
+
+Quanto e 17 - 12?
+Vamos pensar passo a passo.
+Passo 1: Parta de 17 e remova 12.
+Passo 2: Resta 5.
+Resposta: 5
+
+Quanto e 5 - 4?
+Vamos pensar passo a passo.
+Passo 1: Parta de 5 e remova 4.
+Passo 2: Resta 1.
+Resposta: 1
+
+Quanto e 18 - 6?
+Vamos pensar passo a passo.
+Passo 1: Parta de 18 e remova 6.
+Passo 2: Resta 12.
+Resposta: 12
+
+Quanto e 11 - 1?
+Vamos pensar passo a passo.
+Passo 1: Parta de 11 e remova 1.
+Passo 2: Resta 10.
+Resposta: 10
+
+Quanto e 8 - 2?
+Vamos pensar passo a passo.
+Passo 1: Parta de 8 e remova 2.
+Passo 2: Resta 6.
+Resposta: 6
+
+Quanto e 18 - 16?
+Vamos pensar passo a passo.
+Passo 1: Parta de 18 e remova 16.
+Passo 2: Resta 2.
+Resposta: 2
+
+Quanto e 9 - 8?
+Vamos pensar passo a passo.
+Passo 1: Parta de 9 e remova 8.
+Passo 2: Resta 1.
+Resposta: 1
+
+Quanto e 14 - 3?
+Vamos pensar passo a passo.
+Passo 1: Parta de 14 e remova 3.
+Passo 2: Resta 11.
+Resposta: 11
+
+Quanto e 13 - 2?
+Vamos pensar passo a passo.
+Passo 1: Parta de 13 e remova 2.
+Passo 2: Resta 11.
+Resposta: 11
+
+Quanto e 20 - 8?
+Vamos pensar passo a passo.
+Passo 1: Parta de 20 e remova 8.
+Passo 2: Resta 12.
+Resposta: 12
+
+Quanto e 17 - 3?
+Vamos pensar passo a passo.
+Passo 1: Parta de 17 e remova 3.
+Passo 2: Resta 14.
+Resposta: 14
+
+Quanto e 20 - 15?
+Vamos pensar passo a passo.
+Passo 1: Parta de 20 e remova 15.
+Passo 2: Resta 5.
+Resposta: 5
+
+Quanto e 13 - 5?
+Vamos pensar passo a passo.
+Passo 1: Parta de 13 e remova 5.
+Passo 2: Resta 8.
+Resposta: 8
+
+Quanto e 4 - 2?
+Vamos pensar passo a passo.
+Passo 1: Parta de 4 e remova 2.
+Passo 2: Resta 2.
+Resposta: 2
+
+Quanto e 4 - 3?
+Vamos pensar passo a passo.
+Passo 1: Parta de 4 e remova 3.
+Passo 2: Resta 1.
+Resposta: 1
+
+Quanto e 12 - 4?
+Vamos pensar passo a passo.
+Passo 1: Parta de 12 e remova 4.
+Passo 2: Resta 8.
+Resposta: 8
+
+Quanto e 10 - 2?
+Vamos pensar passo a passo.
+Passo 1: Parta de 10 e remova 2.
+Passo 2: Resta 8.
+Resposta: 8
+
+Quanto e 12 - 11?
+Vamos pensar passo a passo.
+Passo 1: Parta de 12 e remova 11.
+Passo 2: Resta 1.
+Resposta: 1
+
+Quanto e 15 - 11?
+Vamos pensar passo a passo.
+Passo 1: Parta de 15 e remova 11.
+Passo 2: Resta 4.
+Resposta: 4
+
+Quanto e 18 - 7?
+Vamos pensar passo a passo.
+Passo 1: Parta de 18 e remova 7.
+Passo 2: Resta 11.
+Resposta: 11
+
+Quanto e 20 - 3?
+Vamos pensar passo a passo.
+Passo 1: Parta de 20 e remova 3.
+Passo 2: Resta 17.
+Resposta: 17
+
+Quanto e 20 - 13?
+Vamos pensar passo a passo.
+Passo 1: Parta de 20 e remova 13.
+Passo 2: Resta 7.
+Resposta: 7
+
+Quanto e 18 - 3?
+Vamos pensar passo a passo.
+Passo 1: Parta de 18 e remova 3.
+Passo 2: Resta 15.
+Resposta: 15
+
+Quanto e 11 - 2?
+Vamos pensar passo a passo.
+Passo 1: Parta de 11 e remova 2.
+Passo 2: Resta 9.
+Resposta: 9
+
+Quanto e 20 - 10?
+Vamos pensar passo a passo.
+Passo 1: Parta de 20 e remova 10.
+Passo 2: Resta 10.
+Resposta: 10
+
+Quanto e 12 - 2?
+Vamos pensar passo a passo.
+Passo 1: Parta de 12 e remova 2.
+Passo 2: Resta 10.
+Resposta: 10
+
+Quanto e 19 - 17?
+Vamos pensar passo a passo.
+Passo 1: Parta de 19 e remova 17.
+Passo 2: Resta 2.
+Resposta: 2
+
+Quanto e 16 - 3?
+Vamos pensar passo a passo.
+Passo 1: Parta de 16 e remova 3.
+Passo 2: Resta 13.
+Resposta: 13
+
+Quanto e 12 - 7?
+Vamos pensar passo a passo.
+Passo 1: Parta de 12 e remova 7.
+Passo 2: Resta 5.
+Resposta: 5
+
+Quanto e 15 - 6?
+Vamos pensar passo a passo.
+Passo 1: Parta de 15 e remova 6.
+Passo 2: Resta 9.
+Resposta: 9
+
+Quanto e 15 - 8?
+Vamos pensar passo a passo.
+Passo 1: Parta de 15 e remova 8.
+Passo 2: Resta 7.
+Resposta: 7
+
+Quanto e 16 - 2?
+Vamos pensar passo a passo.
+Passo 1: Parta de 16 e remova 2.
+Passo 2: Resta 14.
+Resposta: 14
+
+Quanto e 15 - 1?
+Vamos pensar passo a passo.
+Passo 1: Parta de 15 e remova 1.
+Passo 2: Resta 14.
+Resposta: 14
+
+Quanto e 9 - 5?
+Vamos pensar passo a passo.
+Passo 1: Parta de 9 e remova 5.
+Passo 2: Resta 4.
+Resposta: 4
+
+Quanto e 18 - 13?
+Vamos pensar passo a passo.
+Passo 1: Parta de 18 e remova 13.
+Passo 2: Resta 5.
+Resposta: 5
+
+Quanto e 16 - 4?
+Vamos pensar passo a passo.
+Passo 1: Parta de 16 e remova 4.
+Passo 2: Resta 12.
+Resposta: 12
+
+Quanto e 5 - 2?
+Vamos pensar passo a passo.
+Passo 1: Parta de 5 e remova 2.
+Passo 2: Resta 3.
+Resposta: 3
+
+Quanto e 13 - 12?
+Vamos pensar passo a passo.
+Passo 1: Parta de 13 e remova 12.
+Passo 2: Resta 1.
+Resposta: 1
+
+Quanto e 19 - 15?
+Vamos pensar passo a passo.
+Passo 1: Parta de 19 e remova 15.
+Passo 2: Resta 4.
+Resposta: 4
+
+Quanto e 19 - 13?
+Vamos pensar passo a passo.
+Passo 1: Parta de 19 e remova 13.
+Passo 2: Resta 6.
+Resposta: 6
+
+Quanto e 18 - 17?
+Vamos pensar passo a passo.
+Passo 1: Parta de 18 e remova 17.
+Passo 2: Resta 1.
+Resposta: 1
+
+Quanto e 14 - 13?
+Vamos pensar passo a passo.
+Passo 1: Parta de 14 e remova 13.
+Passo 2: Resta 1.
+Resposta: 1
+
+Quanto e 17 - 14?
+Vamos pensar passo a passo.
+Passo 1: Parta de 17 e remova 14.
+Passo 2: Resta 3.
+Resposta: 3
+
+Quanto e 5 * 6?
+Vamos pensar passo a passo.
+Passo 1: Some 5 6 vezes.
+Passo 2: Isso da 30.
+Resposta: 30
+
+Quanto e 3 * 3?
+Vamos pensar passo a passo.
+Passo 1: Some 3 3 vezes.
+Passo 2: Isso da 9.
+Resposta: 9
+
+Quanto e 3 * 7?
+Vamos pensar passo a passo.
+Passo 1: Some 3 7 vezes.
+Passo 2: Isso da 21.
+Resposta: 21
+
+Quanto e 5 * 2?
+Vamos pensar passo a passo.
+Passo 1: Some 5 2 vezes.
+Passo 2: Isso da 10.
+Resposta: 10
+
+Quanto e 5 * 4?
+Vamos pensar passo a passo.
+Passo 1: Some 5 4 vezes.
+Passo 2: Isso da 20.
+Resposta: 20
+
+Quanto e 6 * 8?
+Vamos pensar passo a passo.
+Passo 1: Some 6 8 vezes.
+Passo 2: Isso da 48.
+Resposta: 48
+
+Quanto e 4 * 8?
+Vamos pensar passo a passo.
+Passo 1: Some 4 8 vezes.
+Passo 2: Isso da 32.
+Resposta: 32
+
+Quanto e 8 * 9?
+Vamos pensar passo a passo.
+Passo 1: Some 8 9 vezes.
+Passo 2: Isso da 72.
+Resposta: 72
+
+Quanto e 5 * 7?
+Vamos pensar passo a passo.
+Passo 1: Some 5 7 vezes.
+Passo 2: Isso da 35.
+Resposta: 35
+
+Quanto e 3 * 6?
+Vamos pensar passo a passo.
+Passo 1: Some 3 6 vezes.
+Passo 2: Isso da 18.
+Resposta: 18
+
+Quanto e 9 * 9?
+Vamos pensar passo a passo.
+Passo 1: Some 9 9 vezes.
+Passo 2: Isso da 81.
+Resposta: 81
+
+Quanto e 9 * 3?
+Vamos pensar passo a passo.
+Passo 1: Some 9 3 vezes.
+Passo 2: Isso da 27.
+Resposta: 27
+
+Quanto e 5 * 3?
+Vamos pensar passo a passo.
+Passo 1: Some 5 3 vezes.
+Passo 2: Isso da 15.
+Resposta: 15
+
+Quanto e 9 * 7?
+Vamos pensar passo a passo.
+Passo 1: Some 9 7 vezes.
+Passo 2: Isso da 63.
+Resposta: 63
+
+Quanto e 9 * 2?
+Vamos pensar passo a passo.
+Passo 1: Some 9 2 vezes.
+Passo 2: Isso da 18.
+Resposta: 18
+
+Quanto e 7 * 8?
+Vamos pensar passo a passo.
+Passo 1: Some 7 8 vezes.
+Passo 2: Isso da 56.
+Resposta: 56
+
+Quanto e 8 * 7?
+Vamos pensar passo a passo.
+Passo 1: Some 8 7 vezes.
+Passo 2: Isso da 56.
+Resposta: 56
+
+Quanto e 4 * 7?
+Vamos pensar passo a passo.
+Passo 1: Some 4 7 vezes.
+Passo 2: Isso da 28.
+Resposta: 28
+
+Quanto e 6 * 5?
+Vamos pensar passo a passo.
+Passo 1: Some 6 5 vezes.
+Passo 2: Isso da 30.
+Resposta: 30
+
+Quanto e 6 * 2?
+Vamos pensar passo a passo.
+Passo 1: Some 6 2 vezes.
+Passo 2: Isso da 12.
+Resposta: 12
+
+Quanto e 5 * 5?
+Vamos pensar passo a passo.
+Passo 1: Some 5 5 vezes.
+Passo 2: Isso da 25.
+Resposta: 25
+
+Quanto e 4 * 6?
+Vamos pensar passo a passo.
+Passo 1: Some 4 6 vezes.
+Passo 2: Isso da 24.
+Resposta: 24
+
+Quanto e 3 * 4?
+Vamos pensar passo a passo.
+Passo 1: Some 3 4 vezes.
+Passo 2: Isso da 12.
+Resposta: 12
+
+Quanto e 3 * 8?
+Vamos pensar passo a passo.
+Passo 1: Some 3 8 vezes.
+Passo 2: Isso da 24.
+Resposta: 24
+
+Quanto e 7 * 4?
+Vamos pensar passo a passo.
+Passo 1: Some 7 4 vezes.
+Passo 2: Isso da 28.
+Resposta: 28
+
+Quanto e 8 * 2?
+Vamos pensar passo a passo.
+Passo 1: Some 8 2 vezes.
+Passo 2: Isso da 16.
+Resposta: 16
+
+Quanto e 4 * 2?
+Vamos pensar passo a passo.
+Passo 1: Some 4 2 vezes.
+Passo 2: Isso da 8.
+Resposta: 8
+
+Quanto e 4 * 5?
+Vamos pensar passo a passo.
+Passo 1: Some 4 5 vezes.
+Passo 2: Isso da 20.
+Resposta: 20
+
+Quanto e 8 * 3?
+Vamos pensar passo a passo.
+Passo 1: Some 8 3 vezes.
+Passo 2: Isso da 24.
+Resposta: 24
+
+Quanto e 5 * 9?
+Vamos pensar passo a passo.
+Passo 1: Some 5 9 vezes.
+Passo 2: Isso da 45.
+Resposta: 45
+
+Quanto e 8 * 5?
+Vamos pensar passo a passo.
+Passo 1: Some 8 5 vezes.
+Passo 2: Isso da 40.
+Resposta: 40
+
+Quanto e 3 * 5?
+Vamos pensar passo a passo.
+Passo 1: Some 3 5 vezes.
+Passo 2: Isso da 15.
+Resposta: 15

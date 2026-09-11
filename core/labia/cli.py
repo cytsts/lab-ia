@@ -41,6 +41,16 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--corpus", default="data/tarefa_ciencia.txt", help="corpus de avaliação da perda")
     p.add_argument("--raiz", default=".")
 
+    p = sub.add_parser("raciocinio", help="benchmark de raciocínio: direta|cot|tot ou --comparar (spec G5)")
+    p.add_argument("--run", required=True, help="run-id (base ou com adaptador)")
+    p.add_argument("--estrategia", choices=["direta", "cot", "tot"], default=None)
+    p.add_argument("--comparar", action="store_true", help="roda as três e grava comparativo.json")
+    p.add_argument("--benchmark", default="data/benchmark_matematica.jsonl")
+    p.add_argument("--split", default="teste")
+    p.add_argument("--limite", type=int, default=None)
+    p.add_argument("--semente", type=int, default=1234)
+    p.add_argument("--raiz", default=".")
+
     p = sub.add_parser("servir", help="expõe a API interna para a camada visual")
     p.add_argument("--host", default="127.0.0.1")
     p.add_argument("--porta", type=int, default=8765)
@@ -94,6 +104,43 @@ def main(argv: list[str] | None = None) -> int:
             f"bits efetivos {tam['bits_efetivos_por_parametro']}, "
             f"perda {tam['perda_val_antes']:.3f} -> {tam['perda_val_depois']:.3f}"
         )
+        return 0
+
+    if args.comando == "raciocinio":
+        from .reasoning.runner import comparar_estrategias, executar_benchmark
+
+        run_dir = Path(args.raiz) / "runs" / args.run
+        if not args.estrategia and not args.comparar:
+            parser.error("especifique --estrategia ou --comparar")
+        if args.comparar:
+            comp = comparar_estrategias(
+                run_dir,
+                benchmark=args.benchmark,
+                split=args.split,
+                semente=args.semente,
+                limite=args.limite,
+                raiz=args.raiz,
+            )
+            print(
+                f"[lab-ia] comparativo: direta={comp['estrategias']['direta']['acuracia_global']:.3f} "
+                f"cot={comp['estrategias']['cot']['acuracia_global']:.3f} "
+                f"tot={comp['estrategias']['tot']['acuracia_global']:.3f} "
+                f"(cot-direta {comp['cot_menos_direta_pp']:+.1f} p.p.)"
+            )
+        else:
+            rel = executar_benchmark(
+                run_dir,
+                args.estrategia,
+                benchmark=args.benchmark,
+                split=args.split,
+                semente=args.semente,
+                limite=args.limite,
+                raiz=args.raiz,
+            )
+            print(
+                f"[lab-ia] {args.estrategia}: acurácia {rel['acuracia_global']:.3f} "
+                f"valida {rel['taxa_resposta_valida']:.3f} por família {rel['acuracia_por_familia']}"
+            )
         return 0
 
     if args.comando == "servir":
