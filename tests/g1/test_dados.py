@@ -5,7 +5,7 @@ import torch
 
 from labia.trainer.dados import dividir_corpus, lote_trem, montar_dataset
 from labia.trainer.tokenizacao import treinar_tokenizer_ptbr
-from conftest import gerar_corpus
+from common import gerar_corpus
 
 
 def test_divisao_proporcao_e_determinismo():

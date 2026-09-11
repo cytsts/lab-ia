@@ -1,32 +1,11 @@
-"""Fixtures compartilhadas dos testes da G1: corpus sintético pt-BR e config micro."""
+"""Fixtures compartilhadas dos testes da G1: corpus sintético pt-BR."""
 from __future__ import annotations
 
-import random
 from pathlib import Path
 
 import pytest
 
-FRASES = [
-    "A noite estava fria e chuvosa quando ele decidiu partir.",
-    "Todos os caminhos levavam à velha praça do colégio.",
-    "Ela sorriu sem dizer nada e guardou a carta na gaveta.",
-    "O mar batia com força contra as pedras do quebra-mar.",
-    "Ninguém sabia ao certo quando a casa fora abandonada.",
-    "Disseram que ele voltaria na primavera, mas nunca voltou.",
-    "A janela dava para um quintal cheio de laranjeiras.",
-    "Ele escreveu o nome dela na areia e esperou a maré apagar.",
-    "O sino da igreja tocava ao meio-da-manhã sem pressa nenhuma.",
-    "Havia livros empoeirados em cada canto daquela biblioteca.",
-]
-
-
-def gerar_corpus(n_paragrafos: int = 160, semente: int = 7) -> str:
-    rnd = random.Random(semente)
-    blocos = []
-    for _ in range(n_paragrafos):
-        frases = [rnd.choice(FRASES) for _ in range(rnd.randint(4, 12))]
-        blocos.append(" ".join(frases))
-    return "\n\n".join(blocos)
+from common import gerar_corpus
 
 
 @pytest.fixture(scope="session")
@@ -34,33 +13,3 @@ def corpus_arquivo(tmp_path_factory) -> Path:
     destino = tmp_path_factory.mktemp("dados") / "corpus_micro.txt"
     destino.write_text(gerar_corpus(), encoding="utf-8")
     return destino
-
-
-def config_micro(corpus: Path, run: Path, **extras) -> dict:
-    base = {
-        "nome": "micro",
-        "corpus": str(corpus),
-        "vocab_bpe": 256,
-        "modelo": {"dim": 64, "camadas": 2, "cabecas": 2, "janela_ctx": 64, "abandono": 0.0},
-        "passos": 20,
-        "lote": 2,
-        "avaliar_a_cada": 10,
-        "salvar_a_cada": 10,
-        "iters_avaliacao": 5,
-        "lr": 1e-3,
-        "minimo_lr": 1e-4,
-        "warmup": 4,
-        "peso_decay": 0.0,
-        "grad_clip": 1.0,
-        "semente": 42,
-        "dispositivo": "cpu",
-        "arquivo_eventos": str(Path(run) / "eventos.jsonl") if run else ".lab-ia/eventos.jsonl",
-    }
-    base.update(extras)
-    return base
-
-
-def criar_dir_run(run: Path) -> Path:
-    (run / "ckpt").mkdir(parents=True, exist_ok=True)
-    (run / "tokens").mkdir(parents=True, exist_ok=True)
-    return run

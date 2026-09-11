@@ -1,0 +1,19 @@
+nome: g2-ajuste-ciencia
+base: runs/g1-treino-zero
+corpus_tarefa: data/tarefa_ciencia.txt
+tipo: lora            # lora | qlora
+bits: 8               # p/ qlora: 8 (int8) ou 4 (nf4)
+r: 8
+alpha: 16
+passos: 1500
+lote: 16
+stride: 128
+avaliar_a_cada: 300
+salvar_a_cada: 300
+iters_avaliacao: 40
+lr: 0.006
+minimo_lr: 0.0005
+warmup: 60
+grad_clip: 1.0
+semente: 42
+dispositivo: auto

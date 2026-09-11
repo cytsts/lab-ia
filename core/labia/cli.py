@@ -27,6 +27,20 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--guloso", action="store_true", help="decodificação gulosa (determinística)")
     p.add_argument("--raiz", default=".")
 
+    p = sub.add_parser("ajustar", help="fine-tuning LoRA/QLoRA sobre um run-base (spec G2)")
+    p.add_argument("--config", required=True, help="YAML de ajuste (ex.: configs/g2_ajuste_estilo.yaml)")
+    p.add_argument("--base", default=None, help="run-id da base (sobrescreve o campo 'base' da config)")
+    p.add_argument("--run-id", default=None, help="identificador do run de ajuste (padrão: campo 'nome')")
+    p.add_argument("--retomar", action="store_true")
+    p.add_argument("--raiz", default=".")
+
+    p = sub.add_parser("quantizar", help="quantiza os lineares de um run (spec G3: int8|nf4)")
+    p.add_argument("--run", required=True, help="run-id da base")
+    p.add_argument("--saida", required=True, help="run-id do run quantizado derivado")
+    p.add_argument("--modo", required=True, choices=["int8", "nf4"])
+    p.add_argument("--corpus", default="data/tarefa_ciencia.txt", help="corpus de avaliação da perda")
+    p.add_argument("--raiz", default=".")
+
     p = sub.add_parser("servir", help="expõe a API interna para a camada visual")
     p.add_argument("--host", default="127.0.0.1")
     p.add_argument("--porta", type=int, default=8765)
@@ -51,6 +65,35 @@ def main(argv: list[str] | None = None) -> int:
             run_dir, args.prompt, passos_max=args.passos_max, temperatura=args.temperatura, guloso=args.guloso
         )
         print(texto)
+        return 0
+
+    if args.comando == "ajustar":
+        from .trainer.ajuste import ConfigAjuste, executar_ajuste
+
+        cfg = ConfigAjuste.de_arquivo(args.config)
+        if args.base:
+            base = Path(args.base)
+            cfg.base = str(base if base.is_dir() else Path(args.raiz) / "runs" / args.base)
+        run_id = args.run_id or cfg.nome
+        run_dir = Path(args.raiz) / "runs" / run_id
+        (run_dir / "ckpt").mkdir(parents=True, exist_ok=True)
+        print(f"[lab-ia] ajustando ({cfg.tipo}, r={cfg.r}, base={cfg.base}) -> run '{run_id}'")
+        executar_ajuste(cfg, run_dir, retomar=args.retomar, raiz=args.raiz)
+        print(f"[lab-ia] ajuste concluído: adaptador em {run_dir / 'adaptador'}")
+        return 0
+
+    if args.comando == "quantizar":
+        from .trainer.quantiza import quantizar_run
+
+        base_dir = Path(args.raiz) / "runs" / args.run
+        destino_dir = Path(args.raiz) / "runs" / args.saida
+        destino_dir.mkdir(parents=True, exist_ok=True)
+        tam = quantizar_run(base_dir, destino_dir, args.modo, args.corpus, raiz=args.raiz)
+        print(
+            f"[lab-ia] quantizado ({args.modo}): fator {tam['fator_alvos']:.2f}x nos alvos, "
+            f"bits efetivos {tam['bits_efetivos_por_parametro']}, "
+            f"perda {tam['perda_val_antes']:.3f} -> {tam['perda_val_depois']:.3f}"
+        )
         return 0
 
     if args.comando == "servir":

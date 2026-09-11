@@ -6,7 +6,7 @@ import torch
 from labia.experiments.runner import carregar_estado, ler_metricas, ultimo_checkpoint
 from labia.trainer.gerar import gerar_de_checkpoint
 from labia.trainer.treino import executar_treino
-from conftest import config_micro, criar_dir_run
+from common import config_micro, criar_dir_run
 
 
 def test_treino_converge_e_registra_metricas(tmp_path, corpus_arquivo):

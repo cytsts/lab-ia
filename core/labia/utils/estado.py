@@ -31,9 +31,9 @@ class LogEventos:
     def __init__(self, caminho: Path):
         self.caminho = Path(caminho)
 
-    def registrar(self, tipo: str, **dados) -> None:
+    def registrar(self, evento: str, /, **dados) -> None:
         self.caminho.parent.mkdir(parents=True, exist_ok=True)
-        linha = {"tempo": agora_iso(), "tipo": tipo}
+        linha = {"tempo": agora_iso(), "tipo": evento}
         linha.update(dados)
         with open(self.caminho, "a", encoding="utf-8") as f:
             f.write(json.dumps(linha, ensure_ascii=False) + "\n")

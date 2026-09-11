@@ -7,7 +7,7 @@ from pathlib import Path
 
 import yaml
 
-from conftest import config_micro, criar_dir_run
+from common import config_micro, criar_dir_run
 
 RAIZ_REPO = Path(__file__).resolve().parents[2]
 
