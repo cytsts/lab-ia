@@ -20,8 +20,8 @@ Regra: item só muda de status com evidência re-executável (comando + saída) 
 | S1 | `.venv` (py3.13) + deps CUDA | FEITO | torch 2.11.0+cu128, cuda_ok True (medido) |
 | S2 | Corpus pt-BR domínio público em `data/` | FEITO | 886KB (Dom Casmurro + O Cortiço), manifesto com licença; IDs verificados por busca, não suposição |
 | G1 | Treinamento do zero (nano-GPT pt-BR) | FEITO (Aprovada) | v1 reprovada: overfit real (val 4.99→6.04). v2: CA1 reescrita + stride deslizante. Evidências: 21/21 testes; mutação detectada (0.0095 > 1e-6); treino real 72s CUDA @281k tok/s — min val 4.673 ≤ unigram 6.529−1.5 (CA1a ✅), drift final−min 0.032 ≤ 0.20 (CA1b ✅); gerar produz prosa pt-BR coerente (CA3 ✅) |
-| G2 | LoRA/QLoRA | AGUARDANDO | — |
-| G3 | Quantização 4/8-bit | AGUARDANDO | — |
+| G2 | LoRA/QLoRA | FEITO (Aprovada) | 15/15 testes CPU (incl. slow no run real); mutação do otimizador já detectada na G1 vale aqui (CA5 <1e-6). Run real GPU: perda na tarefa 8.84→0.40 (−95%) em 48s; CA2: sobreposição n-gramas 4 base 0.000 → ajustado 1.000; adaptador r=8 = 1,3% dos parâmetros; QLoRA int8 no micro: −22,5% com economia ≥2× por módulo |
+| G3 | Quantização 4/8-bit | FEITO (Aprovada) | 4/4 testes CPU; run real G1: int8 fator 3.95× (+0.003 nats), nf4 fator 7.11× / 4.50 bits efetivos (+1.7% perda, ≤10%); gerar funcional nos dois; RF5: comparativo com bitsandbytes 0.50.2 registrado — nativo 0.00701 vs bnb 0.01312 (erro relativo) |
 | G4 | MoE | AGUARDANDO | — |
 | G5 | Raciocínio (CoT/ToT + benchmark) | AGUARDANDO | — |
 | G6 | UI completa (Electron + DS) | AGUARDANDO | — |

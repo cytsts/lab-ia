@@ -37,7 +37,7 @@ pnpm install --dir ui
 ## Uso rápido (G1 — treinamento do zero)
 
 ```bat
-:: Treinar nano-GPT pt-BR (~15M parâmetros, 4000 passos)
+:: Treinar nano-GPT pt-BR (~15M parâmetros, 2500 passos)
 .venv\Scripts\python -m labia.cli train --config configs/g1_treino_zero.yaml
 
 :: Retomar após queda de energia (usa último checkpoint)
@@ -48,6 +48,23 @@ pnpm install --dir ui
 
 :: API interna (para a camada visual)
 .venv\Scripts\python -m labia.cli servir --porta 8765
+```
+
+## Uso rápido (G2 — fine-tuning / G3 — quantização)
+
+```bat
+:: LoRA sobre a base treinada (tarefa: estilo técnico-científico)
+.venv\Scripts\python scripts\prepara_tarefa_ciencia.py
+.venv\Scripts\python -m labia.cli ajustar --config configs/g2_ajuste_ciencia.yaml
+:: QLoRA: mude "tipo: qlora" (e bits: 8 ou 4) na config
+
+:: Gerar com o adaptador (reconstrói base+LoRA automaticamente)
+.venv\Scripts\python -m labia.cli gerar --run g2-ajuste-ciencia --prompt "A amostra foi"
+
+:: Quantizar a base (int8 ou NF4) e medir tamanho/perda
+.venv\Scripts\python -m labia.cli quantizar --run g1-treino-zero --saida g3-g1-int8 --modo int8
+.venv\Scripts\python -m labia.cli quantizar --run g1-treino-zero --saida g3-g1-nf4  --modo nf4
+.venv\Scripts\python -m labia.cli gerar --run g3-g1-nf4 --prompt "Uma noite destas"
 ```
 
 Artefatos de um experimento ficam em `runs/<run-id>/`: `estado.json` (progresso),
