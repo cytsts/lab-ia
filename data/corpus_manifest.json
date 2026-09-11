@@ -1,0 +1,23 @@
+{
+  "gerado_em": "2026-09-11T16:51:53.738995+00:00",
+  "licenca": "domínio público (Project Gutenberg)",
+  "obras": [
+    {
+      "titulo": "Dom Casmurro",
+      "autores": [
+        "Machado de Assis"
+      ],
+      "id_gutenberg": "55752",
+      "caracteres": 378376
+    },
+    {
+      "titulo": "O Cortiço",
+      "autores": [
+        "Azevedo, Aluísio"
+      ],
+      "id_gutenberg": "69187",
+      "caracteres": 472854
+    }
+  ],
+  "total_caracteres": 886022
+}
