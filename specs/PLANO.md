@@ -26,7 +26,7 @@ Regra: item só muda de status com evidência re-executável (comando + saída) 
 | G5 | Raciocínio (CoT/ToT + benchmark) | FEITO (Aprovada, spec v2) | 6/6 testes CPU; run real GPU: direta 2,6% · CoT 7,9% · ToT 7,9% (CoT−direta +5,3 p.p. = CA1 ✅; ToT−CoT 0,0 = CA2 ✅; taxa formato CoT 1,00 = CA3 v2 ✅). Achado documentado: aritmética com carry não generaliza em 15M (Passo 1 correto, soma errada) — harness pronto para escalar. Determinismo byte a byte ✅ |
 | G6 | UI completa (Electron + DS) | FEITO (Aprovada) | vitest 7/7; tsc+vite build limpo; janela Electron REAL com dados do núcleo ao vivo (screenshot: 7 runs, badges corretos, progresso, tema escuro do sistema); DS catálogo vivo renderizando (screenshot); API RF5 /execucao+/configs+/tamanhos+/comparativo testada (53/53 pytest). Screenshot da janela em `.qwen/captura-app/ui-*.png` (fora do repo, reprodutível) |
 | G7 | Empacotamento desktop | AGUARDANDO | — |
-| G8 | Retomada pós-queda (kill -9) | AGUARDANDO | — |
+| G8 | Retomada pós-queda (kill -9) | FEITO (Aprovada) | 2/2 testes com KILL REAL de subprocesso (TerminateProcess, sem cleanup) em 2 janelas de passos diferentes: todo passo-*.pt visível carrega inteiro, estado.json íntegro com concluido=false, retomada produz métricas idênticas (<1e-6) ao contínuo e conclui ✅ |
 | G9 | Agentes (3+ com skills) | AGUARDANDO | — |
 | G10 | Suite de testes ≥80% cobertura | AGUARDANDO | — |
 
