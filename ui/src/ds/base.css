@@ -61,7 +61,7 @@ code { font-family: var(--fonte-mono); font-size: 0.9em; background: var(--fundo
 @keyframes deslizar { from { transform: translateY(8px); opacity: 0; } to { transform: none; opacity: 1; } }
 
 .campo { display: block; margin-bottom: var(--esp-3); }
-.campo > label { font-weight: 700; font-size: var(--miudo); color: var(--tinta-suave); display: block; margin-bottom: var(--esp-1); }
+.campo > span { font-weight: 700; font-size: var(--miudo); color: var(--tinta-suave); display: block; margin-bottom: var(--esp-1); }
 .campo input, .campo select {
   font: inherit; width: 100%; padding: var(--esp-2);
   border: 1px solid var(--borda); border-radius: var(--raio-suave);

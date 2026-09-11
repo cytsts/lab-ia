@@ -1,15 +1,15 @@
 # Lab-IA
 
 Laboratório de IA em português brasileiro: treinamento do zero, fine-tuning
-(LoRA/QLoRA), quantização, MoE e modelos de raciocínio — com retomada após queda
-e interface desktop. Projeto guiado por specs (`specs/`) e pelo loop Gauntlet
-(builder constrói, critic valida contra a barra).
+(LoRA/QLoRA), quantização (int8/NF4), MoE, raciocínio (CoT/ToT) e agentes —
+com interface desktop amistosa, retomada após queda e specs + testes para
+tudo. Projeto guiado pelo loop Gauntlet: spec → teste → build → crítico.
 
 ## Requisitos
 
-- Windows/Linux/macOS com **Python 3.13+** e **Node 20+** (recomendado 24) + **pnpm**
-- GPU NVIDIA (CUDA 12.x) opcional — sem GPU tudo roda em CPU (mais lento)
-- ~5 GB livres para ambiente + modelos de teste
+- Windows/Linux/macOS com **Python 3.13+** e **Node 20+** + **pnpm**
+- GPU NVIDIA (CUDA 12.x) opcional — tudo roda em CPU (mais lento)
+- ~5 GB livres para ambiente + artefatos
 
 ## Instalação (do zero)
 
@@ -19,70 +19,62 @@ py -3.13 -m venv .venv
 .venv\Scripts\python -m pip install -U pip
 .venv\Scripts\pip install torch --index-url https://download.pytorch.org/whl/cu128
 .venv\Scripts\pip install -e "core[dev,finetune]"
-:: (opcional, quantização GPU) .venv\Scripts\pip install bitsandbytes
+:: (opcional, comparativo de quantização) .venv\Scripts\pip install bitsandbytes
 
-:: 2. Corpus pt-BR (domínio público; já versionado em data/, re-executável)
+:: 2. Dados (domínio público / sintéticos determinísticos, versionados)
 .venv\Scripts\python scripts\prepara_corpus.py
+.venv\Scripts\python scripts\prepara_tarefa_ciencia.py
+.venv\Scripts\python scripts\prepara_benchmark.py
 
-:: 3. Interface (ver G6)
+:: 3. Interface
 pnpm install --dir ui
+cd ui && node node_modules\.pnpm\electron@*\node_modules\electron\install.js  :: binário Electron (pnpm 10 bloqueia postinstall)
 ```
 
 ## Verificação
 
 ```bat
-.venv\Scripts\python -m pytest        :: suíte completa (não precisa de GPU)
+.venv\Scripts\python -m pytest -q            :: suíte completa (CPU, sem GPU/rede)
+.venv\Scripts\python -m pytest -q -m "not slow"  :: ciclo rápido
+pnpm --dir ui test                           :: testes da UI
+pnpm --dir ui coverage                       :: cobertura TS (v8)
 ```
 
-## Uso rápido (G1 — treinamento do zero)
+## Metas e comandos
 
-```bat
-:: Treinar nano-GPT pt-BR (~15M parâmetros, 2500 passos)
-.venv\Scripts\python -m labia.cli train --config configs/g1_treino_zero.yaml
+| Meta | Comando | Artefato |
+|------|---------|----------|
+| G1 treino do zero | `.venv\Scripts\python -m labia.cli train --config configs/g1_treino_zero.yaml` | `runs/g1-treino-zero/` |
+| G1 retomar após queda | `... train --config ... --retomar` | continua do último ckpt |
+| G1 gerar | `... gerar --run g1-treino-zero --prompt "Uma noite destas"` | prosa pt-BR |
+| G2 LoRA | `... ajustar --config configs/g2_ajuste_ciencia.yaml` | `runs/g2-ajuste-ciencia/adaptador/` |
+| G2 QLoRA | mude `tipo: qlora` (bits 8 ou 4) na config | idem + base quantizada |
+| G3 quantizar | `... quantizar --run g1-treino-zero --saida g3-g1-nf4 --modo nf4` | `tamanhos.json` |
+| G4 MoE | `... train --config configs/g4_moe.yaml` | métricas de rota no `metricas.jsonl` |
+| G5 raciocínio | `... raciocinio --run g5-ajuste-cot --comparar` | `comparativo.json` |
+| G9 agentes | `... agentes` / `... agente treinador train_model --json "{\"config\": ...}"` | eventos `agente_acao` |
+| API p/ UI | `... servir --porta 8765` | REST local |
+| G6 desktop (dev) | `pnpm --dir ui dev` + `pnpm --dir ui electron` | SPA + shell |
+| G7 empacotar | `pnpm --dir ui package` | `ui/release/Lab-IA 0.1.0.exe` (portable) |
 
-:: Retomar após queda de energia (usa último checkpoint)
-.venv\Scripts\python -m labia.cli train --config configs/g1_treino_zero.yaml --retomar
-
-:: Gerar texto do último checkpoint
-.venv\Scripts\python -m labia.cli gerar --run g1-treino-zero --prompt "Escritor de memória"
-
-:: API interna (para a camada visual)
-.venv\Scripts\python -m labia.cli servir --porta 8765
-```
-
-## Uso rápido (G2 — fine-tuning / G3 — quantização)
-
-```bat
-:: LoRA sobre a base treinada (tarefa: estilo técnico-científico)
-.venv\Scripts\python scripts\prepara_tarefa_ciencia.py
-.venv\Scripts\python -m labia.cli ajustar --config configs/g2_ajuste_ciencia.yaml
-:: QLoRA: mude "tipo: qlora" (e bits: 8 ou 4) na config
-
-:: Gerar com o adaptador (reconstrói base+LoRA automaticamente)
-.venv\Scripts\python -m labia.cli gerar --run g2-ajuste-ciencia --prompt "A amostra foi"
-
-:: Quantizar a base (int8 ou NF4) e medir tamanho/perda
-.venv\Scripts\python -m labia.cli quantizar --run g1-treino-zero --saida g3-g1-int8 --modo int8
-.venv\Scripts\python -m labia.cli quantizar --run g1-treino-zero --saida g3-g1-nf4  --modo nf4
-.venv\Scripts\python -m labia.cli gerar --run g3-g1-nf4 --prompt "Uma noite destas"
-```
-
-Artefatos de um experimento ficam em `runs/<run-id>/`: `estado.json` (progresso),
-`metricas.jsonl` (append-only), `ckpt/` (checkpoints atômicos), `tokens/` (BPE).
-Log global append-only em `.lab-ia/eventos.jsonl`.
+Artefatos de um experimento em `runs/<run-id>/`: `estado.json` (progresso),
+`metricas.jsonl` (append-only), `ckpt/` (checkpoints atômicos), `tokens/`
+(BPE), `adaptador/` (LoRA), `tamanhos.json` (quantização), `benchmark-*.json`
+(raciocínio). Log global: `.lab-ia/eventos.jsonl`.
 
 ## Estrutura
 
 | Caminho | Papel |
 |---|---|
-| `core/labia/` | Núcleo Python: modelos, treino, tokens, runner de experimentos, API |
-| `ui/` | Camada visual TypeScript (Electron + Design System) — G6 |
-| `specs/` | Uma spec por meta (G1…G10); `PLANO.md` = estado vivo do loop |
-| `tests/` | Testes derivados das specs (rodam antes da implementação existir) |
-| `configs/` | Configurações YAML de experimentos |
-| `data/` | Corpus pt-BR versionado (domínio público) |
+| `core/labia/` | Núcleo Python: modelos, treino, ajuste, quantização, MoE, raciocínio, agentes, API |
+| `ui/` | Electron + React/TS + Design System próprio (`ui/src/ds/`) |
+| `specs/` | Uma spec por meta (G1…G10) + `PLANO.md` = estado vivo do loop |
+| `tests/` | Testes derivados das specs (g1…g10; sufixo `slow` = exige runs reais) |
+| `configs/` | Configurações YAML reproduzíveis (sementes fixas) |
+| `data/` | Corpus literário pt-BR (domínio público) + tarefa + benchmark (geráveis) |
 
-## Status das metas
+## O que este lab demonstra honestamente
 
-Ver `specs/PLANO.md` — cada meta só muda de status com evidência re-executável
-e veredito do Critic.
+Os achados medidos estão nas specs/PLANO (ex.: MoE ≈ denso em corpus pequeno;
+aritmética com carry não generaliza em 15M; CoT +5,3 p.p. vs direta). Cobertura
+medida: núcleo 92%, UI 96,7%.

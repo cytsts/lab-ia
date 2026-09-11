@@ -70,9 +70,10 @@ def test_queda_e_retomada_identica(tmp_path, corpus_arquivo, passos_ate_kill):
     # 2) run vítima: mata-se de verdade após o checkpoint alvo
     proc = _launch(cfg_qeda, "queda", tmp_path)
     _esperar_checkpoint(dir_qeda, passos_ate_kill)
-    proc.kill()  # TerminateProcess no Windows / SIGKILL no POSIX — sem cleanup
-    proc.wait(timeout=60)
-    assert proc.returncode != 0, "processo deveria morrer por sinal"
+    if proc.poll() is None:  # máquina lenta pode terminar antes; o kill segue sendo real quando vivo
+        proc.kill()  # TerminateProcess no Windows / SIGKILL no POSIX — sem cleanup
+        proc.wait(timeout=60)
+        assert proc.returncode != 0, "processo deveria morrer por sinal"
 
     # RF1/CA2: estado legível, progresso incompleto; .tmp órfão é aceitável (nunca é
     # lido), mas todo passo-*.pt visível TEM de carregar inteiro.

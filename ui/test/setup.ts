@@ -17,3 +17,7 @@ if (!window.matchMedia) {
 beforeEach(() => {
   localStorage.clear()
 })
+
+afterEach(() => {
+  vi.useRealTimers()
+})

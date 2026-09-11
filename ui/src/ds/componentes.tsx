@@ -33,9 +33,9 @@ export function BarraProgresso(props: { atual: number; total: number }) {
 
 export function Campo(props: { rotulo: string; children: ReactNode }) {
   return (
-    <div className="campo">
-      <label>{props.rotulo}</label>
+    <label className="campo">
+      <span>{props.rotulo}</span>
       {props.children}
-    </div>
+    </label>
   )
 }
