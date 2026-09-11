@@ -225,4 +225,5 @@ runs/
 node_modules/
 ui/dist/
 ui/release/
+ui/coverage/
 *.tmp
