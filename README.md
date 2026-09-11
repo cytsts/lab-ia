@@ -38,6 +38,7 @@ cd ui && node node_modules\.pnpm\electron@*\node_modules\electron\install.js  ::
 .venv\Scripts\python -m pytest -q -m "not slow"  :: ciclo rápido
 pnpm --dir ui test                           :: testes da UI
 pnpm --dir ui coverage                       :: cobertura TS (v8)
+.venv\Scripts\python scripts\verifica_pacote.py .qwen\pyi-dist\lab-ia --cuda  :: G7: exe do núcleo (após o build abaixo)
 ```
 
 ## Metas e comandos
@@ -55,7 +56,8 @@ pnpm --dir ui coverage                       :: cobertura TS (v8)
 | G9 agentes | `... agentes` / `... agente treinador train_model --json "{\"config\": ...}"` | eventos `agente_acao` |
 | API p/ UI | `... servir --porta 8765` | REST local |
 | G6 desktop (dev) | `pnpm --dir ui dev` + `pnpm --dir ui electron` | SPA + shell |
-| G7 empacotar | `pnpm --dir ui package` | `ui/release/Lab-IA 0.1.0.exe` (portable) |
+| G7 empacotar UI | `pnpm --dir ui package` | `ui/release/Lab-IA 0.1.0.exe` (portable) |
+| G7 empacotar núcleo | `.venv\Scripts\pyinstaller --noconfirm --distpath .qwen\pyi-dist --workpath .qwen\pyi-work lab-ia.spec` | `.qwen\pyi-dist\lab-ia\lab-ia.exe` (headless, sem venv) |
 
 Artefatos de um experimento em `runs/<run-id>/`: `estado.json` (progresso),
 `metricas.jsonl` (append-only), `ckpt/` (checkpoints atômicos), `tokens/`
@@ -67,6 +69,8 @@ Artefatos de um experimento em `runs/<run-id>/`: `estado.json` (progresso),
 | Caminho | Papel |
 |---|---|
 | `core/labia/` | Núcleo Python: modelos, treino, ajuste, quantização, MoE, raciocínio, agentes, API |
+| `lab-ia.spec` | Empacotamento do núcleo (PyInstaller); fixa as CRTs do `System32` — ver `specs/G7.md` |
+| `scripts/` | Preparação de dados, ponto de entrada congelado, verificador do pacote |
 | `ui/` | Electron + React/TS + Design System próprio (`ui/src/ds/`) |
 | `specs/` | Uma spec por meta (G1…G10) + `PLANO.md` = estado vivo do loop |
 | `tests/` | Testes derivados das specs (g1…g10; sufixo `slow` = exige runs reais) |
@@ -77,4 +81,4 @@ Artefatos de um experimento em `runs/<run-id>/`: `estado.json` (progresso),
 
 Os achados medidos estão nas specs/PLANO (ex.: MoE ≈ denso em corpus pequeno;
 aritmética com carry não generaliza em 15M; CoT +5,3 p.p. vs direta). Cobertura
-medida: núcleo 92%, UI 96,7%.
+medida: núcleo 90%, UI 96,7%.
