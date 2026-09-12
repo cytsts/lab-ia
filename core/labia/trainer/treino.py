@@ -29,6 +29,7 @@ from .tokenizacao import carregar_tokenizer, treinar_tokenizer_ptbr
 class ConfigTreino:
     nome: str = "g1-treino-zero"
     corpus: str = "data/corpus_ptbr.txt"
+    corpus_val: str | None = None  # se definido, usa validação própria em vez do split 95/5
     vocab_bpe: int = 4096
     passos: int = 4000
     lote: int = 32
@@ -46,6 +47,12 @@ class ConfigTreino:
     modelo: dict = field(default_factory=dict)
     arquivo_eventos: str = ".lab-ia/eventos.jsonl"
 
+    def __post_init__(self) -> None:
+        _validar_tipos(self)
+
+    def para_dict(self) -> dict:
+        return dataclasses.asdict(self)
+
     @classmethod
     def de_arquivo(cls, caminho: Path | str) -> "ConfigTreino":
         dados = yaml.safe_load(Path(caminho).read_text(encoding="utf-8")) or {}
@@ -54,6 +61,30 @@ class ConfigTreino:
         if desconhecidas:
             raise ValueError(f"chaves desconhecidas na config: {sorted(desconhecidas)}")
         return cls(**dados)
+
+
+def _validar_tipos(cfg: "ConfigTreino") -> None:
+    """Erro claro quando o YAML entrega texto onde o treino espera número.
+
+    Armadilha clássica: 'minimo_lr: 3e-05'. O resolvedor de float do YAML 1.1 exige
+    ponto na mantissa, então esse valor vira STRING e o laço só quebra muito depois,
+    no primeiro cálculo de lr. Melhor falhar na leitura da config, dizendo o conserto.
+    """
+    for campo in dataclasses.fields(cfg):
+        valor = getattr(cfg, campo.name)
+        if campo.type == "int" and isinstance(valor, str):
+            raise ValueError(
+                f"config: campo '{campo.name}' veio como texto ({valor!r}); use um inteiro (ex.: {campo.name}: 100)"
+            )
+        if campo.type == "float" and isinstance(valor, str):
+            dica = valor
+            if "e" in valor.lower() and "." not in valor:
+                mantissa, _, expoente = valor.lower().partition("e")
+                dica = f"{mantissa}.0e{expoente}"
+            raise ValueError(
+                f"config: campo '{campo.name}' veio como texto ({valor!r}); "
+                f"em YAML o expoente precisa de ponto decimal — escreva {dica}"
+            )
 
 
 def escolher_dispositivo(preferencia: str) -> torch.device:
@@ -99,8 +130,14 @@ def executar_treino(
     dispositivo = escolher_dispositivo(cfg.dispositivo)
     eventos = LogEventos(Path(raiz) / cfg.arquivo_eventos if not Path(cfg.arquivo_eventos).is_absolute() else cfg.arquivo_eventos)
 
-    texto = Path(cfg.corpus).read_text(encoding="utf-8")
-    trem_texto, val_texto = dividir_corpus(texto, semente=cfg.semente)
+    trem_texto = Path(cfg.corpus).read_text(encoding="utf-8")
+    if cfg.corpus_val:
+        # dataset preparado por 'lab-ia dados': trem e validação já separados no disco
+        val_texto = Path(cfg.corpus_val).read_text(encoding="utf-8")
+        origem_dados = f"arquivos separados (trem={cfg.corpus}, val={cfg.corpus_val})"
+    else:
+        trem_texto, val_texto = dividir_corpus(trem_texto, semente=cfg.semente)
+        origem_dados = f"split {1 - 0.05:.0%}/{0.05:.0%} do corpus com semente {cfg.semente}"
 
     tok_arquivo = run_dir / "tokens" / "tokenizer.json"
     if retomar:
@@ -146,8 +183,37 @@ def executar_treino(
         estado_prev = carregar_estado(run_dir) or {}
         base_tempo = float(estado_prev.get("tempo_decorrido_s", 0.0))
         eventos.registrar("treino_retomado", run=run_dir.name, desde_passo=passo_atual)
+        if passo_atual >= cfg.passos:
+            # Queda exatamente depois de gravar o ÚLTIMO checkpoint e antes de fechar o
+            # estado: o treino já estava completo, só o estado não tinha sido finalizado.
+            # Sem esta saída, o laço não roda (range vazio), nada é salvo e o run fica
+            # "não concluído" para sempre — toda retomada futura seria um no-op silencioso.
+            salvar_estado(
+                run_dir,
+                run_id=run_dir.name,
+                passo=passo_atual,
+                passos_totais=cfg.passos,
+                concluido=True,
+                tempo_decorrido_s=base_tempo,
+                dispositivo=str(dispositivo),
+                origem_dados=origem_dados,
+                config_modelo=cfgm.para_dict(),
+                config_treino=cfg.para_dict(),
+            )
+            eventos.registrar("treino_concluido", run=run_dir.name, passo=passo_atual, fechado_na_retomada=True)
+            return run_dir
     else:
-        salvar_estado(run_dir, run_id=run_dir.name, passo=0, passos_totais=cfg.passos, concluido=False)
+        salvar_estado(
+            run_dir,
+            run_id=run_dir.name,
+            passo=0,
+            passos_totais=cfg.passos,
+            concluido=False,
+            origem_dados=origem_dados,
+            # run auto-descritivo: sem isto, comparar dois runs exige carregar checkpoint
+            config_modelo=cfgm.para_dict(),
+            config_treino=cfg.para_dict(),
+        )
         eventos.registrar("treino_iniciado", run=run_dir.name, passos=cfg.passos, dispositivo=str(dispositivo))
         # linha de base (passo 0): modelo aleatório + entropia unigram — referência de convergência
         contagens = torch.bincount(y_trem.reshape(-1), minlength=cfgm.vocab)

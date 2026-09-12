@@ -8,6 +8,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+from .componentes import RMSNorm, RedeSwiGLU, aplicar_rope, rope_frequencias
+
 
 @dataclass
 class ConfigGPT:
@@ -20,6 +22,12 @@ class ConfigGPT:
     n_especialistas: int = 0  # 0 = FFN denso; >1 = camada MoE (spec G4)
     top_k: int = 1  # especialistas ativos por token
     coef_auxiliar: float = 0.01  # peso da perda de balanceamento de carga
+    # --- arquitetura (B7): padrões reproduzem o GPT-2 original do laboratório ---
+    norm: str = "layernorm"  # layernorm | rmsnorm
+    pos: str = "aprendido"  # aprendido | rope
+    mlp: str = "gelu"  # gelu | swiglu
+    n_cabecas_kv: int = 0  # 0 = igual a cabecas (MHA); menor que cabecas = GQA
+    rope_base: float = 10000.0
 
     def para_dict(self) -> dict:
         return asdict(self)
@@ -31,24 +39,45 @@ class ConfigGPT:
 
 
 class AtencaoMultiCabeca(nn.Module):
+    """Atenção causal; suporta GQA (menos cabeças de K/V que de Q) e RoPE.
+
+    Com n_cabecas_kv = 0 o comportamento é idêntico ao original: uma projeção qkv de
+    3·dim e atenção multi-cabeça comum. Com n_cabecas_kv < cabecas, K e V são menores
+    e cada cabeça de K/V serve um grupo de cabeças de Q — é o que a Llama usa para
+    reduzir o cache de KV sem perder qualidade.
+    """
+
     def __init__(self, cfg: ConfigGPT):
         super().__init__()
         if cfg.dim % cfg.cabecas:
             raise ValueError("dim deve ser divisível por cabecas")
         self.cabecas = cfg.cabecas
         self.cabeca_dim = cfg.dim // cfg.cabecas
-        self.qkv = nn.Linear(cfg.dim, 3 * cfg.dim, bias=False)
+        self.cabecas_kv = cfg.n_cabecas_kv or cfg.cabecas
+        if cfg.dim % self.cabecas_kv:
+            raise ValueError("dim deve ser divisível por n_cabecas_kv")
+        if self.cabecas % self.cabecas_kv:
+            raise ValueError("cabecas precisa ser múltiplo de n_cabecas_kv (cada K/V serve um grupo)")
+        self.kv_dim = self.cabecas_kv * self.cabeca_dim
+        self.qkv = nn.Linear(cfg.dim, cfg.dim + 2 * self.kv_dim, bias=False)
         self.proj = nn.Linear(cfg.dim, cfg.dim, bias=False)
         self.abandono = nn.Dropout(cfg.abandono)
+        self.usar_rope = cfg.pos == "rope"
 
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
+    def forward(self, x: torch.Tensor, rope: tuple[torch.Tensor, torch.Tensor] | None = None) -> torch.Tensor:
         b, t, d = x.shape
-        q, k, v = self.qkv(x).split(d, dim=2)
+        q, k, v = self.qkv(x).split([d, self.kv_dim, self.kv_dim], dim=2)
         q = q.view(b, t, self.cabecas, self.cabeca_dim).transpose(1, 2)
-        k = k.view(b, t, self.cabecas, self.cabeca_dim).transpose(1, 2)
-        v = v.view(b, t, self.cabecas, self.cabeca_dim).transpose(1, 2)
+        k = k.view(b, t, self.cabecas_kv, self.cabeca_dim).transpose(1, 2)
+        v = v.view(b, t, self.cabecas_kv, self.cabeca_dim).transpose(1, 2)
+        if self.usar_rope and rope is not None:
+            q = aplicar_rope(q, rope[0], rope[1])
+            k = aplicar_rope(k, rope[0], rope[1])
         saida = F.scaled_dot_product_attention(
-            q, k, v, is_causal=True, dropout_p=self.abandono.p if self.training else 0.0
+            q, k, v,
+            is_causal=True,
+            dropout_p=self.abandono.p if self.training else 0.0,
+            enable_gqa=self.cabecas_kv != self.cabecas,
         )
         saida = saida.transpose(1, 2).reshape(b, t, d)
         return self.abandono(self.proj(saida))
@@ -82,9 +111,14 @@ class Roteador(nn.Module):
         val = val / val.sum(-1, keepdim=True)
         destino = torch.zeros_like(probs).scatter_(1, idx, val)
         with torch.no_grad():
+            # f_i: fração de tokens roteada para o especialista i — contagem dura, sem gradiente
             fracao = destino.gt(0).float().mean(0)
-            aux = self.n * (fracao * probs.mean(0)).sum()
             self.ultima_fracao = fracao.detach()
+        # P̄_i (probabilidade média do roteador) PRECISA carregar gradiente: é por onde a
+        # perda auxiliar empurra o roteador de volta ao equilíbrio (Switch Transformer,
+        # RF3 da G4). Manter o produto inteiro dentro de no_grad tornava o termo inerte —
+        # somado à perda, mas sem nenhum efeito sobre o treino.
+        aux = self.n * (fracao * probs.mean(0)).sum()
         return destino, aux
 
 
@@ -108,16 +142,34 @@ class CamadaMoE(nn.Module):
         return y.view(b, t, d), aux
 
 
+def criar_normalizacao(cfg: ConfigGPT) -> nn.Module:
+    """LayerNorm (GPT-2) ou RMSNorm (Llama em diante)."""
+    if cfg.norm == "rmsnorm":
+        return RMSNorm(cfg.dim)
+    if cfg.norm != "layernorm":
+        raise ValueError(f"norm desconhecido: {cfg.norm!r} (use layernorm|rmsnorm)")
+    return nn.LayerNorm(cfg.dim)
+
+
 class BlocoTransformer(nn.Module):
     def __init__(self, cfg: ConfigGPT):
         super().__init__()
-        self.ln1 = nn.LayerNorm(cfg.dim)
+        self.ln1 = criar_normalizacao(cfg)
         self.atencao = AtencaoMultiCabeca(cfg)
-        self.ln2 = nn.LayerNorm(cfg.dim)
-        self.mlp = CamadaMoE(cfg) if cfg.n_especialistas > 1 else RedeDensa(cfg)
+        self.ln2 = criar_normalizacao(cfg)
+        if cfg.n_especialistas > 1:
+            self.mlp = CamadaMoE(cfg)
+        elif cfg.mlp == "swiglu":
+            self.mlp = RedeSwiGLU(cfg)
+        elif cfg.mlp == "gelu":
+            self.mlp = RedeDensa(cfg)
+        else:
+            raise ValueError(f"mlp desconhecido: {cfg.mlp!r} (use gelu|swiglu)")
 
-    def forward(self, x: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
-        x = x + self.atencao(self.ln1(x))
+    def forward(
+        self, x: torch.Tensor, rope: tuple[torch.Tensor, torch.Tensor] | None = None
+    ) -> tuple[torch.Tensor, torch.Tensor]:
+        x = x + self.atencao(self.ln1(x), rope)
         saida, aux = self.mlp(self.ln2(x))
         return x + saida, aux
 
@@ -127,10 +179,28 @@ class GPT(nn.Module):
         super().__init__()
         self.cfg = cfg
         self.wte = nn.Embedding(cfg.vocab, cfg.dim)
-        self.wpe = nn.Embedding(cfg.janela_ctx, cfg.dim)
+        if cfg.pos == "aprendido":
+            self.wpe = nn.Embedding(cfg.janela_ctx, cfg.dim)
+        elif cfg.pos == "rope":
+            # RoPE dispensa embedding de posição: a posição entra girando q e k.
+            self.wpe = None
+            if (cfg.dim // cfg.cabecas) % 2:
+                raise ValueError(
+                    f"RoPE precisa de dim_cabeca par (dim {cfg.dim} / cabecas {cfg.cabecas}); "
+                    "ajuste --dim ou --cabecas"
+                )
+            cos, sen = rope_frequencias(
+                cfg.janela_ctx, cfg.dim // cfg.cabecas, cfg.rope_base
+            )
+            # persistent=False: a tabela é derivada da config, não é peso aprendido — não
+            # precisa viajar no checkpoint nem mudar o state_dict dos runs antigos.
+            self.register_buffer("_rope_cos", cos, persistent=False)
+            self.register_buffer("_rope_sen", sen, persistent=False)
+        else:
+            raise ValueError(f"pos desconhecido: {cfg.pos!r} (use aprendido|rope)")
         self.abandono = nn.Dropout(cfg.abandono)
         self.blocos = nn.ModuleList(BlocoTransformer(cfg) for _ in range(cfg.camadas))
-        self.ln_f = nn.LayerNorm(cfg.dim)
+        self.ln_f = criar_normalizacao(cfg)
         self.cabeca = nn.Linear(cfg.dim, cfg.vocab, bias=False)
         self.cabeca.weight = self.wte.weight  # pesos atados
 
@@ -151,10 +221,15 @@ class GPT(nn.Module):
                 mlp = bloco.mlp
                 redes = mlp.especialistas if isinstance(mlp, CamadaMoE) else [mlp]
                 for red in redes:
-                    red.fc2.weight.mul_(escala)
+                    # a projeção de SAÍDA do bloco é que precisa nascer pequena
+                    if isinstance(red, RedeSwiGLU):
+                        red.w_down.weight.mul_(escala)
+                    else:
+                        red.fc2.weight.mul_(escala)
             for ln in [self.ln_f, *(b.ln1 for b in self.blocos), *(b.ln2 for b in self.blocos)]:
                 ln.weight.fill_(1.0)
-                ln.bias.zero_()
+                if getattr(ln, "bias", None) is not None:  # RMSNorm não tem viés
+                    ln.bias.zero_()
 
     @property
     def dispositivo(self) -> torch.device:
@@ -190,18 +265,25 @@ class GPT(nn.Module):
         t = idx.shape[1]
         if t > self.cfg.janela_ctx:
             raise ValueError(f"sequência {t} > janela_ctx {self.cfg.janela_ctx}")
-        pos = torch.arange(t, device=idx.device)
-        return self.abandono(self.wte(idx) + self.wpe(pos)[None, :, :])
+        x = self.wte(idx)
+        if self.wpe is not None:
+            pos = torch.arange(t, device=idx.device)
+            x = x + self.wpe(pos)[None, :, :]
+        return self.abandono(x)
 
     def forward(self, idx: torch.Tensor, alvos: torch.Tensor | None = None):
         x = self.emb(idx)
+        rope = None
+        if self.cfg.pos == "rope":
+            tokens = idx.shape[1]
+            rope = (self._rope_cos[:tokens], self._rope_sen[:tokens])
         aux_total = x.new_zeros(())
         for bloco in self.blocos:
-            x, aux = bloco(x)
+            x, aux = bloco(x, rope)
             aux_total = aux_total + aux
         logits = self.cabeca(self.ln_f(x))
         n_moe = sum(1 for b in self.blocos if isinstance(b.mlp, CamadaMoE))
-        self._ultimo_aux = float(aux_total / max(1, n_moe)) if n_moe else None
+        self._ultimo_aux = float(aux_total.detach() / max(1, n_moe)) if n_moe else None
         if alvos is None:
             return logits, None
         perda = F.cross_entropy(logits.view(-1, self.cfg.vocab), alvos.view(-1))

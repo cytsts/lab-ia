@@ -1,0 +1,24 @@
+nome: sw-lr-01
+corpus: data\livros-ptbr\trem.txt
+corpus_val: data\livros-ptbr\val.txt
+vocab_bpe: 4096
+passos: 500
+lote: 16
+avaliar_a_cada: 50
+salvar_a_cada: 100
+iters_avaliacao: 40
+lr: 0.00015
+minimo_lr: 3.0e-05
+warmup: 50
+peso_decay: 0.1
+grad_clip: 1.0
+semente: 42
+stride: 96
+dispositivo: auto
+arquivo_eventos: .lab-ia\eventos.jsonl
+modelo:
+  dim: 192
+  camadas: 4
+  cabecas: 6
+  janela_ctx: 192
+  abandono: 0.05

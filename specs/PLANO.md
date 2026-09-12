@@ -30,6 +30,39 @@ Regra: item só muda de status com evidência re-executável (comando + saída) 
 | G9 | Agentes (3+ com skills) | FEITO (Aprovada) | 6/6 testes CPU; deviação de processo registrada: spec escrita DEPOIS de testes+código (contrato formalizado a posteriori em specs/G9.md). Evidência viva: `lab-ia agentes` → 3 agentes / 8 skills com assinaturas; log `agente_acao` ok=true/false auditado |
 | G10 | Suite de testes ≥80% cobertura | FEITO (Aprovada) | 71 testes pytest (69 CPU-verdes + 2 `slow`), re-medido 2026-09-11 após a G7 v2: **69 passed, 2 deselected, 381s**, cobertura núcleo **90%** (cli incluída in-process) + 16 vitest (UI **96,7%** linhas); mutações documentadas (G1 otimizador, G3 códigos zerados, G7 CRT do JDK reintroduzida no bundle ⇒ 2 falhas); g8 anti-flaky (poll antes do assert de sinal) |
 
+## Bancada (uso próprio) — B1/B2
+| ID | Atividade | Status | Veredito do Critic |
+|----|-----------|--------|--------------------|
+| B1 | Dados próprios + config assistida | FEITO | 64 testes CPU verdes (`pytest tests/b1`); ponta a ponta real na GPU: corpus de 866 KB → `data/livros-ptbr/` (3319 parágrafos) → `configs/livros-rapido.yaml` → run `livros-rapido` val 8,33→5,07 (unigram 6,55) em 14,48 s de laço CUDA. **Achado:** estimador só-FLOPs errou 2,0× (previu 7,2 s; real 14,5 s) porque com 2–6 M parâmetros o gargalo é o custo fixo por passo, não a GPU → modelo de 2 termos (9,3 ms fixos + FLOPs/16,7 TFLOP/s), erro máx. 6,8% e médio 4,8% em validação cruzada deixando-um-de-fora sobre 4 medições. **Dois bugs achados por execução:** `utf-8-sig` rotulava todo utf-8 comum (ordem da detecção); `minimo_lr: 3e-05` vira string no YAML 1.1 e quebrava o treino no passo 1000 — agora falha na leitura dizendo o conserto |
+| B2 | Comparar runs, diagnosticar e desenhar curvas | FEITO | 37 testes CPU (1 pulado por ausência de matplotlib); evidência nos 9 runs reais: `g4-moe-top2` → **overfit** (deriva +0,2691), coerente com o achado do top-2 da G4; `g1-treino-zero` aponta mínimo no passo 1500 com val 4,6731, igual ao PLANO; `g3-g1-int8`/`g3-g1-nf4` → **quantizacao** com fator 3,95×/7,11×. **Dois falsos positivos corrigidos:** queda do passo 0 (modelo aleatório) marcada como instabilidade; orçamento comum zerado por runs de quantização. Curvas saem em SVG sem dependência nenhuma (PyPI inacessível neste ambiente) |
+
+| B3 | Bancada na API e na janela | FEITO | 14 testes de API CPU-verdes (`tests/b3/`) + 44 testes de UI (`pnpm --dir ui test`) + `tsc --noEmit` e vite limpos. Endpoints `/saude`, `/datasets`, `POST /dados`, `/presets`, `POST /novo`, `/comparar`, `/comparar/relatorio`, `/comparar/curvas.svg`, `/guia/{nome}`, `/execucoes/{chave}/log`. Páginas **Bancada** (dados → config → treinar) e **Comparar** (tabela, diagnóstico, veredito, curvas). Verificado: a config gerada pela API é aceita por `ConfigTreino.de_arquivo` sem ajuste manual; curvas saem em SVG sem matplotlib; nenhuma rota aceita caminho arbitrário |
+| B4 | Laboratório portátil: o app sobe o próprio núcleo | FEITO (empacotamento não executado) | Diagnóstico com evidência: `ui/package.json` levava só `dist + electron` (app.asar de 4,88 MB) e o `main.mjs` calculava a raiz como `join(aqui,'..','..')`, que dentro do asar não aponta para lugar nenhum — os dois artefatos da G7 nunca foram unidos. Agora: resolvedor testável em `ui/electron/nucleo.mjs` (19 testes em ambiente node, com dublês injetados), semente do workspace sem sobrescrever nada, espera de `/saude` distinguindo morte de timeout, encerramento junto com a janela, `scripts/monta_portatil.py` e `extraResources`. **Peso medido: 4,84 GB, dos quais 4,08 GB são torch CUDA** — é o número que decide o sabor do pacote (specs/B4.md). `pnpm --dir ui package` não rodou aqui: baixa NSIS/winCodeSign e não há rede neste ambiente |
+
+| B5 | Varredura de hiperparâmetros | FEITO | 19 testes CPU-verdes (`tests/b5/`: 14 do módulo + 5 da API) e 49 testes de UI. **Varredura real na GPU**: base `livros-rapido`, grade `lr` ∈ {0,00015; 0,0003; 0,0006} × `lote` ∈ {16, 32}, 500 passos por variante (orçamento igual) → melhor `sw-lr-06` (lote 32, lr 0,0006) val **5,1310**; efeito medido: `lr` 0,00015→5,7336 · 0,0003→5,4672 · 0,0006→5,2160 e `lote` 16→5,5378 · 32→5,4067 — tendência monótona nas duas chaves. Leitura honesta: as seis saíram `ainda_caindo` (orçamento curto), então o achado é a **direção**, não o valor final. **Dois bugs achados rodando de verdade:** o diretório do run não era criado (as seis variantes morreram com "Parent directory ckpt does not exist" — os testes de unidade passavam porque usavam diretório pronto) e `n or 8` engolia `--n 0` em silêncio |
+
+| B6 | Trilha de estudo (fase 2) | FEITO (10 lições) | 23 testes CPU-verdes (`tests/trilha/`). **10 lições** em pt-BR mapeadas ao núcleo — parte 1 (criar): tensor/autograd · tokenização BPE · atenção causal · bloco e resíduo · laço de treino; parte 2 (otimizar): **LoRA · quantização · MoE · raciocínio · agentes** — com 10 experimentos executáveis e 10 notebooks gerados do próprio experimento. Cada afirmação tem teste com número real: autograd exato (erro 0,0); acúmulo `[3,6,9]` sem `zero_grad`; 4096 → 3,43 chars/token contra 0,98 com 128; causalidade exata (0,000e+00) e vazamento de 1,95 sem `is_causal`; crescimento 1,71x com escala `1/sqrt(2·camadas)` contra 5,40x sem ela; lr=1,0 a 92,3 de perda contra 6,39 com lr=3e-3; LoRA no-op exato e posto de B·A = r; int8 3,94×/erro 0,034 contra NF4 7,53×/erro 0,130; MoE ativos 38,2% e colapso 94,5% → 26,6% com a auxiliar; CoT 6,4× mais tokens e +5,3 p.p. no run real; 3 agentes com 8 skills e log `ok=true/false`. `lab-ia trilha --conferir` acusa citação a código inexistente (0 quebradas) e o teste anti-apodrecimento falha se um notebook ficar desatualizado — **ele falhou de verdade nesta sessão** ao editar um experimento sem regerar o caderno. A trilha também está **dentro da janela** (aba Trilha + `GET /trilha`), para o app portátil levar o material didático junto — 5 testes de API e 5 de UI **Não verificado:** execução dos notebooks — instalar jupyter exige rede, indisponível neste ambiente (mesma causa do matplotlib na B2) |
+
+- 2026-09-11 · **G4: a perda auxiliar do MoE não tinha gradiente.** A Lição 8 da trilha
+  foi escrita para medir o mecanismo de balanceamento e o `backward()` da auxiliar
+  estourou com *"element 0 of tensors does not require grad"*. Causa: o produto
+  `n · Σ fᵢ·P̄ᵢ` estava inteiro dentro de `torch.no_grad()`, então `aux` entrava na perda
+  como **constante** — o `coef_auxiliar` não tinha efeito nenhum no treino, contra o que
+  a RF3 da G4 exige ("somada à perda de linguagem com `coef_auxiliar`"). O `aux_router`
+  registrado em `metricas.jsonl` era diagnóstico, não sinal de treino — o balanceamento
+  observado nas runs da G4 (uso 0,19–0,35, aux 1,048) veio da dinâmica natural.
+  **Conserto:** `fracao` continua sob `no_grad` (contagem dura, como no Switch) e o
+  produto saiu de lá, deixando `P̄ᵢ` carregar o gradiente. **Evidência do efeito:** partindo
+  do mesmo colapso de 94,5%, sem auxiliar o roteador fica em 81,6% e com auxiliar vai a
+  **26,6%** (uniforme, aux 1,0056 = piso); antes do conserto os dois davam resultado
+  idêntico. **Regressão:** dois testes novos em `tests/g4/` (a auxiliar precisa ter gradiente;
+  o coeficiente precisa mudar o gradiente do roteador).
+- 2026-09-11 · G4: `test_gerar_no_moe` exigia que o texto gerado tivesse letras. Com a
+  auxiliar agora ativa, a decodificação gulosa de um modelo micro de 300 passos passou a
+  produzir 12 espaços (medido: `'            '` com auxiliar, `' a    a a a '` sem ela). A CA6
+  pede que a geração funcione, não que seja literata — a asserção passou a verificar o
+  mecanismo, com os valores medidos registrados no comentário.
+
 ## Correções de veredito (trilha de auditoria — nada se apaga)
 - 2026-09-11 · G7/CA2: o veredito anterior dizia *"`c10.dll WinError 1114` na
   inicialização CUDA congelada — rota oficial do núcleo é o venv"*. Falso: a
@@ -40,6 +73,28 @@ Regra: item só muda de status com evidência re-executável (comando + saída) 
 - 2026-09-11 · README dizia "cobertura do núcleo 92%"; medido 90% no início
   desta sessão, antes de qualquer mudança (`pytest -m "not slow"
   --cov=core/labia`, 67 passed + 1 deselected). Alinhado ao PLANO.
+
+- 2026-09-11 · B2: a primeira versão classificava `livros-rapido` como
+  *instável* por causa da queda de 2,01 nats do passo 0 (modelo aleatório) para o
+  passo 100. Falso: queda de linha de base não é instabilidade — a checagem de
+  salto passou a começar depois do passo 0.
+- 2026-09-11 · B2: a coluna *val@comum* saía "?" para todos os runs porque runs de
+  quantização não têm campo `passo`, o `min()` do orçamento virava 0 e 0 era
+  tratado como falso. Quantização saiu do ranking e do orçamento comum.
+- 2026-09-11 · G8: o teste de queda real falhava ~1 em 6 execuções, por **duas causas
+  medidas**, nenhuma delas aleatória. (a) **Bug de produto:** morrer entre gravar o
+  último checkpoint e fechar o `estado.json` deixava o run com `concluido=false`
+  para sempre — na retomada o laço não rodava (`range` vazio), nada era salvo e
+  toda retomada futura virava no-op silencioso. Corrigido com fechamento explícito
+  quando `passo_atual >= passos`, coberto por teste determinístico novo em
+  `tests/g8`. (b) Corrida do próprio teste: a espera de 0,15 s entre pollings dava
+  tempo de o modelo micro terminar os passos restantes antes do kill (o comentário
+  do teste já admitia isso, mas a asserção seguinte não tratava). Espera reduzida
+  para 0,02 s. Verificação: 10/10 execuções do caso `[35]` depois da correção
+  (antes: 5/6, falha reproduzida com a saída completa).
+- 2026-09-11 · Ambiente: o PyPI está inacessível nesta máquina (falha de SSL), então
+  matplotlib não pôde ser instalado. A bancada não depende dele: as curvas saem em
+  SVG gerado no próprio projeto; PNG é caminho opcional.
 
 ## Fora de escopo declarado
 - G7 por último: depende da UI (G6) estável.

@@ -39,7 +39,11 @@
     "appId": "dev.labia.app",
     "productName": "Lab-IA",
     "files": ["dist/**", "electron/**"],
+    "extraResources": [
+      { "from": "../pacote/nucleo", "to": "nucleo" },
+      { "from": "../pacote/semente", "to": "semente" }
+    ],
     "directories": { "output": "release" },
-    "win": { "target": ["portable"], "icon": null }
+    "win": { "target": ["dir", "portable"], "icon": null }
   }
 }

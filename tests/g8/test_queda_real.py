@@ -43,7 +43,10 @@ def _esperar_checkpoint(run: Path, minimo: int, timeout: float = 120.0) -> int:
         )
         if cps and cps[-1] >= minimo:
             return cps[-1]
-        time.sleep(0.15)
+        # 20 ms de espera: o modelo micro termina os passos que faltam em poucas
+        # dezenas de ms, então uma janela de 100 ms deixava o processo escapar vivo
+        # de vez em quando e a queda deixava de ser testada
+        time.sleep(0.02)
     raise AssertionError(f"checkpoint >= {minimo} não apareceu em {timeout}s")
 
 
@@ -101,3 +104,37 @@ def test_queda_e_retomada_identica(tmp_path, corpus_arquivo, passos_ate_kill):
         assert abs(rc["loss_val"] - rq["loss_val"]) < 1e-6
     estado_final = json.loads((dir_qeda / "estado.json").read_text(encoding="utf-8"))
     assert estado_final["concluido"] is True and estado_final["passo"] == total
+
+def test_retomada_fecha_run_que_morreu_depois_do_ultimo_checkpoint(tmp_path, corpus_arquivo):
+    """Corrida real (1 falha em 6 execuções): morrer entre gravar o ÚLTIMO checkpoint e
+    fechar o estado deixava o run 'não concluído' para sempre — toda retomada seguinte
+    virava no-op silencioso. Reproduzido de forma determinística, sem depender de timing.
+    """
+    dir_run = criar_dir_run(tmp_path / "runs" / "gap")
+    cfg = _escrever_config(tmp_path, corpus_arquivo, dir_run, 20)
+    assert subprocess.run(
+        [sys.executable, "-m", "labia.cli", "train", "--config", str(cfg),
+         "--run-id", "gap", "--raiz", str(tmp_path)],
+        cwd=RAIZ_REPO, timeout=600, capture_output=True, text=True,
+    ).returncode == 0
+
+    # estado como ficaria se o processo tivesse morrido logo após o checkpoint final:
+    # checkpoint 20 no disco, estado ainda apontando o fechamento anterior
+    estado = json.loads((dir_run / "estado.json").read_text(encoding="utf-8"))
+    assert estado["concluido"] is True
+    estado["concluido"] = False
+    estado["passo"] = estado["passos_totais"] - 10
+    (dir_run / "estado.json").write_text(json.dumps(estado), encoding="utf-8")
+    metricas_antes = [r["passo"] for r in _ler_metricas(dir_run)]
+
+    assert subprocess.run(
+        [sys.executable, "-m", "labia.cli", "train", "--config", str(cfg),
+         "--run-id", "gap", "--raiz", str(tmp_path), "--retomar"],
+        cwd=RAIZ_REPO, timeout=600, capture_output=True, text=True,
+    ).returncode == 0
+
+    final = json.loads((dir_run / "estado.json").read_text(encoding="utf-8"))
+    assert final["concluido"] is True, "retomada no último passo tem de fechar o run"
+    assert final["passo"] == 20
+    assert [r["passo"] for r in _ler_metricas(dir_run)] == metricas_antes, "retomada não repete nem pula métrica"
+

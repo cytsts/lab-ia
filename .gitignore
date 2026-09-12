@@ -221,6 +221,10 @@ __marimo__/
 
 # Lab-IA
 .venv/
+# datasets preparados por 'lab-ia dados' — derivados, reproduza com o comando
+data/*/
+# montagem do laboratório portátil (núcleo congelado + semente do workspace)
+pacote/
 runs/
 .lab-ia/
 .qwen/

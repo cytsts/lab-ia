@@ -1,7 +1,11 @@
 import '@testing-library/jest-dom/vitest'
 import { vi } from 'vitest'
 
-if (!window.matchMedia) {
+// O setup roda também nos testes de ambiente node (ex.: test/nucleo.test.ts), onde
+// não existe window nem localStorage — por isso as guardas de ambiente.
+const temDom = typeof window !== 'undefined'
+
+if (temDom && !window.matchMedia) {
   window.matchMedia = vi.fn().mockImplementation((query: string) => ({
     matches: false,
     media: query,
@@ -14,9 +18,11 @@ if (!window.matchMedia) {
   })) as unknown as typeof window.matchMedia
 }
 
-beforeEach(() => {
-  localStorage.clear()
-})
+if (temDom) {
+  beforeEach(() => {
+    localStorage.clear()
+  })
+}
 
 afterEach(() => {
   vi.useRealTimers()

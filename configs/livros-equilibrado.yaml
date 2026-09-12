@@ -1,0 +1,33 @@
+# Lab-IA — config de treino do zero (preset: equilibrado)
+# gerado por 'lab-ia novo' — mesma receita do run g1-treino-zero (linha de base do laboratório)
+#
+# parâmetros: 5.847.040 totais / 5.847.040 ativos por token
+# estimativa: 284.076 tokens/s → 1.2 min
+# VRAM estimada: 569.2 MB (89.2 MB de otimizador)
+# corpus: ~222.493 tokens → 1.737 janelas → 46.3 épocas em 2500 passos
+#
+# edite à vontade: o treino recusa chave desconhecida em vez de ignorar em silêncio
+
+nome: livros-equilibrado        # identificador do run; vira a pasta runs/<nome>/
+corpus: 'data\livros-ptbr\trem.txt'  # arquivo de treino (texto puro, UTF-8)
+corpus_val: 'data\livros-ptbr\val.txt'  # arquivo de validação; se vazio, o treino divide o corpus (95/5)
+vocab_bpe: 4096                 # tamanho do vocabulário BPE; maior = menos tokens por palavra, embedding maior
+passos: 2500                    # passos de otimização (um lote por passo)
+lote: 32                        # sequências por passo
+stride: 128                     # passo entre janelas; menor que janela_ctx = janelas deslizantes (aproveita corpus pequeno)
+avaliar_a_cada: 250             # intervalo de avaliação na validação (mede generalização)
+salvar_a_cada: 250              # intervalo de checkpoint atômico (é o que permite retomar após queda)
+iters_avaliacao: 40             # quantos lotes de validação por avaliação
+lr: 0.0003                      # learning rate de pico
+minimo_lr: 3.0e-05              # piso do decaimento cosseno
+warmup: 100                     # passos de aquecimento linear (evita divergir no começo)
+peso_decay: 0.1                 # weight decay do AdamW (só em pesos 2D; embeddings de posição ficam fora)
+grad_clip: 1.0                  # norma máxima do gradiente (0 desliga)
+semente: 42                     # semente; com o mesmo corpus e semente o treino é reproduzível
+dispositivo: auto               # auto | cuda | cpu
+modelo:
+  dim: 256                      # largura (dimensão do resíduo)
+  camadas: 6                    # profundidade (blocos transformer)
+  cabecas: 8                    # cabeças de atenção; dim precisa ser divisível por cabecas
+  janela_ctx: 256               # contexto máximo em tokens
+  abandono: 0.1                 # dropout (0 desliga; corpus pequeno costuma pedir mais)

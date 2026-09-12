@@ -17,6 +17,10 @@ vi.mock('../src/api', async (importOriginal) => {
     api: {
       corre: vi.fn(), metricas: vi.fn(), estado: vi.fn(), tamanhos: vi.fn(),
       comparativo: vi.fn(), configs: vi.fn(), eventos: vi.fn(), execucoes: vi.fn(), executar: vi.fn(),
+      saude: vi.fn(), datasets: vi.fn(), presets: vi.fn(), prepararDados: vi.fn(), novo: vi.fn(),
+      comparar: vi.fn(), urlCurvas: vi.fn(() => 'http://127.0.0.1:8765/comparar/curvas.svg?runs=a'),
+      logExecucao: vi.fn(), varreduras: vi.fn(), varrerSeco: vi.fn(), varrer: vi.fn(),
+      trilha: vi.fn(), licao: vi.fn(), rodarLicao: vi.fn(),
     },
   }
 })
@@ -128,6 +132,11 @@ describe('App (integração de navegação)', () => {
     vi.mocked(api.eventos).mockResolvedValue([] as never)
     vi.mocked(api.configs).mockResolvedValue([] as never)
     vi.mocked(api.execucoes).mockResolvedValue([] as never)
+    vi.mocked(api.saude).mockResolvedValue({ ok: true, cuda: true, gpu: 'RTX', runs: 1, datasets: 0, configs: 0, guia: [], versao_api: '0.2.0', raiz: 'x' } as never)
+    vi.mocked(api.datasets).mockResolvedValue([] as never)
+    vi.mocked(api.presets).mockResolvedValue([] as never)
+    vi.mocked(api.varreduras).mockResolvedValue([] as never)
+    vi.mocked(api.trilha).mockResolvedValue({ total: 0, licoes: [], citacoes_quebradas: [] } as never)
     vi.mocked(api.corre).mockResolvedValue([{ run_id: 'g1', concluido: true, passo: 1, passos_totais: 1 }] as never)
     render(
       <ProvedorDeAvisos>
@@ -136,6 +145,12 @@ describe('App (integração de navegação)', () => {
     )
     const usuario = userEvent.setup()
     expect(await screen.findByText('Lab-IA')).toBeInTheDocument()
+    await usuario.click(screen.getByRole('button', { name: 'Bancada' }))
+    expect(screen.getByText(/Trazer seus dados/)).toBeInTheDocument()
+    await usuario.click(screen.getByRole('button', { name: 'Comparar' }))
+    expect(await screen.findByText('Escolher runs')).toBeInTheDocument()
+    await usuario.click(screen.getByRole('button', { name: 'Trilha' }))
+    expect(await screen.findByText('Trilha de estudo')).toBeInTheDocument()
     await usuario.click(screen.getByRole('button', { name: 'Eventos' }))
     expect(screen.getByText(/Log de eventos/)).toBeInTheDocument()
     await usuario.click(screen.getByRole('button', { name: 'Design System' }))

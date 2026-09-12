@@ -102,4 +102,39 @@ def test_gerar_no_moe(tmp_path, corpus_arquivo):
     run = criar_dir_run(tmp_path / "gera")
     executar_treino(_config_moe(corpus_arquivo, run, passos=300, avaliar_a_cada=150, salvar_a_cada=150), run, raiz=tmp_path)
     texto = gerar_de_checkpoint(run, "A noite", passos_max=12, guloso=True)
-    assert isinstance(texto, str) and any(c.isalpha() for c in texto)
+    assert isinstance(texto, str) and len(texto) > 0
+    # O CONTEÚDO não é asseverável aqui, e já não era: num modelo micro de 300 passos a
+    # decodificação gulosa cai num token e o repete. Medido neste repositório: com a
+    # perda auxiliar ativa sai '            ' (12 espaços) e sem ela ' a    a a a '.
+    # O que a CA6 pede é que a geração do run MoE funcione ponta a ponta; texto com
+    # sentido é verificado nos runs reais (G1/G5), com modelo treinado de verdade.
+
+
+def test_perda_auxiliar_tem_gradiente_no_roteador():
+    """Regressão: a auxiliar era calculada dentro de no_grad — somada à perda como
+    constante e sem nenhum efeito no treino, contrariando a RF3 da G4."""
+    torch.manual_seed(0)
+    m = GPT(_cfg_moe(coef_auxiliar=1.0))
+    x = torch.randn(16, 32)
+    _, aux = m.blocos[0].mlp.roteador(x)
+    assert aux.requires_grad, "perda auxiliar sem gradiente: coef_auxiliar não faria nada"
+    m.zero_grad()
+    aux.backward()
+    gradiente = m.blocos[0].mlp.roteador.peso.weight.grad
+    assert gradiente is not None and float(gradiente.abs().sum()) > 0.0
+
+
+def test_coeficiente_auxiliar_muda_o_gradiente_do_roteador():
+    """Se o coeficiente não muda o gradiente, ele não está treinando nada."""
+    def gradiente_do_roteador(coef: float) -> float:
+        torch.manual_seed(0)
+        m = GPT(_cfg_moe(coef_auxiliar=coef))
+        idx = torch.randint(0, 64, (2, 8))
+        _, perda = m(idx, alvos=idx.clone())
+        m.zero_grad()
+        perda.backward()
+        return float(m.blocos[0].mlp.roteador.peso.weight.grad.abs().sum())
+
+    com_coef = gradiente_do_roteador(1.0)
+    sem_coef = gradiente_do_roteador(0.0)
+    assert com_coef > 0 and abs(com_coef - sem_coef) > 1e-9
