@@ -1,0 +1,58 @@
+{
+ "versao": 1,
+ "id": "logica-pq",
+ "gerado_em": "2026-09-13T21:57:13+00:00",
+ "parametros": {
+  "id": "logica-pq",
+  "familias": [
+   "avaliacao",
+   "tautologia",
+   "satisfativel",
+   "equivalencia",
+   "implicacao"
+  ],
+  "n_variaveis": 2,
+  "operadores": 3,
+  "operadores_dificeis": 5,
+  "n_treino": 3000,
+  "n_teste": 300,
+  "n_dificil": 200,
+  "semente": 42,
+  "variaveis": [
+   "p",
+   "q"
+  ]
+ },
+ "saidas": {
+  "trem": {
+   "arquivo": "data/logica-pq/trem.txt",
+   "bytes": 989705,
+   "sha256": "ebe6b2b2a66558f7"
+  },
+  "val": {
+   "arquivo": "data/logica-pq/val.txt",
+   "bytes": 49253
+  },
+  "benchmark": {
+   "arquivo": "data/logica-pq/benchmark.jsonl",
+   "itens": 3500
+  }
+ },
+ "distribuicao": {
+  "por_split": {
+   "treino": 3000,
+   "teste": 300,
+   "dificil": 200
+  },
+  "por_familia": {
+   "avaliacao": 700,
+   "tautologia": 700,
+   "satisfativel": 700,
+   "equivalencia": 700,
+   "implicacao": 700
+  },
+  "media_de_operadores": 4.31
+ },
+ "nota_resposta": "1 = verdadeiro, 0 = falso; o avaliador da G5 le inteiro, entao 1/0 mantem o harness intacto",
+ "nota_split_dificil": "o split 'dificil' usa ate 5 operadores contra 3 do treino: e o teste de generalizacao de comprimento"
+}

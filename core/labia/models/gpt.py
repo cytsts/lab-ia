@@ -123,12 +123,18 @@ class Roteador(nn.Module):
 
 
 class CamadaMoE(nn.Module):
-    """FFN esparsamente ativado: n especialistas, top-k por token (spec G4)."""
+    """FFN esparsamente ativado: n especialistas, top-k por token (spec G4).
+
+    O especialista segue a opção 'mlp' da config: com 'swiglu' os especialistas são
+    SwiGLU (como Mixtral e DeepSeek fazem), com 'gelu' continuam sendo a FFN densa
+    original — o padrão preserva o comportamento medido na G4.
+    """
 
     def __init__(self, cfg: ConfigGPT):
         super().__init__()
         self.roteador = Roteador(cfg)
-        self.especialistas = nn.ModuleList(RedeDensa(cfg) for _ in range(self.roteador.n))
+        fabrica = RedeSwiGLU if cfg.mlp == "swiglu" else RedeDensa
+        self.especialistas = nn.ModuleList(fabrica(cfg) for _ in range(self.roteador.n))
 
     def forward(self, x: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
         b, t, d = x.shape

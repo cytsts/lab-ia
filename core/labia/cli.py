@@ -145,6 +145,24 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--json", action="store_true")
     p.add_argument("--raiz", default=".")
 
+    p = sub.add_parser(
+        "logica-proposicional",
+        help="gera dataset de lógica proposicional (avaliação, tautologia, satisfatível, equivalência, implicação)",
+    )
+    p.add_argument("--id", required=True, help="id do dataset (vira data/<id>/)")
+    p.add_argument("--familias", default="avaliacao,tautologia,satisfativel,equivalencia,implicacao")
+    p.add_argument("--treino", type=int, default=3000, help="itens de treino")
+    p.add_argument("--teste", type=int, default=300, help="itens de teste (mesma dificuldade do treino)")
+    p.add_argument("--dificil", type=int, default=200, help="itens do split difícil (generalização de comprimento)")
+    p.add_argument("--variaveis", type=int, default=2, help="quantas variáveis (p, q, r...)")
+    p.add_argument("--operadores", type=int, default=3, help="operadores por fórmula no treino/teste")
+    p.add_argument("--operadores-dificeis", type=int, default=5, help="operadores no split difícil")
+    p.add_argument("--semente", type=int, default=42)
+    p.add_argument("--mostrar", type=int, default=0, help="imprime N exemplos com a resposta")
+    p.add_argument("--destino", default="data")
+    p.add_argument("--json", action="store_true")
+    p.add_argument("--raiz", default=".")
+
     p = sub.add_parser("servir", help="expõe a API interna para a camada visual")
     p.add_argument("--host", default="127.0.0.1")
     p.add_argument("--porta", type=int, default=8765)
@@ -477,6 +495,50 @@ def main(argv: list[str] | None = None) -> int:
             if processo.returncode != 0:
                 print(processo.stderr.rstrip(), file=sys.stderr)
                 return 1
+        return 0
+
+    if args.comando == "logica-proposicional":
+        import json as _json
+
+        from .logica import gerador_proposicional as logica
+
+        try:
+            manifesto = logica.gerar(
+                logica.ConfigLogica(
+                    id=args.id,
+                    familias=tuple(f.strip() for f in args.familias.split(",") if f.strip()),
+                    n_variaveis=args.variaveis,
+                    operadores=args.operadores,
+                    operadores_dificeis=args.operadores_dificeis,
+                    n_treino=args.treino,
+                    n_teste=args.teste,
+                    n_dificil=args.dificil,
+                    semente=args.semente,
+                    destino=args.destino,
+                    raiz=args.raiz,
+                )
+            )
+        except ValueError as e:
+            print(f"[lab-ia] erro ao gerar logica: {e}", file=sys.stderr)
+            return 2
+        if args.json:
+            print(_json.dumps(manifesto, ensure_ascii=False, indent=1))
+            return 0
+        d = manifesto["distribuicao"]
+        print(f"dataset : {manifesto['id']}  ({manifesto['pasta']})")
+        print(f"treino  : {d['por_split']['treino']} itens · {d['por_familia']}")
+        print(f"teste   : {d['por_split']['teste']} itens (mesma dificuldade)")
+        print(f"dificil : {d['por_split']['dificil']} itens (ate {args.operadores_dificeis} operadores vs {args.operadores})")
+        print(f"tamanho : {manifesto['saidas']['trem']['bytes'] / 1024:.0f} KB de corpus · sha {manifesto['saidas']['trem']['sha256']}")
+        print(f"benchmark: {manifesto['saidas']['benchmark']['arquivo']}")
+        for item in manifesto["amostras"][: args.mostrar]:
+            print()
+            print(f"--- {item['id']} ({item['familia']}) ---")
+            print(item["enunciado"])
+            print(item["cot"])
+        print()
+        print(f"proximo : lab-ia novo --nome logica-1 --dados {manifesto['id']} --preset equilibrado")
+        print(f"          lab-ia raciocinio --run logica-1 --comparar --benchmark {manifesto['saidas']['benchmark']['arquivo']}")
         return 0
 
     if args.comando == "servir":

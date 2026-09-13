@@ -32,11 +32,13 @@ class RMSNorm(nn.Module):
     def __init__(self, dim: int, eps: float = 1e-6):
         super().__init__()
         self.eps = eps
-        self.peso = nn.Parameter(torch.ones(dim))
+        # nome 'weight' de propósito: nn.LayerNorm usa esse nome, e assim init_pesos e
+        # qualquer código genérico tratam as duas normalizações sem caso especial.
+        self.weight = nn.Parameter(torch.ones(dim))
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         escala = x.pow(2).mean(-1, keepdim=True).add(self.eps).rsqrt()
-        return x * escala * self.peso
+        return x * escala * self.weight
 
 
 def rope_frequencias(

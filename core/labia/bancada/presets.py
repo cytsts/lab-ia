@@ -15,6 +15,8 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from ..models.componentes import intermediario_swiglu
+
 # --- calibração -------------------------------------------------------------
 # Medições reais usadas para ajustar o custo por passo. Cada linha é um treino que
 # aconteceu de verdade nesta máquina (RTX 3070, bf16+autocast); o ajuste é refeito
@@ -103,6 +105,22 @@ PRESETS: dict[str, dict] = {
         "avaliar_a_cada": 250,
         "salvar_a_cada": 250,
     },
+    "moderna": {
+        "descricao": "arquitetura de 2023 em diante (estilo Llama): RMSNorm, RoPE, SwiGLU e GQA",
+        "vocab_bpe": 4096,
+        "modelo": {
+            "dim": 256, "camadas": 6, "cabecas": 8, "janela_ctx": 256, "abandono": 0.1,
+            "norm": "rmsnorm", "pos": "rope", "mlp": "swiglu", "n_cabecas_kv": 2,
+        },
+        "passos": 2500,
+        "lote": 32,
+        "stride": 128,
+        "lr": 3e-4,
+        "minimo_lr": 3e-5,
+        "warmup": 100,
+        "avaliar_a_cada": 250,
+        "salvar_a_cada": 250,
+    },
     "moe": {
         "descricao": "FFN esparsamente ativado (4 especialistas, top-1) — achado da G4: em corpus pequeno empata com o denso",
         "vocab_bpe": 4096,
@@ -137,6 +155,10 @@ SOBRESCRITAS_MODELO = {
     "especialistas": "n_especialistas",
     "top_k": "top_k",
     "coef_auxiliar": "coef_auxiliar",
+    "norm": "norm",
+    "pos": "pos",
+    "mlp": "mlp",
+    "cabecas_kv": "n_cabecas_kv",
 }
 SOBRESCRITAS_TREINO = {
     "passos": "passos",
@@ -184,30 +206,75 @@ COMENTARIOS_MODELO = {
     "n_especialistas": "0 = FFN denso; >1 = MoE com n especialistas",
     "top_k": "especialistas ativos por token no MoE",
     "coef_auxiliar": "peso da perda de balanceamento de carga do roteador",
+    "norm": "layernorm (GPT-2) ou rmsnorm (Llama em diante, mais barata)",
+    "pos": "aprendido (embedding de posição) ou rope (posição por rotação, sem parâmetro)",
+    "mlp": "gelu (FFN clássica) ou swiglu (FFN com portão, 3 matrizes)",
+    "n_cabecas_kv": "0 = atenção comum (MHA); menor que cabecas = GQA, menos K/V para memorizar",
 }
 
 
 def contar_parametros(
-    vocab: int, dim: int, camadas: int, janela: int, n_especialistas: int = 0, top_k: int = 1
+    vocab: int,
+    dim: int,
+    camadas: int,
+    janela: int,
+    n_especialistas: int = 0,
+    top_k: int = 1,
+    *,
+    norm: str = "layernorm",
+    pos: str = "aprendido",
+    mlp: str = "gelu",
+    cabecas: int = 0,
+    n_cabecas_kv: int = 0,
 ) -> dict:
     """Conta parâmetros pela mesma aritmética do modelo em models/gpt.py.
 
-    Verificado contra GPT.contar_parametros() no teste tests/b1/test_presets.py —
-    se a arquitetura mudar, o teste quebra aqui primeiro.
+    Verificado contra GPT.contar_parametros() em tests/b7 (8 combinações) e no teste
+    original da B1 — se a arquitetura mudar, o teste quebra aqui primeiro.
     """
-    embedding = vocab * dim + janela * dim
-    atencao = 4 * dim * dim  # qkv (3*dim*dim) + proj (dim*dim), sem bias
-    normalizacoes = 4 * dim  # ln1 + ln2
-    densa = 8 * dim * dim + 5 * dim  # fc1(4d*d + 4d) + fc2(d*4d + d)
+    inter = intermediario_swiglu(dim)
+    # Embedding de posição só existe quando a posição é aprendida; RoPE usa tabela
+    # derivada (buffer não persistente), que não é parâmetro.
+    embedding = vocab * dim + (janela * dim if pos == "aprendido" else 0)
+    # q projeta dim; k e v projetam kv_dim cada (GQA usa menos cabeças para K/V).
+    kv_dim = dim if not (cabecas and n_cabecas_kv) else dim * n_cabecas_kv // cabecas
+    atencao = 2 * dim * dim + 2 * dim * kv_dim  # qkv + proj, sem bias
+    normalizacoes = 4 * dim if norm == "layernorm" else 2 * dim  # RMSNorm não tem viés
+    por_camada_mlp = mlp_densa(dim, inter) if mlp == "swiglu" else 8 * dim * dim + 5 * dim
     if n_especialistas > 1:
-        mlp = dim * n_especialistas + n_especialistas * densa  # roteador sem bias
-        ativos_mlp = dim * n_especialistas + max(1, min(top_k, n_especialistas)) * densa
+        mlp = dim * n_especialistas + n_especialistas * por_camada_mlp
+        ativos_mlp = dim * n_especialistas + max(1, min(top_k, n_especialistas)) * por_camada_mlp
     else:
-        mlp = densa
-        ativos_mlp = densa
-    total = embedding + camadas * (atencao + normalizacoes + mlp) + 2 * dim
-    ativos = embedding + camadas * (atencao + normalizacoes + ativos_mlp) + 2 * dim
-    return {"total": int(total), "ativos": int(ativos), "por_camada_mlp": int(mlp)}
+        mlp = por_camada_mlp
+        ativos_mlp = por_camada_mlp
+    normalizacao_final = 2 * dim if norm == "layernorm" else dim
+    total = embedding + camadas * (atencao + normalizacoes + mlp) + normalizacao_final
+    ativos = embedding + camadas * (atencao + normalizacoes + ativos_mlp) + normalizacao_final
+    return {
+        "total": int(total),
+        "ativos": int(ativos),
+        "por_camada_mlp": int(mlp),
+        "dim_kv": int(kv_dim),
+    }
+
+
+def mlp_densa(dim: int, inter: int) -> int:
+    """SwiGLU: três matrizes sem viés — gate, up e down."""
+    return 3 * dim * inter
+
+
+def parametros_da_arquitetura(**opcoes) -> dict:
+    """Atalho que deriva cabecas/janela do próprio dict de modelo (uso da CLI e da UI)."""
+    modelo = {
+        "vocab": opcoes.pop("vocab", 4096),
+        "dim": opcoes.pop("dim", 256),
+        "camadas": opcoes.pop("camadas", 6),
+        "janela": opcoes.pop("janela_ctx", 256),
+        "n_especialistas": opcoes.pop("n_especialistas", 0),
+        "top_k": opcoes.pop("top_k", 1),
+        **{k: v for k, v in opcoes.items() if k in ("norm", "pos", "mlp", "cabecas", "n_cabecas_kv")},
+    }
+    return contar_parametros(**modelo)
 
 
 def _flops_por_token(ativos: int, camadas: int, dim: int, janela: int) -> float:
@@ -390,6 +457,30 @@ def _validar(cfg: dict) -> None:
     especialistas = m.get("n_especialistas", 0)
     if especialistas and especialistas > 1 and m.get("top_k", 1) > especialistas:
         raise ValueError("top_k não pode ser maior que n_especialistas")
+    # --- arquitetura (B7) ---
+    normalizacao = m.get("norm", "layernorm")
+    if normalizacao not in ("layernorm", "rmsnorm"):
+        raise ValueError(f"norm desconhecido: {normalizacao!r} (use layernorm ou rmsnorm)")
+    posicao = m.get("pos", "aprendido")
+    if posicao not in ("aprendido", "rope"):
+        raise ValueError(f"pos desconhecido: {posicao!r} (use aprendido ou rope)")
+    if posicao == "rope" and (m["dim"] // m["cabecas"]) % 2:
+        raise ValueError(
+            f"RoPE precisa de dim_cabeca par: dim {m['dim']} / cabecas {m['cabecas']} = "
+            f"{m['dim'] // m['cabecas']}. Ajuste dim ou cabecas."
+        )
+    funcao_mlp = m.get("mlp", "gelu")
+    if funcao_mlp not in ("gelu", "swiglu"):
+        raise ValueError(f"mlp desconhecido: {funcao_mlp!r} (use gelu ou swiglu)")
+    kv = m.get("n_cabecas_kv", 0)
+    if kv:
+        if m["cabecas"] % kv:
+            raise ValueError(
+                f"cabecas ({m['cabecas']}) precisa ser múltiplo de n_cabecas_kv ({kv}): "
+                "cada cabeça de K/V serve um grupo de cabeças de Q"
+            )
+        if m["dim"] % kv:
+            raise ValueError(f"dim ({m['dim']}) precisa ser divisível por n_cabecas_kv ({kv})")
 
 
 def texto_yaml(cfg: dict, cabecalho: list[str], comentarios_extra: dict[str, str] | None = None) -> str:
@@ -489,6 +580,13 @@ def gerar(
     params = contar_parametros(
         cfg["vocab_bpe"], m["dim"], m["camadas"], m["janela_ctx"],
         m.get("n_especialistas", 0), m.get("top_k", 1),
+        # sem passar a arquitetura aqui, o preset 'moderna' reportava o número do GPT-2 —
+        # foi o que o teste de contagem pegou
+        norm=m.get("norm", "layernorm"),
+        pos=m.get("pos", "aprendido"),
+        mlp=m.get("mlp", "gelu"),
+        cabecas=m["cabecas"],
+        n_cabecas_kv=m.get("n_cabecas_kv", 0),
     )
     desempenho = estimar_desempenho(
         params, m["camadas"], m["dim"], m["janela_ctx"], cfg["lote"], cfg["passos"], tokens_por_s
@@ -552,6 +650,36 @@ def gerar(
     }
 
 
+def _assinatura_arquitetura(m: dict) -> str:
+    """Sufixo curto com o que foge do GPT-2 clássico (aparece na linha 'modelo')."""
+    marcas = []
+    if m.get("norm") == "rmsnorm":
+        marcas.append("rmsnorm")
+    if m.get("pos") == "rope":
+        marcas.append("rope")
+    if m.get("mlp") == "swiglu":
+        marcas.append("swiglu")
+    if m.get("n_cabecas_kv"):
+        marcas.append(f"GQA({m['n_cabecas_kv']})")
+    return (" · " + " · ".join(marcas)) if marcas else " · estilo GPT-2"
+
+
+def _descricao_arquitetura(m: dict) -> str:
+    """Frase que diz de que época é a arquitetura — o aluno precisa saber o que está rodando."""
+    classica = m.get("norm", "layernorm") == "layernorm" and m.get("pos", "aprendido") == "aprendido"
+    classica = classica and m.get("mlp", "gelu") == "gelu" and not m.get("n_cabecas_kv")
+    if classica:
+        return "GPT-2 (2019): LayerNorm, posição aprendida, FFN com GELU, atenção comum"
+    return "moderna (2021+): " + ", ".join(
+        x for x in (
+            "RMSNorm" if m.get("norm") == "rmsnorm" else "",
+            "RoPE" if m.get("pos") == "rope" else "",
+            "SwiGLU" if m.get("mlp") == "swiglu" else "",
+            f"GQA com {m['n_cabecas_kv']} cabeças de K/V" if m.get("n_cabecas_kv") else "",
+        ) if x
+    )
+
+
 def _duracao(segundos: float) -> str:
     """Duração legível: 7,6 s · 12,3 min · 2,10 h."""
     if segundos < 60:
@@ -573,7 +701,9 @@ def resumo_texto(resultado: dict) -> str:
         f"run     : {cfg['nome']}",
         f"corpus  : {cfg['corpus']}" + (f"  (validação: {cfg.get('corpus_val')})" if cfg.get("corpus_val") else "  (split 95/5 no treino)"),
         f"modelo  : dim={m['dim']} camadas={m['camadas']} cabecas={m['cabecas']} janela={m['janela_ctx']}"
-        + (f" MoE={m['n_especialistas']}x top-{m.get('top_k', 1)}" if m.get("n_especialistas", 0) > 1 else ""),
+        + (f" MoE={m['n_especialistas']}x top-{m.get('top_k', 1)}" if m.get("n_especialistas", 0) > 1 else "")
+        + _assinatura_arquitetura(m),
+        f"arquitet. : {_descricao_arquitetura(m)}",
         f"tamanho : {p['total']:,} parâmetros ({p['ativos']:,} ativos/token)".replace(",", "."),
         f"treino  : {cfg['passos']} passos x lote {cfg['lote']} x janela {m['janela_ctx']} = {d['tokens_totais']:,} tokens".replace(",", "."),
         f"tempo   : ~{_duracao(d['segundos_previstos'])} · {d['segundos_por_passo']:.4f} s/passo · {d['tokens_por_s_previsto']:,} tokens/s".replace(",", "."),

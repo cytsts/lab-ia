@@ -119,6 +119,11 @@ def resumir_run(run_id: str, raiz: Path | str = ".", janela_estagnacao: int = 3)
             cfg_modelo.get("janela_ctx", 0),
             cfg_modelo.get("n_especialistas", 0),
             cfg_modelo.get("top_k", 1),
+            norm=cfg_modelo.get("norm", "layernorm"),
+            pos=cfg_modelo.get("pos", "aprendido"),
+            mlp=cfg_modelo.get("mlp", "gelu"),
+            cabecas=cfg_modelo.get("cabecas", 0),
+            n_cabecas_kv=cfg_modelo.get("n_cabecas_kv", 0),
         )
         resumo.parametros = params["total"]
         resumo.parametros_ativos = params["ativos"]

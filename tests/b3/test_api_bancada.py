@@ -45,7 +45,10 @@ def test_saude_responde_estado_do_nucleo(tmp_path):
 
 def test_presets_listados(tmp_path):
     presets = TestClient(criar_app(tmp_path)).get("/presets").json()
-    assert {p["nome"] for p in presets} == {"micro", "rapido", "equilibrado", "longo", "moe"}
+    nomes = {p["nome"] for p in presets}
+    # os cinco originais mais os que a B7 acrescentou (arquitetura moderna)
+    assert {"micro", "rapido", "equilibrado", "longo", "moe"} <= nomes
+    assert "moderna" in nomes
     assert all(p["descricao"] and p["modelo"] for p in presets)
 
 
