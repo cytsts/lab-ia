@@ -15,6 +15,8 @@ import torch.nn.functional as F
 
 COT = "Vamos pensar passo a passo."
 _PARSE = re.compile(r"Resposta:\s*(-?\d+)")
+# usada para PARAR a geração assim que a resposta saiu (não para extrair: isso é _PARSE)
+_RESPOSTA_COMPLETA = re.compile(r"Resposta:\s*-?\d")
 _NUM = re.compile(r"-?\d+")
 
 
@@ -39,10 +41,16 @@ def _gerar_tokens(
     topo_k: int = 40,
     guloso: bool = False,
     gerador: torch.Generator | None = None,
+    parada=None,
 ) -> tuple[list[int], float]:
     """Amostra continuação com log-prob acumulado. Retorna (ids_novos, logprob_soma).
 
     O corte estruturado (nova linha / "Resposta:") é pós-processado pelas estratégias.
+
+    'parada' é um predicado opcional sobre os ids já gerados: quando devolve True, a
+    geração para. Sem ele, o orçamento fixo de tokens corta a cadeia no meio — foi o que
+    aconteceu com as famílias de lógica que precisam de uma tabela-verdade inteira antes
+    de escrever a resposta (a acurácia delas saía 0 por truncamento, não por erro).
     """
     ctx = modelo.cfg.janela_ctx
     idx = torch.tensor([ids], dtype=torch.long, device=dispositivo)
@@ -66,6 +74,8 @@ def _gerar_tokens(
         soma_lp += lp
         novos.append(escolh)
         idx = torch.cat([idx, torch.tensor([[escolh]], device=dispositivo)], dim=1)
+        if parada is not None and parada(novos):
+            break
     return novos, soma_lp
 
 
@@ -82,17 +92,33 @@ def responder_direta(modelo, tok, dispositivo, enunciado: str, semente: int = 12
 
 
 def responder_cot(
-    modelo, tok, dispositivo, enunciado: str, semente: int = 1234, guloso: bool = True
+    modelo,
+    tok,
+    dispositivo,
+    enunciado: str,
+    semente: int = 1234,
+    guloso: bool = True,
+    n_max: int = 256,
 ) -> tuple[int | None, str]:
+    """CoT com orçamento generoso e parada antecipada ao completar a resposta.
+
+    O orçamento precisa caber a cadeia mais longa (tabela-verdade de várias linhas) e a
+    parada antecipada evita gastar geração depois que "Resposta: N" já saiu.
+    """
     ids = tok.encode(f"{enunciado}\n{COT}\n", add_special_tokens=False).ids
+
+    def resposta_completa(novos: list[int]) -> bool:
+        return _RESPOSTA_COMPLETA.search(tok.decode(novos)) is not None
+
     novos, _ = _gerar_tokens(
         modelo,
         ids,
         dispositivo,
-        n_max=64,
+        n_max=n_max,
         temperatura=0.7,
         guloso=guloso,
         gerador=torch.Generator(device=dispositivo).manual_seed(semente),
+        parada=resposta_completa,
     )
     texto = _decodigtok(tok, novos)
     if "Resposta:" in texto:

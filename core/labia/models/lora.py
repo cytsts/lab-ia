@@ -42,10 +42,13 @@ class NoLinear(nn.Module):
             self.register_buffer("q_escala", (buf["escala"] if quant == "int8" else buf["escalas"]).float())
             self.register_buffer("q_forma", buf["forma"])
         if r:
-            a = torch.empty(r, entrada)
+            # os ramos nascem no dispositivo da base: aplicar LoRA em modelo já em CUDA
+            # sem `.to()` posterior funcionaria com matmul em dispositivos mistos
+            dispositivo_base = base.weight.device
+            a = torch.empty(r, entrada, device=dispositivo_base)
             nn.init.normal_(a, mean=0.0, std=1.0 / math.sqrt(entrada))
             self.lora_A = nn.Parameter(a)
-            self.lora_B = nn.Parameter(torch.zeros(saida, r))  # init zerado: parte da base
+            self.lora_B = nn.Parameter(torch.zeros(saida, r, device=dispositivo_base))  # init zerado: parte da base
         else:
             self.lora_A = None  # quantização pura: sem ramo adaptador
             self.lora_B = None
@@ -140,6 +143,11 @@ def salvar_adaptador(modelo: nn.Module, pasta: Path | str, meta_extra: dict | No
     pasta = Path(pasta)
     pasta.mkdir(parents=True, exist_ok=True)
     estado = estado_adaptador(modelo)
+    if not estado[_CHAVE_ADAPTADOR]:
+        raise ValueError(
+            "nenhum adaptador LoRA no modelo — nada a salvar "
+            "(o modelo passou por mesclar_lora? salve o adaptador antes de fundir)"
+        )
     torch.save(estado, pasta / "lora.pt")
     amostra = next(iter(estado[_CHAVE_ADAPTADOR].values()), None)
     no_exemplo = None

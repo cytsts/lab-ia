@@ -18,6 +18,7 @@ declare global {
       salvarEstado?: (parcial: Record<string, unknown>) => Promise<Record<string, unknown>>
       nucleo?: () => Promise<EstadoNucleo>
       raiz?: () => Promise<string>
+      abrirCadernos?: () => Promise<{ ok: boolean; url?: string; erro?: string }>
     }
   }
 }

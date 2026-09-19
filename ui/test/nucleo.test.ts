@@ -1,3 +1,4 @@
+// @ts-nocheck -- os módulos Electron são JavaScript executado somente no processo principal.
 // @vitest-environment node
 import { describe, expect, it, vi } from 'vitest'
 import { join } from 'node:path'
@@ -9,6 +10,7 @@ import {
   garantirNucleo,
   consultarSaude,
 } from '../electron/nucleo.mjs'
+import { argumentosJupyter, esperarCadernos, urlCadernos } from '../electron/cadernos.mjs'
 
 describe('escolherRaiz', () => {
   it('respeita LABIA_RAIZ acima de tudo', () => {
@@ -233,5 +235,24 @@ describe('consultarSaude', () => {
     expect(await consultarSaude(8765, async () => {
       throw new Error('ECONNREFUSED')
     })).toBeNull()
+  })
+})
+
+describe('cadernos Jupyter', () => {
+  it('gera URL autenticada e restringe o servidor ao loopback', () => {
+    const url = urlCadernos({ porta: 8999, token: 'a b' })
+    expect(url).toBe('http://127.0.0.1:8999/lab/tree/cadernos?token=a%20b')
+    expect(argumentosJupyter({ raiz: 'C:\\lab', porta: 8999, token: 'segredo' })).toEqual(expect.arrayContaining([
+      '-m', 'jupyterlab', '--ServerApp.root_dir=C:\\lab', '--ServerApp.ip=127.0.0.1',
+      '--ServerApp.port=8999', '--ServerApp.token=segredo',
+    ]))
+  })
+
+  it('espera a API do Jupyter responder', async () => {
+    const resultado = await esperarCadernos({
+      url: 'http://127.0.0.1:8999/lab?token=x',
+      buscar: async () => ({ ok: true }), dormir: async () => {}, agora: () => 0, limiteMs: 1000,
+    })
+    expect(resultado).toEqual({ ok: true })
   })
 })

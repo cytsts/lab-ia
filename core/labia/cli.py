@@ -168,7 +168,22 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--porta", type=int, default=8765)
     p.add_argument("--raiz", default=".")
 
+    p = sub.add_parser("laboratorio", help="abre cadernos Jupyter para experimentos livres")
+    p.add_argument("--porta", type=int, default=8889, help="porta local do JupyterLab")
+    p.add_argument("--sem-abrir", action="store_true", help="cria o espaço de cadernos e sai")
+    p.add_argument("--raiz", default=".")
+
     args = parser.parse_args(argv)
+
+    if args.comando == "laboratorio":
+        from .laboratorio import abrir, preparar
+
+        info = preparar(args.raiz)
+        print(f"[lab-ia] cadernos em {info['cadernos']}")
+        print(f"[lab-ia] exemplo em {info['exemplo']}")
+        if args.sem_abrir:
+            return 0
+        return abrir(args.raiz, args.porta)
 
     if args.comando == "train":
         cfg = ConfigTreino.de_arquivo(args.config)

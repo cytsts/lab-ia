@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import copy
 
+import pytest
 import torch
 
 from labia.models.gpt import ConfigGPT, GPT
@@ -92,3 +93,24 @@ def test_mesclar_preserva_saida(tmp_path):
     mesclar_lora(m)
     assert torch.allclose(esperado, _logits(m, x), rtol=1e-4, atol=1e-5)
     assert not any(nome.endswith(".lora_A") for nome, _ in m.named_parameters())
+
+
+def test_ramos_lora_nascem_no_dispositivo_da_base():
+    """Regressão (caderno 08): aplicar LoRA em modelo já em CUDA quebrava o forward
+    — lora_A/lora_B eram criados na CPU e estouravam em matmul de dispositivos mistos."""
+    if not torch.cuda.is_available():
+        pytest.skip("requer CUDA")
+    m = _base().cuda()
+    aplicar_lora(m, r=4, alpha=8)
+    for nome, p in m.named_parameters():
+        if nome.endswith(".lora_A") or nome.endswith(".lora_B"):
+            assert p.device.type == "cuda", nome
+    x = torch.randint(0, 100, (2, 8), device="cuda")
+    assert _logits(m, x).device.type == "cuda"
+
+
+def test_salvar_adaptador_sem_ramos_falha_em_vez_de_gravar_vazio(tmp_path):
+    """Regressão (caderno 08): salvar depois de fundir gravava meta={} silencioso."""
+    m = _base()
+    with pytest.raises(ValueError, match="nenhum adaptador"):
+        salvar_adaptador(m, tmp_path / "adaptador")

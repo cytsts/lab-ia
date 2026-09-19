@@ -7,12 +7,14 @@ import { CatalogoDS } from './paginas/CatalogoDS'
 import { Bancada } from './paginas/Bancada'
 import { Comparar } from './paginas/Comparar'
 import { Trilha } from './paginas/Trilha'
+import { Cadernos } from './paginas/Cadernos'
 import { AlternadorDeTema } from './ds/tema'
 
-type Pagina = 'painel' | 'run' | 'bancada' | 'executar' | 'comparar' | 'trilha' | 'eventos' | 'ds'
+type Pagina = 'painel' | 'cadernos' | 'run' | 'bancada' | 'executar' | 'comparar' | 'trilha' | 'eventos' | 'ds'
 
 const ABAS: { id: Pagina; rotulo: string }[] = [
   { id: 'painel', rotulo: 'Painel' },
+  { id: 'cadernos', rotulo: 'Cadernos' },
   { id: 'bancada', rotulo: 'Bancada' },
   { id: 'executar', rotulo: 'Executar' },
   { id: 'comparar', rotulo: 'Comparar' },
@@ -50,6 +52,7 @@ export function App() {
       </header>
       <main>
         {pagina === 'painel' && <Painel abrirRun={abrir} />}
+        {pagina === 'cadernos' && <Cadernos />}
         {pagina === 'run' && runAberto && <DetalheDoRun id={runAberto} />}
         {pagina === 'bancada' && <Bancada />}
         {pagina === 'executar' && <Executar />}

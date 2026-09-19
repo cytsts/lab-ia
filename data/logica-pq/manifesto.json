@@ -1,7 +1,7 @@
 {
  "versao": 1,
  "id": "logica-pq",
- "gerado_em": "2026-09-13T21:57:13+00:00",
+ "gerado_em": "2026-09-13T22:32:14+00:00",
  "parametros": {
   "id": "logica-pq",
   "familias": [
@@ -27,16 +27,218 @@
   "trem": {
    "arquivo": "data/logica-pq/trem.txt",
    "bytes": 989705,
+   "chars": 989705,
+   "itens": 3000,
    "sha256": "ebe6b2b2a66558f7"
   },
   "val": {
    "arquivo": "data/logica-pq/val.txt",
-   "bytes": 49253
+   "bytes": 49253,
+   "chars": 49253
   },
   "benchmark": {
    "arquivo": "data/logica-pq/benchmark.jsonl",
    "itens": 3500
   }
+ },
+ "estatisticas": {
+  "trem": {
+   "chars": 989705,
+   "linhas": 24434,
+   "palavras": 221160,
+   "palavras_unicas": 58,
+   "chars_por_palavra": 4.48,
+   "entropia_caractere_bits": 4.508,
+   "fracao_ascii": 1.0,
+   "idioma_provavel": "pt",
+   "pistas_idioma": {
+    "pt": 28551,
+    "en": 769
+   },
+   "top_palavras": [
+    [
+     "q",
+     31349
+    ],
+    [
+     "p",
+     30766
+    ],
+    [
+     "1",
+     27771
+    ],
+    [
+     "0",
+     21818
+    ],
+    [
+     "e",
+     16312
+    ],
+    [
+     "ou",
+     11549
+    ],
+    [
+     "passo",
+     9712
+    ],
+    [
+     "a",
+     6306
+    ],
+    [
+     "nao",
+     6192
+    ],
+    [
+     "para",
+     6000
+    ],
+    [
+     "ex",
+     5700
+    ],
+    [
+     "use",
+     3000
+    ],
+    [
+     "verdadeiro",
+     3000
+    ],
+    [
+     "falso",
+     3000
+    ],
+    [
+     "vamos",
+     3000
+    ],
+    [
+     "pensar",
+     3000
+    ],
+    [
+     "resposta",
+     3000
+    ],
+    [
+     "premissas",
+     2988
+    ],
+    [
+     "conclusao",
+     2988
+    ],
+    [
+     "linha",
+     2231
+    ]
+   ]
+  },
+  "val": {
+   "chars": 49253,
+   "linhas": 1227,
+   "palavras": 10944,
+   "palavras_unicas": 57,
+   "chars_por_palavra": 4.5,
+   "entropia_caractere_bits": 4.514,
+   "fracao_ascii": 1.0,
+   "idioma_provavel": "pt",
+   "pistas_idioma": {
+    "pt": 1443,
+    "en": 45
+   },
+   "top_palavras": [
+    [
+     "q",
+     1605
+    ],
+    [
+     "p",
+     1428
+    ],
+    [
+     "1",
+     1399
+    ],
+    [
+     "0",
+     1037
+    ],
+    [
+     "e",
+     835
+    ],
+    [
+     "ou",
+     545
+    ],
+    [
+     "passo",
+     511
+    ],
+    [
+     "nao",
+     307
+    ],
+    [
+     "a",
+     304
+    ],
+    [
+     "para",
+     300
+    ],
+    [
+     "ex",
+     261
+    ],
+    [
+     "premissas",
+     155
+    ],
+    [
+     "conclusao",
+     155
+    ],
+    [
+     "use",
+     150
+    ],
+    [
+     "verdadeiro",
+     150
+    ],
+    [
+     "falso",
+     150
+    ],
+    [
+     "vamos",
+     150
+    ],
+    [
+     "pensar",
+     150
+    ],
+    [
+     "resposta",
+     150
+    ],
+    [
+     "verdadeira",
+     112
+    ]
+   ]
+  }
+ },
+ "estimativas": {
+  "tokens_aprox_trem": 274918,
+  "tokens_aprox_val": 13681,
+  "nota_tokens": "estimativa por 3,6 chars/token; o numero real sai do tokenizer do run"
  },
  "distribuicao": {
   "por_split": {

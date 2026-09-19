@@ -15,6 +15,7 @@ import {
   semearWorkspace,
   garantirNucleo,
 } from './nucleo.mjs'
+import { iniciarCadernos } from './cadernos.mjs'
 
 const aqui = dirname(fileURLToPath(import.meta.url))
 const empacotado = app.isPackaged
@@ -30,6 +31,9 @@ const arquivoEstado = join(pastaEstado, 'ui-estado.json')
 
 let estadoNucleo = { estado: 'pendente', raiz: raizLab, porta }
 let processoNucleo = null
+let processoCadernos = null
+let janelaCadernos = null
+let urlCadernos = null
 
 function lerEstado() {
   try {
@@ -50,6 +54,39 @@ ipcMain.handle('lab-ia:ler-estado', () => lerEstado())
 ipcMain.handle('lab-ia:salvar-estado', (_e, parcial) => salvarEstado(parcial))
 ipcMain.handle('lab-ia:nucleo', () => estadoNucleo)
 ipcMain.handle('lab-ia:raiz', () => raizLab)
+ipcMain.handle('lab-ia:abrir-cadernos', async () => {
+  if (!processoCadernos || processoCadernos.exitCode !== null || processoCadernos.killed) {
+    const comando = escolherComandoNucleo({
+      ambiente: process.env,
+      empacotado,
+      raiz: raizLab,
+      recursos: process.resourcesPath,
+    })
+    // O pacote final ainda não inclui Jupyter. Em desenvolvimento, o núcleo e o
+    // kernel usam o mesmo Python para `import labia` apontar ao ambiente correto.
+    const resultado = await iniciarCadernos({
+      python: empacotado ? null : comando?.exe,
+      argsNucleo: empacotado ? [] : (comando?.args ?? []),
+      raiz: raizLab,
+    })
+    if (!resultado.ok) return resultado
+    processoCadernos = resultado.processo
+    urlCadernos = resultado.url
+  }
+  if (!janelaCadernos || janelaCadernos.isDestroyed()) {
+    janelaCadernos = new BrowserWindow({
+      width: 1280,
+      height: 860,
+      title: 'Lab-IA — Cadernos',
+      webPreferences: { contextIsolation: true, nodeIntegration: false },
+    })
+    janelaCadernos.on('closed', () => { janelaCadernos = null })
+  }
+  await janelaCadernos.loadURL(urlCadernos)
+  janelaCadernos.show()
+  janelaCadernos.focus()
+  return { ok: true, url: urlCadernos }
+})
 
 async function prepararNucleo() {
   const semente = empacotado ? join(process.resourcesPath, 'semente') : ''
@@ -119,6 +156,18 @@ function encerrarNucleo() {
   processoNucleo = null
 }
 
+function encerrarCadernos() {
+  if (processoCadernos && processoCadernos.exitCode === null) {
+    try {
+      processoCadernos.kill()
+    } catch {
+      /* processo já morto: nada a fazer */
+    }
+  }
+  processoCadernos = null
+  urlCadernos = null
+}
+
 app.whenReady().then(() => {
   criarJanela()
   // sobe o núcleo em paralelo: a janela abre na hora e a página mostra o estado
@@ -130,7 +179,11 @@ app.whenReady().then(() => {
   })
 })
 app.on('window-all-closed', () => {
+  encerrarCadernos()
   encerrarNucleo()
   if (process.platform !== 'darwin') app.quit()
 })
-app.on('before-quit', encerrarNucleo)
+app.on('before-quit', () => {
+  encerrarCadernos()
+  encerrarNucleo()
+})

@@ -1,9 +1,18 @@
 # Lab-IA
 
-Laboratório de IA em português brasileiro: treinamento do zero, fine-tuning
-(LoRA/QLoRA), quantização (int8/NF4), MoE, raciocínio (CoT/ToT) e agentes —
-com interface desktop amistosa, retomada após queda e specs + testes para
-tudo. Projeto guiado pelo loop Gauntlet: spec → teste → build → crítico.
+Laboratório local de IA em português brasileiro para criar e conduzir **seus
+próprios experimentos** em cadernos interativos: código Python, anotações, dados,
+modelos, treinamento, gráficos e resultados no mesmo espaço de trabalho.
+
+**Estado atual:** o núcleo de IA, a bancada e a primeira experiência livre já existem.
+Os cadernos usam JupyterLab local; a interface antiga continua oferecendo fluxos
+predefinidos como recursos auxiliares. Ainda faltam mais exemplos, o aceite de um
+experimento autoral e incluir Jupyter no pacote portátil.
+
+A direção foi atualizada em 15/09/2026. Veja o [plano vigente](specs/PLANO.md) e a
+[especificação do laboratório interativo](specs/B14.md). Os comandos e verificações
+abaixo descrevem os recursos existentes; exemplos e testes não limitam os experimentos
+que a plataforma deve permitir ao usuário criar.
 
 Para **entender** o que os números dizem, há a trilha de estudo:
 `.venv\Scripts\python -m labia.cli trilha` lista as lições; cada uma tem ideia curta,
@@ -28,7 +37,7 @@ e desenhar as curvas. Comece por `docs/bancada.md`.
 py -3.13 -m venv .venv
 .venv\Scripts\python -m pip install -U pip
 .venv\Scripts\pip install torch --index-url https://download.pytorch.org/whl/cu128
-.venv\Scripts\pip install -e "core[dev,finetune]"
+.venv\Scripts\pip install -e "core[dev,finetune,laboratorio]"
 :: (opcional, comparativo de quantização) .venv\Scripts\pip install bitsandbytes
 
 :: 2. Dados (domínio público / sintéticos determinísticos, versionados)
@@ -50,6 +59,24 @@ pnpm --dir ui test                           :: testes da UI
 pnpm --dir ui coverage                       :: cobertura TS (v8)
 .venv\Scripts\python scripts\verifica_pacote.py .qwen\pyi-dist\lab-ia --cuda  :: G7: exe do núcleo (após o build abaixo)
 ```
+
+## Cadernos para experimentos livres
+
+```bat
+:: prepara cadernos/ e abre JupyterLab local em http://127.0.0.1:8889
+.venv\Scripts\python -m labia.cli laboratorio
+
+:: apenas cria o espaço e o exemplo, sem iniciar o servidor
+.venv\Scripts\python -m labia.cli laboratorio --sem-abrir
+```
+
+Pelo aplicativo, abra a aba **Cadernos** e use **Abrir cadernos**. O primeiro uso
+cria `cadernos/exemplos/00-primeiro-experimento.ipynb` e `cadernos/resultados/`, sem
+sobrescrever arquivos seus. Copie o exemplo antes de alterá-lo. O JupyterLab roda
+somente em `127.0.0.1` e protege a sessão com token; fechar o app encerra o servidor.
+
+Salve checkpoints explicitamente em `cadernos/resultados/`: salvar um notebook não
+preserva as variáveis, processos ou memória de GPU depois de reiniciar o kernel.
 
 ## Metas e comandos
 

@@ -237,3 +237,10 @@ ui/dist/
 ui/release/
 ui/coverage/
 *.tmp
+# artefatos pesados/derivados dos cadernos didáticos — gere de novo executando os cadernos
+cadernos/lab_jupyter_llm_qwen_gguf/artifacts/
+cadernos/lab_jupyter_llm_qwen_gguf/tools/
+cadernos/lab_jupyter_llm_qwen_gguf/models/
+cadernos/lab_jupyter_llm_qwen_gguf/logs/
+# salvos autorais do espaço de experimentos (binary checkpoints dos usuários)
+cadernos/resultados/

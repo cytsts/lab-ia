@@ -6,4 +6,5 @@ contextBridge.exposeInMainWorld('labia', {
   // estado do núcleo: a janela mostra se o laboratório portátil conseguiu subir o serviço
   nucleo: () => ipcRenderer.invoke('lab-ia:nucleo'),
   raiz: () => ipcRenderer.invoke('lab-ia:raiz'),
+  abrirCadernos: () => ipcRenderer.invoke('lab-ia:abrir-cadernos'),
 })

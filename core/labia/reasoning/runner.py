@@ -45,6 +45,28 @@ def executar_benchmark(
         elif len(amostra_erros) < 10:
             amostra_erros.append({"id": item["id"], "esperado": item["resposta"], "obtido": resposta, "texto": texto[:160]})
 
+        parcial = acertos["__global__"] / totais["__global__"]
+        print(
+            f"[benchmark] item {pos + 1} de {len(itens)} — acurácia parcial: {parcial * 100:.1f}% ({acertos['__global__']}/{totais['__global__']})",
+            flush=True,
+        )
+        try:
+            (run_dir / "benchmark_progresso.json").write_text(
+                json.dumps(
+                    {
+                        "item_atual": pos + 1,
+                        "total_itens": len(itens),
+                        "acertos": acertos["__global__"],
+                        "acuracia_parcial": round(parcial, 4),
+                        "concluido": False,
+                    },
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+        except Exception:
+            pass
+
     relatorio = {
         "run": run_dir.name,
         "estrategia": estrategia,
@@ -60,6 +82,22 @@ def executar_benchmark(
     }
     destino = run_dir / f"benchmark-{estrategia}-{split}.json"
     destino.write_text(json.dumps(relatorio, ensure_ascii=False, sort_keys=True, indent=1), encoding="utf-8")
+    try:
+        (run_dir / "benchmark_progresso.json").write_text(
+            json.dumps(
+                {
+                    "item_atual": len(itens),
+                    "total_itens": len(itens),
+                    "acertos": acertos["__global__"],
+                    "acuracia_parcial": relatorio["acuracia_global"],
+                    "concluido": True,
+                },
+                ensure_ascii=False,
+            ),
+            encoding="utf-8",
+        )
+    except Exception:
+        pass
 
     with open(run_dir / "metricas.jsonl", "a", encoding="utf-8") as f:
         f.write(

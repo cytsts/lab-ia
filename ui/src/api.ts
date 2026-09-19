@@ -167,6 +167,131 @@ export interface IndiceTrilha {
   citacoes_quebradas: CitacaoQuebrada[]
 }
 
+// B13 — Laboratório
+export interface ItemBenchmark {
+  id: string
+  enunciado: string
+  cot: string
+  resposta: number | string
+  familia: string
+  split: string
+  [chave: string]: unknown
+}
+
+export interface ManifestoDataset {
+  id: string
+  manifesto: Record<string, unknown>
+  familias: string[]
+  splits: Record<string, number>
+  itens_treino?: number
+  itens_benchmark?: number
+  sha256?: string
+  idioma: string
+  tokens_aprox_trem?: number
+  tem_benchmark: boolean
+}
+
+export interface RespostaItensDataset {
+  id: string
+  total: number
+  filtrados: number
+  desde: number
+  limite: number
+  itens: ItemBenchmark[]
+  tem_benchmark: boolean
+}
+
+export interface ProgressoRun {
+  run_id: string
+  passo: number
+  passos_totais: number
+  concluido: boolean
+  loss_trem: number | null
+  loss_val: number | null
+  lr: number | null
+  tokens_por_s: number | null
+  tempo_s: number | null
+  tempo_restante_s: number | null
+  sparkline: { passo: number; loss_trem?: number | null; loss_val?: number | null }[]
+  benchmark_progresso?: {
+    item_atual: number
+    total_itens: number
+    acertos: number
+    acuracia_parcial: number
+    concluido: boolean
+  } | null
+}
+
+export interface RelatorioBenchmark {
+  run: string
+  estrategia: string
+  split: string
+  semente: number
+  itens: number
+  acuracia_global: number
+  acuracia_por_familia: Record<string, number>
+  taxa_resposta_valida: number
+  amostra_erros: { id: string; esperado: number | string; obtido: number | string | null; texto: string }[]
+  arquivo?: string
+}
+
+export interface ModeloBaseRun {
+  id: string
+  origem: 'run'
+  parametros: number | null
+  dispositivo: string
+  medido: boolean
+  treinado_em_raciocinio: boolean
+  benchmarks: { estrategia: string; split: string; acuracia_global: number; itens: number }[]
+}
+
+export interface ModeloGGUF {
+  arquivo: string
+  origem: 'gguf'
+  tamanho_mb: number
+  quantizacao: string
+  reasoning_declarado: boolean
+  rotulo_honestidade: string
+  medido: boolean
+}
+
+export interface CatalogoModelos {
+  runs: ModeloBaseRun[]
+  gguf: ModeloGGUF[]
+  llama_cpp_instalado: boolean
+  comando_instalacao: string
+}
+
+export interface CorpoTestar {
+  run: string
+  enunciado: string
+  estrategia?: string
+  temperatura?: number
+  guloso?: boolean
+  max_tokens?: number
+  prefixo?: string | null
+  semente?: number
+}
+
+export interface RespostaTestar {
+  run: string
+  enunciado: string
+  estrategia: string
+  texto_gerado: string
+  resposta_extraida: number | string | null
+  exploracao: boolean
+  tempo_s: number
+}
+
+export interface CorpoBenchmark {
+  run: string
+  estrategia?: string
+  benchmark?: string
+  split?: string
+  limite?: number | null
+  semente?: number
+}
+
 export const API_BASE_PADRAO = 'http://127.0.0.1:8765'
 
 export function baseDaApi(): string {
@@ -216,7 +341,7 @@ export const api = {
   execucoes: () => buscar<{ chave: string; pid: number; vivo: boolean; codigo_saida: number | null }[]>('/execucoes'),
   executar: (acao: string, config: string) => enviar<{ chave: string; pid: number }>('/execucao', { acao, config }),
   logExecucao: (chave: string, linhas = 60) =>
-    buscar<{ chave: string; linhas: string[]; existe: boolean }>(
+    buscar<{ chave: string; linhas: string[]; existe: boolean; total: number }>(
       `/execucoes/${encodeURIComponent(chave)}/log?linhas=${linhas}`,
     ),
 
@@ -266,4 +391,28 @@ export const api = {
       `/trilha/${numero}/rodar`,
       {},
     ),
+
+  // Laboratório (B13) — interface estilo caderno e ciclo integrado
+  dataset: (id: string) => buscar<ManifestoDataset>(`/datasets/${encodeURIComponent(id)}`),
+  itensDataset: (
+    id: string,
+    params: { desde?: number; limite?: number; split?: string; familia?: string; busca?: string } = {},
+  ) => {
+    const q = new URLSearchParams()
+    if (params.desde !== undefined) q.set('desde', String(params.desde))
+    if (params.limite !== undefined) q.set('limite', String(params.limite))
+    if (params.split) q.set('split', params.split)
+    if (params.familia) q.set('familia', params.familia)
+    if (params.busca) q.set('busca', params.busca)
+    const qs = q.toString()
+    return buscar<RespostaItensDataset>(`/datasets/${encodeURIComponent(id)}/itens${qs ? `?${qs}` : ''}`)
+  },
+  progresso: (id: string) => buscar<ProgressoRun>(`/corre/${encodeURIComponent(id)}/progresso`),
+  benchmarksDoRun: (id: string) => buscar<RelatorioBenchmark[]>(`/corre/${encodeURIComponent(id)}/benchmarks`),
+  pararExecucao: (chave: string) =>
+    enviar<{ chave: string; pid: number; parado: boolean }>(`/execucoes/${encodeURIComponent(chave)}/parar`, {}),
+  testar: (corpo: CorpoTestar) => enviar<RespostaTestar>('/testar', corpo),
+  dispararBenchmark: (corpo: CorpoBenchmark) =>
+    enviar<{ chave: string; pid: number; comando: string[] }>('/benchmark', corpo),
+  modelos: () => buscar<CatalogoModelos>('/modelos'),
 }

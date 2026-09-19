@@ -2,6 +2,40 @@
 
 Regra: item só muda de status com evidência re-executável (comando + saída) registrada em `.lab-ia/eventos.jsonl` ou neste arquivo.
 
+## Direção vigente — 15/09/2026
+
+**O produto é um laboratório para os experimentos do usuário, com cadernos
+interativos e execução livre de Python.** Testes de engenharia e benchmarks
+predefinidos apoiam a plataforma, mas não são sua entrega principal.
+
+O usuário confirmou a experiência semelhante a Jupyter e a abertura a soluções
+open source. JupyterLab foi escolhido e integrado na primeira entrega; não há
+compromisso de construir editor, protocolo de execução ou kernel próprio.
+
+Plano vigente: [B14 — Laboratório de experimentação livre](B14.md).
+
+| Prioridade | Entrega | Estado |
+|---|---|---|
+| L0 | JupyterLab avaliado e integrado em execução local | Feito: 4.6.3, servidor local com token |
+| L1 | Cadernos autorais, células Python/Markdown e sessão persistente entre células | Feito via JupyterLab; falta aceite manual |
+| L2 | Dados, modelos, treino e métricas livres usando o núcleo como biblioteca | Feito no exemplo mínimo; ampliar exemplos em L4 |
+| L3 | Checkpoints, resultados salvos e reprodução em kernel limpo | Feito no exemplo mínimo |
+| L4 | Exemplos editáveis e aceite com um experimento escolhido pelo usuário | Parcial |
+| L5 | Instalação/abertura e distribuição verificadas em ambiente limpo | Pendente |
+
+**Próximo passo:** L4, abra a aba **Cadernos**, copie o exemplo e conduza um
+experimento escolhido por você. Esse aceite prático determina os próximos exemplos
+e correções; não será substituído por uma suíte verde.
+
+B13 passa a ser implementação parcial e auxiliar: seus passos visuais não oferecem
+um kernel interativo nem código livre. Os bloqueios de configuração registrados
+abaixo continuam abertos. B7–B11 permanecem como backlog, subordinados à entrega do
+ciclo livre; ampliar formulários, suíte de testes ou currículo não substitui B14.
+
+As tabelas e medições abaixo são histórico das entregas anteriores. “FEITO” em
+G1–G10 ou em uma bancada não significa plataforma B14 entregue. A nova direção
+está registrada; L0–L3 foram implementadas em 15/09/2026. L4 e L5 continuam abertas.
+
 ## Ambiente (E0) — validado 2026-09-11
 | Checagem | Resultado | Evidência |
 |---|---|---|
@@ -41,8 +75,27 @@ Regra: item só muda de status com evidência re-executável (comando + saída) 
 
 | B5 | Varredura de hiperparâmetros | FEITO | 19 testes CPU-verdes (`tests/b5/`: 14 do módulo + 5 da API) e 49 testes de UI. **Varredura real na GPU**: base `livros-rapido`, grade `lr` ∈ {0,00015; 0,0003; 0,0006} × `lote` ∈ {16, 32}, 500 passos por variante (orçamento igual) → melhor `sw-lr-06` (lote 32, lr 0,0006) val **5,1310**; efeito medido: `lr` 0,00015→5,7336 · 0,0003→5,4672 · 0,0006→5,2160 e `lote` 16→5,5378 · 32→5,4067 — tendência monótona nas duas chaves. Leitura honesta: as seis saíram `ainda_caindo` (orçamento curto), então o achado é a **direção**, não o valor final. **Dois bugs achados rodando de verdade:** o diretório do run não era criado (as seis variantes morreram com "Parent directory ckpt does not exist" — os testes de unidade passavam porque usavam diretório pronto) e `n or 8` engolia `--n 0` em silêncio |
 
+| B13 | Interface de Treinamento v2 (área Laboratório) | PARCIAL / AUXILIAR — bloqueios funcionais; direção sucedida por B14 em 2026-09-15 | **9 testes pytest** (`tests/b13/test_api_b13.py`, 9/9 verdes em 5,28 s) + **6 testes Vitest** (`ui/test/laboratorio.test.tsx`, 6/6 verdes) + **60/60 testes de UI** totais. Os testes escritos cobrem CA1, CA4–CA17; **a verificação independente de 2026-09-14 refutou a cobertura de CA2/CA3** — os dois modos da sub-aba Configurar falham contra o núcleo real — e achou o build da UI quebrado (detalhes no fim desta célula e no log). **Novas rotas API:** `GET /datasets/{id}`, `GET /datasets/{id}/itens` (paginado, filtros — CA1), `GET /corre/{run_id}/progresso` (RF3.3/RF3.4), `GET /corre/{run_id}/benchmarks`, `POST /execucoes/{chave}/parar` (CA8 — terminate+kill, concluido:false), `GET /execucoes/{chave}/log` (cauda reversa <200 ms — CA12), `POST /testar` (CoT+teacher forcing — CA6/CA15, grava em `exploracao.jsonl`), `POST /benchmark`, `GET /modelos` (catálogo unificado runs+GGUF — CA13). **Novos componentes UI:** `PassoCaderno` (célula de caderno c/ CLI copiável — CA17), `SubAbaDados` (manifesto + navegador itens — CA1), `SubAbaConfigurar` (modo zero/refinar, aba runs+GGUF c/ rótulo de honestidade — CA13, validação síncrona dim%cabeças — CA4), `SubAbaExecutar` (log ao vivo 2 s — RF3.2, parada/retomada — CA8), `SubAbaCurvas` (gráfico perda, diagnóstico, sparkline), `SubAbaTestar` (CoT/direta, teacher forcing — CA15, diff "Onde ele errou" — CA16), `SubAbaMedir` (benchmark c/ progresso parcial — CA14, acurácia por família, comparativo delta p.p.). Aba `Laboratório` adicionada ao `App.tsx`. `llama-cpp-python 0.3.35` instalado em-processo via wheel local (confirmado: `from llama_cpp import Llama` carrega; `modelos/` está vazio, então CA13 só é verificável com um GGUF de verdade). **Três defeitos medidos na conferência independente (2026-09-14):** (a) **o payload que a própria UI envia era rejeitado** por `POST /novo` — a whitelist `SOBRESCRITAS_*` não tem `janela_ctx` nem `arquitetura` (modo zero) nem `lora_r`/`lora_alpha`/`lora_tipo` (modo refinar, que é o **padrão** da aba): medido `STATUS=400 {"detail":"sobrescrita desconhecida: 'janela_ctx'"}` e `STATUS=400 {"detail":"sobrescrita desconhecida: 'lora_r'"}`. Os 60 testes de UI passavam porque **mockam** `api.novo` — nenhum toca a whitelist. (b) `pnpm --dir ui build` estava **quebrado** (`tsc` exit 2: `test/laboratorio.test.tsx(147,106)` usa `total`, campo que a rota `/execucoes/{chave}/log` devolve sempre, mas que o tipo de `logExecucao` em `ui/src/api.ts` não declarava). (c) `GET /modelos` devolvia `parametros: null` em 16 de 18 runs e `treinado_em_raciocinio: false` para **todos**, inclusive `logica-1`: lia `runs/<id>/config.yaml`, arquivo que nenhum run grava (medido: 0 ocorrências em `runs/`). **(b) e (c) corrigidos** nesta conferência; **(a) segue aberto**, e não é só whitelist: o config de ajuste canônico (`configs/g5_ajuste_cot.yaml`) usa outro schema (`base`, `corpus_tarefa`, `tipo`, `r`, `alpha`) e **nada no núcleo gera esse arquivo** — falta o gerador do modo refinar, não uma chave. |
 | B6 | Trilha de estudo (fase 2) | FEITO (10 lições) | 23 testes CPU-verdes (`tests/trilha/`). **10 lições** em pt-BR mapeadas ao núcleo — parte 1 (criar): tensor/autograd · tokenização BPE · atenção causal · bloco e resíduo · laço de treino; parte 2 (otimizar): **LoRA · quantização · MoE · raciocínio · agentes** — com 10 experimentos executáveis e 10 notebooks gerados do próprio experimento. Cada afirmação tem teste com número real: autograd exato (erro 0,0); acúmulo `[3,6,9]` sem `zero_grad`; 4096 → 3,43 chars/token contra 0,98 com 128; causalidade exata (0,000e+00) e vazamento de 1,95 sem `is_causal`; crescimento 1,71x com escala `1/sqrt(2·camadas)` contra 5,40x sem ela; lr=1,0 a 92,3 de perda contra 6,39 com lr=3e-3; LoRA no-op exato e posto de B·A = r; int8 3,94×/erro 0,034 contra NF4 7,53×/erro 0,130; MoE ativos 38,2% e colapso 94,5% → 26,6% com a auxiliar; CoT 6,4× mais tokens e +5,3 p.p. no run real; 3 agentes com 8 skills e log `ok=true/false`. `lab-ia trilha --conferir` acusa citação a código inexistente (0 quebradas) e o teste anti-apodrecimento falha se um notebook ficar desatualizado — **ele falhou de verdade nesta sessão** ao editar um experimento sem regerar o caderno. A trilha também está **dentro da janela** (aba Trilha + `GET /trilha`), para o app portátil levar o material didático junto — 5 testes de API e 5 de UI **Não verificado:** execução dos notebooks — instalar jupyter exige rede, indisponível neste ambiente (mesma causa do matplotlib na B2) |
 
+- 2026-09-14 · **B13 — conferência independente da implementação (3 defeitos, 2 corrigidos).**
+  Baseline re-medido antes de mexer: **304 pytest** (1 pulado, exit 0) e **60 testes de UI** verdes.
+  O que está de pé e foi conferido contra o núcleo rodando de verdade, não contra dublê:
+  `/datasets/logica-pq` (3500 itens, 3 splits), `/corre/logica-1/progresso` (val 0,1804 em 2500 passos),
+  `/corre/logica-1/benchmarks` (CoT 80,0% no teste e 71,7% no difícil, com `acuracia_por_familia` e `amostra_erros`),
+  `POST /testar` (CoT guloso devolveu 3 passos + `"Resposta: 0"`, correta para p=1, q=0 em (p E q)) e o teacher forcing do RF7
+  (`exploracao: true` e gravação em `.lab-ia/exploracao.jsonl` com o prefixo — guarda CA15 funcionando).
+  **Achado de qualidade do modelo, não da interface:** no item acima o CoT gerado é **infiel** — o Passo 1 diz
+  `(p OU-EX q) = 0` quando 1 XOR 0 = 1 — e ainda assim a resposta final sai certa. O benchmark só julga a resposta
+  final, então "80% de acurácia" não diz nada sobre a fidelidade do raciocínio; é exatamente o tipo de erro que o painel
+  "Onde ele errou" (CA16) existe para mostrar.
+  **Defeitos:** (a) whitelist x UI (HTTP 400 nos dois modos — evidência abaixo), (b) build da UI quebrado pelo campo
+  `total` ausente no tipo, (c) `/modelos` sem parâmetros e sem marca de raciocínio.
+  **Comandos re-executáveis:** `curl -s -X POST localhost:8766/novo -H "Content-Type: application/json" -d @{"nome":"t","dados":"logica-pq","preset":"equilibrado","sobrescritas":{"dim":256,"camadas":6,"cabecas":8,"janela_ctx":256,"lote":32,"passos":100,"lr":0.0003,"abandono":0.1,"arquitetura":"classica"},"forcar":true}@ -> 400`;
+  `pnpm --dir ui exec tsc --noEmit` (antes: exit 2; depois: exit 0) e `pnpm --dir ui build` (antes parava no tsc; depois "✓ built in 1.28s").
+  **Impacto medido do conserto (c):** `logica-1` passou a reportar `parametros: 4913152` e `treinado_em_raciocinio: true`;
+  a contagem bate exatamente com a aritmética à mão (448·256 + 256·256 = 180.224 de embedding; 6 camadas × (2·256² + 2·256² + 8·256² + 5·256) = 4.732.416; + 2·256 = **4.913.152**), o que confirma que o fallback usa a mesma conta verificada de `bancada/presets.contar_parametros` (comparada com `GPT.contar_parametros` em `tests/b7`).
+  Restam 9 runs antigos (g1–g5, `livros-rapido`, `valida-custo`) sem parâmetros: o `estado.json` deles é do schema antigo (sem `config_modelo`) e os dois `tamanhos.json` que existem são o **relatório de quantização** da G3, que não tem chave `total` — não inventei número para eles.
 - 2026-09-11 · **G4: a perda auxiliar do MoE não tinha gradiente.** A Lição 8 da trilha
   foi escrita para medir o mecanismo de balanceamento e o `backward()` da auxiliar
   estourou com *"element 0 of tensors does not require grad"*. Causa: o produto

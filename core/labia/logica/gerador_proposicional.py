@@ -29,6 +29,8 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 
+from ..bancada.dados import estimar_tokens, estatisticas
+
 SIMBOLOS = {
     "e": "E",
     "ou": "OU",
@@ -370,10 +372,20 @@ def gerar(cfg: ConfigLogica) -> dict:
         "gerado_em": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
         "parametros": cfg.para_dict(),
         "saidas": {
+            # mesmo schema dos datasets da bancada (B1): chars, sha e contagem, para
+            # 'lab-ia dados --listar' e 'lab-ia novo --dados <id>' sem caso especial
             "trem": {"arquivo": f"data/{cfg.id}/trem.txt", "bytes": len(trem_texto.encode("utf-8")),
+                     "chars": len(trem_texto), "itens": len(treino),
                      "sha256": hashlib.sha256(trem_texto.encode("utf-8")).hexdigest()[:16]},
-            "val": {"arquivo": f"data/{cfg.id}/val.txt", "bytes": len(val_texto.encode("utf-8"))},
+            "val": {"arquivo": f"data/{cfg.id}/val.txt", "bytes": len(val_texto.encode("utf-8")),
+                    "chars": len(val_texto)},
             "benchmark": {"arquivo": f"data/{cfg.id}/benchmark.jsonl", "itens": len(todos)},
+        },
+        "estatisticas": {"trem": estatisticas(trem_texto), "val": estatisticas(val_texto)},
+        "estimativas": {
+            "tokens_aprox_trem": estimar_tokens(len(trem_texto)),
+            "tokens_aprox_val": estimar_tokens(len(val_texto)),
+            "nota_tokens": "estimativa por 3,6 chars/token; o numero real sai do tokenizer do run",
         },
         "distribuicao": {
             "por_split": {"treino": len(treino), "teste": len(teste), "dificil": len(dificil)},

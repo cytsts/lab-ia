@@ -3,16 +3,27 @@
 > Prompt de trabalho da fase seguinte. Substitui o original (perdido) e foi escrito a
 > partir do **estado real do repositório**: todo número aqui foi medido nesta máquina.
 
-## 0. Visão de produto
+> **Atualização de direção — 15/09/2026:** o usuário confirmou que quer fazer
+> seus próprios experimentos em um ambiente semelhante a Jupyter, com abertura a
+> soluções open source. [B14](B14.md) e a direção vigente em [PLANO](PLANO.md)
+> prevalecem sobre prioridades, critérios de encerramento e pendências históricas
+> deste documento. Os épicos A–E são backlog; sua conclusão não substitui B14.
+> O retrato do ambiente abaixo é histórico e precisa ser revalidado em L0.
 
-Uma **plataforma única, local e portátil** para treinar, testar e estudar IA:
+## 0. Visão de produto vigente
 
-- criar modelos **do zero**, em Python, com o núcleo escrito por nós (sem caixa-preta);
-- **treinar, ajustar (LoRA/QLoRA) e quantizar** (int8, NF4, GGUF);
-- testar **arquiteturas de GPT-1 ao estado da arte** (RMSNorm, RoPE, SwiGLU, GQA, KV-cache, MoE);
-- rodar **modelos pré-treinados dimensionados para uma RTX 3070 (8 GB)**;
-- estudar o equivalente a uma **graduação em IA**, com exercícios medidos;
-- tudo com **interface TS + Electron portátil** e Design System próprio.
+Uma plataforma local para o usuário criar seus próprios experimentos de IA em
+cadernos editáveis, com células Python/Markdown, sessão compartilhada entre células,
+resultados, gráficos, interrupção, reinício e persistência de artefatos.
+
+O núcleo próprio é uma biblioteca à disposição do usuário. Treino do zero,
+LoRA/QLoRA, quantização e avaliação são capacidades que ele pode combinar e alterar.
+As lições e benchmarks existentes são exemplos editáveis. Testes automatizados
+verificam o software; não constituem o laboratório nem definem seus experimentos.
+
+Avaliar uma base open source, começando por Jupyter, antes de criar infraestrutura
+própria de notebook. A escolha técnica será registrada em L0. A interface Electron
+existente pode apoiar essa experiência, sem ser uma restrição obrigatória.
 
 ## 1. Identidade do projeto (contexto do Hub)
 
@@ -223,27 +234,24 @@ Cerimônias organiza; não substitui especialista nem ignora blocker de domínio
 - **Parar quando:** os cinco épicos fecharem com reviews PASS, ou quando um blocker
   humano (H-1 a H-3) impedir o próximo WI.
 
-## 13. Definition of Done da plataforma
+## 13. Definition of Done vigente
 
-1. Treinar do zero, ajustar (LoRA/QLoRA), quantizar (int8/NF4/GGUF) e servir — local,
-   pela CLI **e** pela janela.
-2. Arquiteturas de GPT-2 ao moderno comparadas com números na 3070.
-3. Modelos pré-treinados pequenos rodando e ajustáveis na VRAM disponível.
-4. Currículo completo com exercícios medidos e progresso visível.
-5. Todo achado com incerteza medida e reproduzível por um comando.
-6. Pacote portátil verificado em máquina sem Python.
-7. Suíte verde em CPU, sem rede, com evidência registrada a cada ciclo.
+O aceite mínimo é o da [B14](B14.md): criar um caderno vazio, escrever código livre,
+carregar dados próprios, usar e modificar modelos, executar treino e métricas de
+sua escolha, inspecionar resultados, interromper/reiniciar, salvar e reabrir o
+trabalho. Restaurar modelo por checkpoint é explícito; salvar notebook não preserva
+memória do kernel. Deve haver uma sessão de aceite com experimento escolhido pelo
+usuário, além da demonstração técnica e das verificações de engenharia.
 
-## 14. Ordem de execução
+Currículo completo, modelos externos, benchmarks extensos e o acabamento do Design
+System continuam desejados, mas não bloqueiam o primeiro laboratório utilizável.
 
-    A.1 -> A.2 -> A.3 -> A.4      componentes, integração, conta, medição na GPU
-    A.5 -> A.6                    ensinar (lições 11-13) e expor na janela
-    F-1 (fórum)                   decidir o eixo antes de abrir B e C
-    B.1 -> B.2 -> B.3 -> B.4 -> B.5
-    C.1 -> C.2 -> C.3 -> C.4 -> C.5 -> C.6
-    D.1 -> D.2 -> D.3 -> D.4
-    E.1 -> E.2 -> E.3 -> H-1 (humano) -> E.4 -> E.5
+## 14. Ordem de execução vigente
 
-**Primeiro passo concreto:** A.1 e A.2 — fechar a ligação do RoPE no `GPT` (emb, buffers de
-frequência), o `init_pesos` para RMSNorm e SwiGLU, e os testes de retrocompatibilidade;
-depois A.4 com o benchmark na 3070.
+L0 → L1 → L2 → L3 → L4 → L5, conforme B14.
+
+**Primeiro passo concreto:** prova de conceito local da base open source: caderno
+com duas células compartilhando estado, importação de `labia`, saída visível e
+salvamento/reabertura. Registrar a decisão técnica e as limitações verificadas.
+Depois entregar a integração do núcleo e o ciclo autoral completo antes de retomar
+a expansão dos épicos A–E. As decisões de pesos e pacote final não bloqueiam L0.
